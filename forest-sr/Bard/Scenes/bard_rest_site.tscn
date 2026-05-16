@@ -1,16 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://elj4g2ut4sti"]
+[gd_scene load_steps=2 format=3 uid="uid://bmod02yg3kl7m"]
 
 [ext_resource type="Texture2D" uid="uid://d2w8bdv616lbv" path="res://Bard/Images/Visual/Bard.png" id="1_60lfn"]
 
 [node name="TestCharacterRestSite" type="Node2D"]
 
 [node name="Bard" type="Sprite2D" parent="."]
-scale = Vector2(0.2958607, 0.2979307)
-texture = ExtResource("1_60lfn")
-
-[node name="Bard2" type="Sprite2D" parent="."]
-position = Vector2(73.99999, -59)
-scale = Vector2(0.29064134, 0.2926748)
+scale = Vector2(0.46897942, 0.4722606)
 texture = ExtResource("1_60lfn")
 
 [node name="ControlRoot" type="Control" parent="."]

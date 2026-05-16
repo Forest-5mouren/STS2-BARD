@@ -21,6 +21,10 @@ public class MainFile
 
     public static void Initialize()
     {
+        var assembly = Assembly.GetExecutingAssembly();
+        RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
+        ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
+
         Logger = RitsuLibFramework.CreateLogger(ModId);
 
         // 注册程序集（启用注解式注册）
