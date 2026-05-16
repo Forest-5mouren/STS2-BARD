@@ -6,7 +6,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,42 +16,50 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
 /// See You Again
-/// 效果：从弃牌堆回收2张牌，然后丢弃1张手牌。
-/// 升级：回收 2→3 张牌
+/// 效果：从弃牌堆回收 {recycleCount} 张牌，然后丢弃1张手牌。
+/// 升级：回收 2 → 3 张牌
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class SeeYouAgain : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new CardsVar(2)  // 回收数量（基础2张）
-    };
+    private const string _recycleCountKey = "recycleCount";
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromKeyword(BardKeyword.SONG)
-    };
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar(_recycleCountKey, 2)   // 回收数量
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
-    {
-        BardKeyword.SONG
-    };
+    // 关键词：乐曲
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        BardKeywords.Song
+    ];
 
-    public SeeYouAgain()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+
+    public SeeYouAgain() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
+    }
+
+    // 升级：回收 2 → 3 张牌
+    protected override void OnUpgrade()
+    {
+        DynamicVars[_recycleCountKey].UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        CardSelectorPrefs prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, DynamicVars.Cards.IntValue);
-        CardPile pile = PileType.Discard.GetPile(base.Owner);
-        CardModel cardModel = (await CardSelectCmd.FromSimpleGrid(choiceContext, pile.Cards, base.Owner, prefs)).FirstOrDefault();
-        if (cardModel != null)
+        int recycleCount = DynamicVars[_recycleCountKey].IntValue;
+
+        // 1. 从弃牌堆回收牌
+        CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, recycleCount);
+        CardPile discardPile = PileType.Discard.GetPile(Owner);
+        CardModel recycledCard = (await CardSelectCmd.FromSimpleGrid(choiceContext, discardPile.Cards, Owner, prefs)).FirstOrDefault();
+
+        if (recycledCard != null)
         {
-            await CardPileCmd.Add(cardModel, PileType.Hand);
+            await CardPileCmd.Add(recycledCard, PileType.Hand, source: this);
         }
 
-        // 2. 丢弃1张手牌（参考 Hologram 的简洁写法）
+        // 2. 丢弃1张手牌
         await CardCmd.Discard(
             choiceContext,
             await CardSelectCmd.FromHandForDiscard(
@@ -61,11 +70,5 @@ public sealed class SeeYouAgain : BardCard
                 this
             )
         );
-    }
-
-    protected override void OnUpgrade()
-    {
-        // 升级：回收 2 → 3 张牌
-        DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }

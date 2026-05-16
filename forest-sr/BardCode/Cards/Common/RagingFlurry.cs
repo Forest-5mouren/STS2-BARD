@@ -1,49 +1,58 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using Godot;
-using MegaCrit.Sts2.Core.Nodes.Rooms;
-using Forest_Sr.BardCode.Cards;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 狂怒连击｜RagingFlurry
+/// 效果：造成 5 点伤害，重复 2 次。
+/// 升级：伤害 +2（5 → 7）
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class RagingFlurry : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(5m, ValueProp.Move),      // 每次基础伤害
-        new RepeatVar(2),                        // 基础攻击次数
-    };
+    private const int energyCost = 1;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
 
-    public RagingFlurry() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    // 基础数值：伤害 + 攻击次数
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(5,ValueProp.Move),
+        new RepeatVar(2)
+    ];
+
+    public RagingFlurry() : base(energyCost, type, rarity, targetType)
     {
     }
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new List<CardKeyword>();
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        // 执行多段攻击
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .WithHitCount(base.DynamicVars.Repeat.IntValue)
+
+
+        // 使用 WithHitCount 实现多段攻击
+        await DamageCmd.Attack(DynamicVars.Damage.IntValue)
+            .WithHitCount(DynamicVars.Repeat.IntValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-
-        await Cmd.Wait(0.05f);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(2m);
+        //DynamicVars.Damage.UpgradeValueBy(2);  // 5 → 7
+        DynamicVars.Repeat.UpgradeValueBy(1);
     }
 }

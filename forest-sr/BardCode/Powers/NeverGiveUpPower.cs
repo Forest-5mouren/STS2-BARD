@@ -58,7 +58,7 @@ public sealed class NeverGiveUpPower : BardPower
         _wasTriggered = true;
 
         // 获取回复量和抽牌数
-        int healAmount = 1;
+        int healAmount = 5;
         int drawAmount = 3;
 
         // 回复生命（参考 LizardTail 的 Healing）

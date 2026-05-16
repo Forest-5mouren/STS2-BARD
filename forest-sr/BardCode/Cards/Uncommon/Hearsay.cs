@@ -5,7 +5,9 @@ using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Keywords;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,17 +19,15 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 效果：随机获得一张诗人乐曲或法术牌，其本回合0费。
 /// 升级：移除消耗
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class Hearsay : BardCard
 {
     private CardModel _mockSelectedCard;
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
-    {
-        CardKeyword.Exhaust  // 消耗（升级后移除）
-    };
+    // 关键词（升级后会被移除）
+    protected override IEnumerable<string> RegisteredKeywordIds => ["EXHAUST"];
 
-    public Hearsay()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
+    public Hearsay() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
     }
 
@@ -48,8 +48,8 @@ public sealed class Hearsay : BardCard
 
             // 过滤出乐曲或法术牌
             var eligibleCards = allUnlockedCards
-                .Where(card => card.Keywords.Contains(BardKeyword.SONG)
-                            || card.Keywords.Contains(BardKeyword.Magic))
+                .Where(card => card.HasModKeyword(BardKeywords.Song)
+                            || card.HasModKeyword(BardKeywords.Magic))
                 .ToList();
 
             // 如果没有符合条件的卡牌，返回
@@ -58,7 +58,7 @@ public sealed class Hearsay : BardCard
                 return;
             }
 
-            // 随机选择3张供玩家选择（参考 Discovery）
+            // 随机选择3张供玩家选择
             List<CardModel> cards = CardFactory.GetDistinctForCombat(
                 Owner,
                 eligibleCards,
@@ -77,15 +77,16 @@ public sealed class Hearsay : BardCard
         {
             // 设置本回合0费
             selectedCard.EnergyCost.SetThisTurnOrUntilPlayed(0);
-            // 添加到手牌
-            await CardPileCmd.AddGeneratedCardToCombat(selectedCard, PileType.Hand, addedByPlayer: true);
+
+            // 添加到手牌（注意：creator 参数）
+            await CardPileCmd.AddGeneratedCardToCombat(selectedCard, PileType.Hand,true);
         }
     }
 
+    // 升级：移除消耗 - 通过 RegisteredKeywordIds 已处理，不需要额外代码
+    // 如果需要运行时移除，可以保留此方法但通常不需要
     protected override void OnUpgrade()
     {
-        // 升级：移除消耗关键字
-        RemoveKeyword(CardKeyword.Exhaust);
+       RemoveKeyword(CardKeyword.Exhaust);
     }
-
 }

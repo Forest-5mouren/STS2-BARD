@@ -1,58 +1,64 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using System;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
+
 /// <summary>
-/// 隐身
+/// 隐身｜Invisibility
+/// 效果：使一个友方获得 {intangible} 层无实体。
+/// 升级：无实体 1 → 2
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class Invisbility : BardCard
 {
-    protected override List<DynamicVar> CanonicalVars => new List<DynamicVar>
-    {
-        new PowerVar<IntangiblePower>(1m)
-    };
+    private const string _intangibleKey = "intangible";
 
-    // 卡牌关键词
-    public override List<CardKeyword> CanonicalKeywords => new List<CardKeyword>
-    {
-        CardKeyword.Exhaust,
-        KeyWord.BardKeyword.Magic
-    };
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar(_intangibleKey, 1)   // 无实体层数
+    ];
 
-    // 悬停提示
-    protected override List<IHoverTip> ExtraHoverTips => new List<IHoverTip>
-    {
+    // 关键词：消耗、魔法
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        "EXHAUST",
+        BardKeywords.Magic
+    ];
+
+    // 额外悬停提示
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromPower<IntangiblePower>()
-    };
+    ];
 
-    // 构造函数 - 使用 AnyPlayer 即可选择自己或队友
     public Invisbility() : base(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {
     }
 
-    // 打出效果
+    // 升级：无实体 1 → 2
+    protected override void OnUpgrade()
+    {
+        DynamicVars[_intangibleKey].UpgradeValueBy(1);
+    }
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         Creature target = cardPlay.Target ?? Owner.Creature;
+        int intangibleAmount = DynamicVars[_intangibleKey].IntValue;
 
-        await PowerCmd.Apply<IntangiblePower>(target, DynamicVars["IntangiblePower"].BaseValue, Owner.Creature, this);
-
-    }
-
-    // 升级效果
-    protected override void OnUpgrade()
-    {
-        DynamicVars["IntangiblePower"].UpgradeValueBy(1m);  // 1 → 2
+        await PowerCmd.Apply<IntangiblePower>(
+            target,
+            intangibleAmount,
+            Owner.Creature,
+            this
+        );
     }
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c13382jr4gw4k"
-path="res://.godot/imported/invisbility.png-dad186958383231451296a4a8189ded9.ctex"
+uid="uid://0lchdyxfo55y"
+path="res://.godot/imported/Invisbility.png-3e7d50d382b1aea1ca8e99af0031ac77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/invisbility.png"
-dest_files=["res://.godot/imported/invisbility.png-dad186958383231451296a4a8189ded9.ctex"]
+source_file="res://Bard/Images/Cards/Invisbility.png"
+dest_files=["res://.godot/imported/Invisbility.png-3e7d50d382b1aea1ca8e99af0031ac77.ctex"]
 
 [params]
 

@@ -1,16 +1,18 @@
-using BaseLib.Utils;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -21,16 +23,20 @@ namespace Forest_Sr.BardCode.Cards.Common;
 /// 如果上一张打出的牌是技能牌，再获得6点格挡。
 /// 升级：格挡+2（6→8），连击格挡+2（6→8）
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class Disengage : BardCard
 {
-    public Disengage() : base(1, CardType.Skill, CardRarity.Common, TargetType.Self)
-    {
-    }
+    private const int energyCost = 1;
+    private const CardType type = CardType.Skill;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.Self;
+    private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new BlockVar(6m, ValueProp.Move)  // 基础格挡值
-    };
+    // 基础数值：格挡值
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockVar(6,ValueProp.Move),
+        new CardsVar(2)
+    ];
 
     // 判断上一张打出的牌是否是攻击牌
     private bool WasLastCardPlayedAttack
@@ -39,8 +45,8 @@ public sealed class Disengage : BardCard
         {
             CardPlayStartedEntry entry = CombatManager.Instance.History
                 .CardPlaysStarted
-                .LastOrDefault(e => e.CardPlay.Card.Owner == base.Owner
-                && e.HappenedThisTurn(base.CombatState)
+                .LastOrDefault(e => e.CardPlay.Card.Owner == Owner
+                && e.HappenedThisTurn(CombatState)
                 && e.CardPlay.Card != this);
             return entry?.CardPlay.Card.Type == CardType.Attack;
         }
@@ -53,43 +59,43 @@ public sealed class Disengage : BardCard
         {
             CardPlayStartedEntry entry = CombatManager.Instance.History
                 .CardPlaysStarted
-                .LastOrDefault(e => e.CardPlay.Card.Owner == base.Owner
-                && e.HappenedThisTurn(base.CombatState)
+                .LastOrDefault(e => e.CardPlay.Card.Owner == Owner
+                && e.HappenedThisTurn(CombatState)
                 && e.CardPlay.Card != this);
             return entry?.CardPlay.Card.Type == CardType.Skill;
         }
     }
 
+    // 手牌高亮条件
     protected override bool ShouldGlowGoldInternal => WasLastCardPlayedAttack || WasLastCardPlayedSkill;
+
+    public Disengage() : base(energyCost, type, rarity, targetType)
+    {
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获取基础格挡值
-        decimal blockAmount = base.DynamicVars.Block.BaseValue;
-
-        // 判断上一张牌的类型
         bool isAttack = WasLastCardPlayedAttack;
         bool isSkill = WasLastCardPlayedSkill;
 
         // 获得基础格挡
-        await CommonActions.CardBlock(this, cardPlay);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.IntValue, ValueProp.Move, cardPlay);
 
         // 根据上一张牌类型触发额外效果
         if (isAttack)
         {
             // 上一张是攻击牌：抽2张牌
-            await CardPileCmd.Draw(choiceContext, 2, Owner);
+            await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, Owner);
         }
         else if (isSkill)
         {
             // 上一张是技能牌：再获得6点格挡
-            await CommonActions.CardBlock(this, cardPlay);
+            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.IntValue, ValueProp.Move, cardPlay);
         }
     }
 
     protected override void OnUpgrade()
     {
-        // 升级：格挡 +2（6 → 8）
-        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars.Block.UpgradeValueBy(2);
     }
 }

@@ -1,4 +1,3 @@
-using BaseLib.Utils;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -14,7 +13,5 @@ internal class TheAncient
     {
         RunManager.Instance.ActChangeSynchronizer.SetLocalPlayerReady();
         return false; // 不调用原方法
-
-
     }
 }

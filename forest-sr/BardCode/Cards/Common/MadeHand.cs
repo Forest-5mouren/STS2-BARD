@@ -1,67 +1,81 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Keywords;
+using STS2RitsuLib.Scaffolding.Content;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Common;
+
 /// <summary>
-/// 法师之手
+/// 法师之手｜Made Hand
 /// </summary>
-public sealed class MadeHand() : BardCard(1,
-    CardType.Skill, CardRarity.Common,
-    TargetType.Self)
+[RegisterCard(typeof(BardCardPool))]
+public sealed class MadeHand : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DynamicVar("RetainAmount", 1m),  // 基础保留数量：1张
-        new CardsVar(1)                    // 抽牌数量
-    };
+    private const int energyCost = 1;
+    private const CardType type = CardType.Skill;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.Self;
+    private const bool shouldShowInCardLibrary = true;
 
+    // 基础数值：保留数量 + 抽牌数量
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        ModCardVars.Int("retainAmount", 1),
+        new CardsVar(1)
+    ];
 
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
-    {
+    // 额外提示文本
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromKeyword(CardKeyword.Retain)
-    };
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [Forest_Sr.BardCode.Cards.KeyWord.BardKeyword.Magic];
+    ];
+
+    // 关键词
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+
+    public MadeHand() : base(energyCost, type, rarity, targetType)
+    {
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int retainCount = (int)base.DynamicVars["RetainAmount"].BaseValue;
+        int retainCount = DynamicVars["retainAmount"].IntValue;
 
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue, Owner);
+        // 抽牌
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
 
+        // 从手牌中选择要保留的牌（排除已有保留关键词的牌）
         CardModel[] selectedCards = (await CardSelectCmd.FromHand(
-            prefs: new CardSelectorPrefs(base.SelectionScreenPrompt, retainCount),  // 使用变量控制数量
+            prefs: new CardSelectorPrefs(SelectionScreenPrompt, retainCount),
             context: choiceContext,
-            player: base.Owner,
-            filter: (CardModel c) => !c.Keywords.Contains(CardKeyword.Retain),
+            player: Owner,
+            filter: (CardModel c) => !c.HasModKeyword(CardKeyword.Retain.ToString()),
             source: this)).ToArray();
 
-        
-
+        // 为选中的卡牌添加保留关键词
         foreach (var card in selectedCards)
         {
             CardCmd.ApplyKeyword(card, CardKeyword.Retain);
         }
-
-        
     }
 
     protected override void OnUpgrade()
     {
-        //base.DynamicVars["RetainAmount"].UpgradeValueBy(1m);  // 升级后可以保留2张牌
-        base.DynamicVars.Cards.UpgradeValueBy(1m);
+        // 升级：抽牌数量 +1（1 → 2）
+        DynamicVars.Cards.UpgradeValueBy(1);
+        // 可选：保留数量 +1
+        // DynamicVars["retainAmount"].UpgradeValueBy(1);
     }
 }

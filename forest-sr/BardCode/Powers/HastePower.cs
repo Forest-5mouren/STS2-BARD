@@ -28,7 +28,7 @@ public sealed class HastePower : BardPower
     public override bool AllowNegative => false;
 
     // 效果的附加提示
-    protected override List<IHoverTip> ExtraHoverTips =>
+    protected override List<IHoverTip> AdditionalHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Energy),
         HoverTipFactory.Static(StaticHoverTip.CardReward)

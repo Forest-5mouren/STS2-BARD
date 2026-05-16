@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using STS2RitsuLib.Keywords;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 法力充沛能力：每回合第一次释放法术时抽牌
 /// </summary>
-public sealed class ManaSurgePower : PowerModel
+public sealed class ManaSurgePower : BardPower
 {
     private bool _usedThisTurn = false;
 
@@ -30,7 +31,7 @@ public sealed class ManaSurgePower : PowerModel
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
         // 检查是否是法术牌
-        if (!cardPlay.Card.Keywords.Contains(BardKeyword.Magic)) return;
+        if (!cardPlay.Card.HasModKeyword(BardKeywords.Magic)) return;
 
         // 本回合已使用过，不再触发
         if (_usedThisTurn) return;
@@ -39,11 +40,10 @@ public sealed class ManaSurgePower : PowerModel
         _usedThisTurn = true;
 
         // 抽牌
-        int drawCount = (int)base.Amount;
-        if (drawCount > 0)
+        if (DynamicVars.Cards.IntValue > 0)
         {
             Flash();
-            await CardPileCmd.Draw(context, drawCount, base.Owner.Player);
+            await CardPileCmd.Draw(context, DynamicVars.Cards.IntValue, base.Owner.Player);
         }
     }
 

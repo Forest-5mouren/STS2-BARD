@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -9,49 +6,51 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Ancient;
 
 /// <summary>
 /// 韵律风暴｜RhythmStorm
-/// 效果：能力。每当你获得活力时，对所有敌人造成2点法术伤害。
-///       每当你使用法术牌或乐曲牌时，获得1层活力。
-/// 升级：活力伤害+1（2→3），获得活力+1（1→2）
+/// 效果：能力。每当你获得活力时，对所有敌人造成 {damage} 点法术伤害。
+///       每当你使用法术牌或乐曲牌时，获得 {vigor} 层活力。
+/// 升级：获得固有
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class RhythmStorm : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new IntVar("DamageAmount", 3m),   // AOE伤害
-        new IntVar("VigorAmount", 2m)     // 获得活力层数
-    };
+    
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar( 3,MegaCrit.Sts2.Core.ValueProps.ValueProp.Move),   // AOE伤害
+        new PowerVar<VigorPower>( 2)     // 获得活力层数
+    ];
+
+    // 额外悬停提示
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromPower<VigorPower>()
-    };
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
-    {
-        BardKeyword.Magic,
-        BardKeyword.SONG
-    };
+    // 关键词：魔法、乐曲// 升级：获得固有
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic, BardKeywords.Song];
 
-    public RhythmStorm()
-        : base(1, CardType.Power, CardRarity.Ancient, TargetType.Self)
+    public RhythmStorm() : base(1, CardType.Power, CardRarity.Ancient, TargetType.Self)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        // 施加能力
+        // 施加能力（层数为1作为标记）
         await PowerCmd.Apply<RhythmStormPower>(
-            base.Owner.Creature,
-            1m,
-            base.Owner.Creature,
+            Owner.Creature,
+            1,
+            Owner.Creature,
             this
         );
     }

@@ -1,35 +1,26 @@
-using BaseLib.Abstracts;
 using Forest_Sr.BardCode.Extensions;
 using Godot;
-using Forest_Sr.BardCode.Character;
+using MegaCrit.Sts2.Core.Models.Cards;
+using STS2RitsuLib.Scaffolding.Content;
+using STS2RitsuLib.Utils;
 
-namespace Forest_Sr.BardCode.Character;
+namespace Forest_Sr.BardCode.Cards;
 
-public class BardCardPool : CustomCardPoolModel
+public sealed class BardCardPool : TypeListCardPoolModel
 {
-    public override string Title => Bard.CharacterId; //This is not a display name.
+    public override string Title => "Bard";  // 卡池的ID。必须唯一防撞车。
+    public override string EnergyColorName => "bard";
+    //public override string CardFrameMaterialPath => "res://Bard/materials/card_frame.tres";
+    public override Color DeckEntryCardColor => new("#840240");  // 卡池的主题色。
+    // 能量表盘文字轮廓颜色
+    public override Color EnergyOutlineColor => new(0.5f, 0.5f, 1f);
+    // 如果你想用原版卡框换色，加这两行
+    private static readonly Material? _poolFrameMaterial = MaterialUtils.CreateRgbShaderMaterial(0.5f, 0.5f, 1f);
+    public override Material? PoolFrameMaterial => _poolFrameMaterial;
+    public override bool IsColorless => false; // 卡池是否是无色。例如事件、状态等卡池就是无色的。
 
-    public override string BigEnergyIconPath => "Charui/big_energy.png".ImagePath();
-    public override string TextEnergyIconPath => "Charui/text_energy.png".ImagePath();
-
-    /* These HSV values will determine the color of your card back.
-	They are applied as a shader onto an already colored image,
-	so it may take some experimentation to find a color you like.
-	Generally they should be values between 0 and 1. */
-    public override float H => 0.95f;
-    public override float S => 0.98f;
-    public override float V => 0.7f;
-
-    //Alternatively, leave these values at 1 and provide a custom frame image.
-    /*public override Texture2D CustomFrame(CustomCardModel card)
-	{
-		//This will attempt to load Oddmelt/images/cards/frame.png
-		return PreloadManager.Cache.GetTexture2D("cards/frame.png".ImagePath());
-	}*/
-
-    //Color of small card icons
-    public override Color DeckEntryCardColor => new("840240");
-    public override Color EnergyOutlineColor => new("651565");
-
-    public override bool IsColorless => false;
+    // 可选：自定义能量图标
+    public override string? TextEnergyIconPath => "res://Bard/Images/Charui/small_energy.png";  // 描述中使用的能量图标。大小为24x24。
+    public override string? BigEnergyIconPath => "res://Bard/Images/Charui/big_energy.png";  // tooltip和卡牌左上角的能量图标。大小为74x74
+    
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Other
 {
-    public sealed class FoxCunning : BardCard, KnowledgeDemon.IChoosable
+    public sealed class FoxCunning : BardCard
     {
         public override bool CanBeGeneratedInCombat => false;
 
@@ -19,7 +19,7 @@ namespace Forest_Sr.BardCode.Cards.Other
 
         protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
         {
-            new DynamicVar("Cards", 2m)
+            new CardsVar(2)
         };
 
         public FoxCunning()
@@ -27,12 +27,10 @@ namespace Forest_Sr.BardCode.Cards.Other
         {
         }
 
-        public async Task OnChosen()
+        public async Task OnChosen(PlayerChoiceContext choiceContext)
         {
-            int drawCount = base.DynamicVars["Cards"].IntValue;
 
-            var choiceContext = new BlockingPlayerChoiceContext();
-            await CardPileCmd.Draw(choiceContext, drawCount, base.Owner);
+            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, base.Owner);
             // 本回合下一张法术牌费用-1
             await PowerCmd.Apply<NextSpellCostReductionPower>(
                 base.Owner.Creature,

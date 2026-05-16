@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
@@ -12,56 +13,49 @@ namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 守卫刻文能力：失去格挡时对全体敌人造成等量伤害
 /// </summary>
-public sealed class GuardianRunePower : PowerModel
+[RegisterPower]
+public sealed class GuardianRunePower : BardPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 
     /// <summary>
-    /// 格挡被清除时触发（参考 Reflect 的 AfterDamageReceived）
+    /// 受到伤害后触发（格挡被消耗时）
     /// </summary>
-    public override async Task AfterBlockCleared(Creature creature)
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
         // 只对自己生效
-        if (creature != base.Owner) return;
+        if (target != Owner) return;
 
-        // 获取清除的格挡量（需要记录）
-        // 注意：这里需要通过其他方式获取清除的格挡值
-        // 简化方案：记录每回合失去的格挡
-    }
-
-    /// <summary>
-    /// 受到伤害后触发（参考 Reflect）
-    /// 当格挡被消耗时，对全体敌人造成等量伤害
-    /// </summary>
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props, Creature? dealer, CardModel? cardSource)
-    {
-        // 只对自己生效
-        if (target != base.Owner) return;
-
-        // 如果实际损失了格挡（格挡被消耗）
+        // 如果实际消耗了格挡（格挡被用来抵挡伤害）
         if (result.BlockedDamage > 0)
         {
-            // 对所有敌人造成等量伤害（参考 NecroMasteryPower）
+            // 对所有敌人造成等量伤害
             await CreatureCmd.Damage(
                 choiceContext,
-                base.Owner.CombatState.HittableEnemies,  // 全体敌人
-                result.BlockedDamage,                     // 伤害 = 消耗的格挡值
+                Owner.CombatState.HittableEnemies,
+                result.BlockedDamage,
                 ValueProp.Unblockable | ValueProp.Unpowered,
-                base.Owner,
+                Owner,
                 null
             );
         }
     }
 
     /// <summary>
-    /// 回合结束时减少层数（参考 Reflect）
+    /// 回合开始时减少层数
     /// </summary>
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
     {
-        if (side == base.Owner.Side)
+        if (side == CombatSide.Enemy)
         {
-            await PowerCmd.Decrement(this);
+            await PowerCmd.TickDownDuration(this);
         }
     }
 }

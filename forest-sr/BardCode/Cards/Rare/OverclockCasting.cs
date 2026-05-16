@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -15,41 +15,41 @@ namespace Forest_Sr.BardCode.Cards.Rare;
 /// 效果：能力。你的所有法术牌获得消耗和再次打出。
 /// 升级：移除虚无
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class OverclockCasting : BardCard
 {
-    private const string POWER_KEY = "OverclockCasting";
+    private const string _markerKey = "marker";
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DynamicVar(POWER_KEY, 1m)  // 能力标记
-    };
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar(_markerKey, 1)   // 能力标记
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
-    {
-        CardKeyword.Ethereal  // 虚无（升级后移除）
-    };
+    // 关键词：虚无（升级后移除）
+    protected override IEnumerable<string> RegisteredKeywordIds => ["ETHEREAL"];
 
-    public OverclockCasting()
-        : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
+    public OverclockCasting() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
+    }
+
+    // 升级：移除虚无（已通过 RegisteredKeywordIds 处理）
+    protected override void OnUpgrade()
+    {
+        RemoveKeyword(CardKeyword.Eternal);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.CastAnimDelay);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+
+        int markerAmount = DynamicVars[_markerKey].IntValue;
 
         // 施加超频施法能力Power
         await PowerCmd.Apply<OverclockCastingPower>(
-            base.Owner.Creature,
-            base.DynamicVars[POWER_KEY].BaseValue,
-            base.Owner.Creature,
+            Owner.Creature,
+            markerAmount,
+            Owner.Creature,
             this
         );
-    }
-
-    protected override void OnUpgrade()
-    {
-        // 升级：移除虚无关键字
-        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

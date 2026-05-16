@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using STS2RitsuLib.Keywords;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
@@ -12,7 +13,7 @@ namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 战歌能力：使用乐曲卡时获得活力
 /// </summary>
-public sealed class WarSongPower : PowerModel
+public sealed class WarSongPower : BardPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -26,7 +27,7 @@ public sealed class WarSongPower : PowerModel
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
         // 检查是否是乐曲卡
-        if (!cardPlay.Card.Keywords.Contains(BardKeyword.SONG)) return;
+        if (!cardPlay.Card.HasModKeyword(BardKeywords.Magic)) return;
 
         // 获得活力
         await PowerCmd.Apply<VigorPower>(

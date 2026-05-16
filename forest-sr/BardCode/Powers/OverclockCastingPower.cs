@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using STS2RitsuLib.Keywords;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
@@ -12,7 +13,7 @@ namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 超频施法能力：法术牌获得消耗和再次打出
 /// </summary>
-public sealed class OverclockCastingPower : PowerModel
+public sealed class OverclockCastingPower : BardPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -23,7 +24,7 @@ public sealed class OverclockCastingPower : PowerModel
     public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
         // 只对法术牌生效
-        if (!card.Keywords.Contains(BardKeyword.Magic)) return playCount;
+        if (!card.HasModKeyword(BardKeywords.Magic)) return playCount;
 
         // 只对自己打出的牌生效
         if (card.Owner.Creature != base.Owner) return playCount;
@@ -49,7 +50,7 @@ public sealed class OverclockCastingPower : PowerModel
         }
 
         // 检查法术牌
-        if (!card.Keywords.Contains(BardKeyword.Magic))
+        if (!card.HasModKeyword(BardKeywords.Magic))
         {
             return (pileType, position);
         }

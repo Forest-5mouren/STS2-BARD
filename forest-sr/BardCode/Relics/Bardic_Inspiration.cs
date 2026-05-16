@@ -1,7 +1,5 @@
-using BaseLib.Extensions;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
-using Forest_Sr.BardCode.Relics;
-using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -10,31 +8,48 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
-using System;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Relics;
-public class Bardic_Inspiration : BardRelics
+
+/// <summary>
+/// 诗人激励
+/// 效果：每回合开始时，给全体友方提供 {vigor} 层活力。
+/// </summary>
+[RegisterRelic(typeof(BardRelicPool))]
+public sealed class BardicInspiration : BardRelics
 {
-    public override RelicRarity Rarity => RelicRarity.Starter; //稀有度
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new PowerVar<VigorPower>(3m) };
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<VigorPower>(2)
+    ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>new IHoverTip[] { HoverTipFactory.FromPower<VigorPower>() };
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player) //回合开始时
+    // 额外悬停提示
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<VigorPower>()
+    ];
+
+    public override RelicRarity Rarity => RelicRarity.Starter;
+
+    // 每回合开始时触发
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        Flash(); //闪一下
+        // 闪烁效果
+        Flash();
 
+
+        // 给全体友方施加活力
         await PowerCmd.Apply<VigorPower>(
-                player.Creature.CombatState.Allies,
-                base.DynamicVars["VigorPower"].IntValue,
-                player.Creature,
-                null
-            );
-    } 
+            player.Creature.CombatState.Allies,
+            DynamicVars["VigorPower"].IntValue,
+            player.Creature,
+            null
+        );
+    }
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjvmuxfrcpuge"
-path="res://.godot/imported/haste.png-b2f250fb41ea38ecfa13e7d17a8351aa.ctex"
+uid="uid://bm56dm6lny2oa"
+path="res://.godot/imported/Haste.png-8f508498420bdec04bc205b061b5b3ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/haste.png"
-dest_files=["res://.godot/imported/haste.png-b2f250fb41ea38ecfa13e7d17a8351aa.ctex"]
+source_file="res://Bard/Images/Cards/Haste.png"
+dest_files=["res://.godot/imported/Haste.png-8f508498420bdec04bc205b061b5b3ec.ctex"]
 
 [params]
 

@@ -14,7 +14,8 @@ namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 舞动青春能力：每回合开始时，若上一回合打出了至少2种类型的牌，抽1张牌
 /// </summary>
-public sealed class DancingYouthPower : PowerModel
+/// 这个没改ritsulib
+public sealed class DancingYouthPower : BardPower
 {
     private const string TYPE_THRESHOLD_KEY = "TypeThreshold";
     private const int TYPE_THRESHOLD_VALUE = 2;  // 至少2种类型

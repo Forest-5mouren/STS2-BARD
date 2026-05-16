@@ -1,54 +1,31 @@
-using BaseLib.Abstracts;
-using BaseLib.Extensions;
-using BaseLib.Utils;
-using Forest_Sr.BardCode.Extensions;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Logging;
-using Forest_Sr.BardCode.Character;
+using STS2RitsuLib.Scaffolding.Content;
+using STS2RitsuLib.Interop.AutoRegistration;
+using Forest_Sr.BardCode.Extensions;
 
 namespace Forest_Sr.BardCode.Cards;
 
-[Pool(typeof(BardCardPool))]
-public abstract class BardCard(int cost, CardType type, CardRarity rarity, TargetType target) :
-	CustomCardModel(cost, type, rarity, target)
+[RegisterCard(typeof(BardCardPool), Inherit = true)]
+public abstract class BardCard : ModCardTemplate
 {
-	//Image size:
-	//Normal art: 1000x760 (Using 500x380 should also work, it will simply be scaled.)
-	//Full art: 606x852
-	public override string CustomPortraitPath
-	{
-		get
-		{
-			var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-			Log.Info(">>>[BardMod]CardPath=" + path, 2);
-			return ResourceLoader.Exists(path) ? path : "card.png".CardImagePath();
-		}
-	}
+    protected BardCard(int cost, CardType type, CardRarity rarity, TargetType target)
+        : base(cost, type, rarity, target)
+    {
+    }
 
-	//Smaller variants of card images for efficiency:
-	//Smaller variant of fullart: 250x350
-	//Smaller variant of normalart: 250x190
-	//Uses card_portraits/card_name.png as image path. These should be smaller images.
-	public override string PortraitPath
-	{
-		get
-		{
-			var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-			Log.Info(">>>[BardMod]CardPath=" + path, 2);
-			return ResourceLoader.Exists(path) ? path : "card.png".CardImagePath();
-		}
-	}
+    public override CardAssetProfile AssetProfile => new(
+        PortraitPath: $"res://Bard/Images/Cards/{GetType().Name}.png"
 
-	//Optional and I'm not sure it's functional yet.
-	public override string BetaPortraitPath
-	{
-		get
-		{
-			var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
-			Log.Info(">>>[BardMod]CardPath=" + path, 2);
-			return ResourceLoader.Exists(path) ? path : "card.png".CardImagePath();
-		}
-	}
+        // 根据不同类型设置不同卡框
+        //FramePath: type switch
+        //{
+        //    CardType.Attack => "res://RitsuTest/images/card_frame_attack.png",
+        //    CardType.Skill => "res://RitsuTest/images/card_frame_skill.png",
+        //    CardType.Power => "res://RitsuTest/images/card_frame_power.png",
+        //    _ => ""
+        //}
+        // PortraitBorderPath: "",
+        // BannerTexturePath: ""
+    );
 }

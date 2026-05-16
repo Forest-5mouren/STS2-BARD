@@ -1,28 +1,42 @@
-using BaseLib.Abstracts;
-using BaseLib.Extensions;
-using Forest_Sr.BardCode.Extensions;
 using Godot;
+using MegaCrit.Sts2.Core.Models.Powers;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+using Forest_Sr.BardCode.Extensions;
 using Forest_Sr.Bard;
 
 namespace Forest_Sr.BardCode.Powers;
 
-public abstract class BardPower : CustomPowerModel
+[RegisterPower(Inherit = true)]  // Inherit = true 让所有子类自动注册
+public abstract class BardPower : ModPowerTemplate
 {
-    public override string CustomPackedIconPath
+    // 统一能力图标路径（小型图标）
+    public override PowerAssetProfile AssetProfile => new()
     {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".PowerImagePath();
-            return ResourceLoader.Exists(path) ? path : "power.png".PowerImagePath();
-        }
+        IconPath = GetIconPath(),
+        BigIconPath = GetBigIconPath()
+    };
+
+    private string GetIconPath()
+    {
+        var cardName = GetPowerName();
+        var path = $"res://{MainFile.ModId}/Images/Powers/{cardName}.png";
+        return ResourceLoader.Exists(path) ? path : $"res://{MainFile.ModId}/Images/Powers/default.png";
     }
 
-    public override string CustomBigIconPath
+    private string GetBigIconPath()
     {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigPowerImagePath();
-            return ResourceLoader.Exists(path) ? path : "power.png".BigPowerImagePath();
-        }
+        var cardName = GetPowerName();
+        var path = $"res://{MainFile.ModId}/Images/Powers/{cardName}.png";
+        return ResourceLoader.Exists(path) ? path : $"res://{MainFile.ModId}/Images/Powers/default.png";
+    }
+
+    private string GetPowerName()
+    {
+        var entry = Id.Entry;
+        // 移除前缀，例如 "BARD_POWER_BARD_POWER" -> "BARD_POWER"
+        var prefix = "BARD_POWER_";
+        var name = entry.StartsWith(prefix) ? entry[prefix.Length..] : entry;
+        return name.ToLowerInvariant();
     }
 }

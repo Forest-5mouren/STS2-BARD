@@ -1,61 +1,67 @@
-using BaseLib.Utils;
-using Forest_Sr.BardCode.Cards;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 滑步｜SlideStep
-/// 效果：获得4点格挡，获得1点临时敏捷。
-/// 升级：格挡+2（4→6），临时敏捷+1（1→2）
+/// 效果：抽1张牌，获得1点临时敏捷。
+/// 升级：临时敏捷+1（1→2），抽牌+1（1→2）
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class SlideStep : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new CardsVar(1),                   // 抽1张牌 
-        new BlockVar(4m, ValueProp.Move),           // 基础格挡值
-        new PowerVar<DexterityPower>(1m)            // 临时敏捷层数
-    };
+    private const int energyCost = 0;
+    private const CardType type = CardType.Skill;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.Self;
+    private const bool shouldShowInCardLibrary = true;
+    // 基础数值：抽牌 + 临时敏捷层数
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new CardsVar(1),
+        ModCardVars.Int("dexterity", 1)
+    ];
 
+    // 额外提示文本
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<DexterityPower>()
+    ];
 
-
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromPower<DexterityPower>()  // 敏捷提示
-    };
-
-    public SlideStep()
-        : base(0, CardType.Skill, CardRarity.Common, TargetType.Self)
+    public SlideStep() : base(energyCost, type, rarity, targetType)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        
-        await PowerCmd.Apply<SlideStepPower>(
-            base.Owner.Creature,
-            base.DynamicVars.Dexterity.BaseValue,
-            base.Owner.Creature,
-            this
-         );
+        int dexterityAmount = DynamicVars["dexterity"].IntValue;
 
-        await CardPileCmd.Draw(choiceContext, base.DynamicVars.Cards.IntValue,base.Owner);
+        // 施加临时敏捷（使用 SlideStepPower 或直接使用 DexterityPower）
+        await PowerCmd.Apply<SlideStepPower>(
+            Owner.Creature,
+            dexterityAmount,
+            Owner.Creature,
+            this);
+
+        // 抽牌
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        //.Block.UpgradeValueBy(2m);
-        // 升级：临时敏捷 +1（1→2）
-        DynamicVars.Dexterity.UpgradeValueBy(1m);
+        //DynamicVars.Cards.UpgradeValueBy(1);      // 1 → 2
+        DynamicVars["dexterity"].UpgradeValueBy(1);  // 1 → 2
     }
 }

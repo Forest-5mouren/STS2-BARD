@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -8,49 +7,50 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
-namespace Forest_Sr.BardCode.Cards.Common;
+namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
 /// 野蜂飞翔｜FlightOfTheBumblebee
-/// 效果：随机造成2点伤害4次。
-/// 升级：随机造成2点伤害5次
+/// 效果：随机造成 {damage} 点伤害 {repeat} 次。
+/// 升级：攻击次数 4 → 5
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class FlightOfTheBumblebee : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(2m, ValueProp.Move),   // 单次伤害
-        new RepeatVar(4)                     // 攻击次数
-    };
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar( 2,ValueProp.Move),   // 单次伤害
+        new RepeatVar(4)    // 攻击次数
+    ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromKeyword(BardKeyword.SONG)
-    };
+    // 关键词：乐曲
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        BardKeywords.Song
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
-    {
-        BardKeyword.SONG
-    };
 
-    public FlightOfTheBumblebee()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
+    public FlightOfTheBumblebee() : base(1, CardType.Attack, CardRarity.Common, TargetType.RandomEnemy)
     {
+    }
+
+    // 升级：攻击次数 4 → 5
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Repeat.UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .WithHitCount(base.DynamicVars.Repeat.IntValue)
-            .FromCard(this)
-            .TargetingRandomOpponents(base.CombatState)
-            .Execute(choiceContext);
-    }
+        
+        int repeatCount = DynamicVars.Repeat.IntValue;
 
-    protected override void OnUpgrade()
-    {
-        // 升级：攻击次数 4 → 5
-        base.DynamicVars.Repeat.UpgradeValueBy(1m);
+        await DamageCmd.Attack(DynamicVars.Damage.IntValue)
+            .WithHitCount(repeatCount)
+            .FromCard(this)
+            .TargetingRandomOpponents(CombatState)
+            .Execute(choiceContext);
     }
 }

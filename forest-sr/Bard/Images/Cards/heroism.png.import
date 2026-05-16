@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7fw0w2p0arxs"
-path="res://.godot/imported/heroism.png-714ff13992df12fac2aba1acef7ea5a1.ctex"
+uid="uid://b78hxqnv054eg"
+path="res://.godot/imported/Heroism.png-e51ba71d91e8a03609af31bf45df214d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/heroism.png"
-dest_files=["res://.godot/imported/heroism.png-714ff13992df12fac2aba1acef7ea5a1.ctex"]
+source_file="res://Bard/Images/Cards/Heroism.png"
+dest_files=["res://.godot/imported/Heroism.png-e51ba71d91e8a03609af31bf45df214d.ctex"]
 
 [params]
 

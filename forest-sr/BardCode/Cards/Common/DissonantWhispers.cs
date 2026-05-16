@@ -1,48 +1,51 @@
-using BaseLib.Utils;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 不谐低语｜Dissonant Whispers
-/// 效果：对单个敌人造成12/15点伤害，施加2/3层虚弱。魔法。
+/// 效果：对单个敌人造成14/18点伤害，施加2/3层虚弱。魔法。
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class DissonantWhispers : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(14m, ValueProp.Move),      // 伤害
-        new PowerVar<WeakPower>(2m)              // 虚弱层数
-    };
+    private const int energyCost = 2;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
-    {
+    // 基础数值：伤害 + 虚弱层数
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(14,ValueProp.Move),
+        new PowerVar<WeakPower>(2)
+    ];
+
+    // 额外提示文本
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromPower<WeakPower>()
-    };
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new CardKeyword[]
-    {
-        Forest_Sr.BardCode.Cards.KeyWord.BardKeyword.Magic
-    };
+    // 关键词
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
 
-    public DissonantWhispers() : base(2, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    public DissonantWhispers() : base(energyCost, type, rarity, targetType)
     {
     }
 
@@ -54,29 +57,28 @@ public sealed class DissonantWhispers : BardCard
         NCombatRoom.Instance?.PlaySplashVfx(cardPlay.Target, new Color("#8E44AD"));
 
         // 播放施法动画
-        await CreatureCmd.TriggerAnim(base.Owner.Creature, "Cast", base.Owner.Character.AttackAnimDelay);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.AttackAnimDelay);
 
         // 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        await CreatureCmd.Damage(
+            choiceContext,
+            cardPlay.Target,
+            DynamicVars.Damage.IntValue,
+            ValueProp.Move,
+            Owner.Creature,
+            this);
 
         // 施加虚弱
         await PowerCmd.Apply<WeakPower>(
             cardPlay.Target,
-            base.DynamicVars.Weak.BaseValue,
-            base.Owner.Creature,
-            this
-        );
+            DynamicVars.Weak.BaseValue,
+            Owner.Creature,
+            this);
     }
 
     protected override void OnUpgrade()
     {
-        // 升级：伤害 +3（12 → 15）
-        base.DynamicVars.Damage.UpgradeValueBy(4m);
-        // 升级：虚弱 +1（2 → 3）
-        base.DynamicVars.Weak.UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(4);   // 14 → 18
+        DynamicVars.Weak.UpgradeValueBy(1);     // 2 → 3
     }
 }

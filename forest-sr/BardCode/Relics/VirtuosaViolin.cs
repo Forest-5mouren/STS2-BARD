@@ -1,8 +1,5 @@
-using BaseLib.Extensions;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
-using Forest_Sr.BardCode.Relics;
-using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,29 +9,52 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
-using System;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Keywords;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Relics;
-public class VirtuosaViolin : BardRelics
+
+/// <summary>
+/// 大师的小提琴｜Virtuosa Violin
+/// 效果：每当你打出乐曲牌时，对所有敌人施加 {doom} 层末日。
+/// </summary>
+[RegisterRelic(typeof(BardRelicPool))]
+public sealed class VirtuosaViolin : BardRelics
 {
-    public override RelicRarity Rarity => RelicRarity.Uncommon; //稀有度
+    private const string _doomKey = "doom";
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new PowerVar<DoomPower>(2m) };  //基础数值
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar(_doomKey, 3)   // 末日层数
+    ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[] { HoverTipFactory.FromPower<DoomPower>() };   //显示
-    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay) //打出卡牌后
+    // 额外悬停提示
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<DoomPower>()
+    ];
+
+    public override RelicRarity Rarity => RelicRarity.Uncommon;
+
+    public override async Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Keywords.Contains(BardKeyword.SONG) && cardPlay.Card.Owner == base.Owner)
+        // 检查是否是乐曲牌且是遗物拥有者打出的
+        if (cardPlay.Card.HasModKeyword(BardKeywords.Song) && cardPlay.Card.Owner == Owner)
         {
-            foreach (Creature hittableEnemy2 in base.Owner.Creature.CombatState.HittableEnemies)
+            int doomAmount = DynamicVars[_doomKey].IntValue;
+
+            // 对所有敌人施加末日
+            foreach (Creature enemy in Owner.Creature.CombatState.HittableEnemies)
             {
-                await PowerCmd.Apply<DoomPower>(hittableEnemy2, base.DynamicVars["PoisonPower"].IntValue, base.Owner.Creature, null);
+                await PowerCmd.Apply<DoomPower>(
+                    enemy,
+                    doomAmount,
+                    Owner.Creature,
+                    null
+                );
             }
         }
     }

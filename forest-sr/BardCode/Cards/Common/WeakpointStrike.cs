@@ -1,49 +1,75 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
-//光束（
+
+/// <summary>
+/// 弱点打击｜WeakpointStrike
+/// 效果：造成3点伤害，施加1层易伤。
+/// 升级：伤害 3→4，易伤 1→2
+/// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class WeakpointStrike : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(3m, ValueProp.Move),
-        new PowerVar<VulnerablePower>(1m)
-    };
+    private const int energyCost = 0;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
 
-    public WeakpointStrike()
-        : base(0, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    // 基础数值：伤害 + 易伤层数
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar( 3, ValueProp.Move),
+        new PowerVar<VulnerablePower>( 1)
+    ];
+
+    // 额外提示文本
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<VulnerablePower>()
+    ];
+
+    public WeakpointStrike() : base(energyCost, type, rarity, targetType)
     {
     }
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
-    {
-        HoverTipFactory.FromPower<VulnerablePower>()
-    };
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 造成伤害
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_blunt", null, "blunt_attack.mp3")
-            .Execute(choiceContext);
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars.Vulnerable.BaseValue, base.Owner.Creature, this);
+
+
+        // 造成伤害
+        await CreatureCmd.Damage(
+            choiceContext,
+            cardPlay.Target,
+            DynamicVars.Damage.IntValue,
+            ValueProp.Move,
+            Owner.Creature,
+            this);
+
+        // 施加易伤
+        await PowerCmd.Apply<VulnerablePower>(
+            cardPlay.Target,
+            DynamicVars.Vulnerable.BaseValue,
+            Owner.Creature,
+            this);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(1m);  // 3→4
-        base.DynamicVars.Vulnerable.UpgradeValueBy(1m);  // 1→2
+        DynamicVars.Damage.UpgradeValueBy(1);      // 3 → 4
+        DynamicVars.Vulnerable.UpgradeValueBy(1);  // 1 → 2
     }
 }

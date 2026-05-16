@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
+using STS2RitsuLib.Keywords;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
@@ -11,7 +12,7 @@ namespace Forest_Sr.BardCode.Powers;
 /// 法术共鸣
 /// 效果：本回合下一张法术牌费用-1
 /// </summary>
-public sealed class NextSpellCostReductionPower : PowerModel
+public sealed class NextSpellCostReductionPower : BardPower
 {
     private bool _used = false;
 
@@ -46,7 +47,7 @@ public sealed class NextSpellCostReductionPower : PowerModel
         if (!isValidPile) return false;
 
         // 检查是否是法术牌
-        if (!card.Keywords.Contains(BardKeyword.Magic)) return false;
+        if (!card.HasModKeyword(BardKeywords.Magic)) return false;
 
         // 减少费用
         modifiedCost = originalCost - base.Amount;
@@ -64,7 +65,7 @@ public sealed class NextSpellCostReductionPower : PowerModel
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
         // 检查是否是法术牌
-        if (!cardPlay.Card.Keywords.Contains(BardKeyword.Magic)) return;
+        if (!cardPlay.Card.HasModKeyword(BardKeywords.Magic)) return;
 
         // 检查卡牌是否在手牌或正在打出
         bool isValidPile;

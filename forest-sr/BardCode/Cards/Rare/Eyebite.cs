@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,68 +9,72 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
 /// <summary>
 /// 摄心目光｜Eyebite
-/// 效果：使一个敌人眩晕1回合，给予2层虚弱，再减少2点力量。
+/// 效果：使一个敌人眩晕1回合，给予 {weak} 层虚弱，再减少 {strength} 点力量。
 /// 升级：虚弱 2→3，减力量 2→3
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class Eyebite : BardCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        StunIntent.GetStaticHoverTip(),           // 眩晕提示
-        HoverTipFactory.FromPower<WeakPower>(),   // 虚弱提示
-        HoverTipFactory.FromPower<StrengthPower>() // 力量提示
-    };
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new PowerVar<WeakPower>(2m),      // 虚弱层数
-        new PowerVar<StrengthPower>(2m)   // 力量减少层数（负数）
-    };
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<WeakPower>( 2),       // 虚弱层数
+        new PowerVar<StrengthPower>( 2)    // 力量减少层数
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
-    {
-        CardKeyword.Exhaust  // 消耗
-    };
+    // 关键词：消耗
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        "EXHAUST"
+    ];
 
-    public Eyebite()
-        : base(3, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
+    // 额外悬停提示
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        StunIntent.GetStaticHoverTip(),
+        HoverTipFactory.FromPower<WeakPower>(),
+        HoverTipFactory.FromPower<StrengthPower>()
+    ];
+
+    public Eyebite() : base(3, CardType.Skill, CardRarity.Rare, TargetType.AnyEnemy)
     {
+    }
+
+    // 升级：虚弱 2→3，减力量 2→3
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Weak.UpgradeValueBy(1);
+        DynamicVars["StrengthPower"].UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
-        // 1. 眩晕敌人（参考 Whistle）
+        // 1. 眩晕敌人
         await CreatureCmd.Stun(cardPlay.Target);
 
         // 2. 给予虚弱
+        int weakAmount = DynamicVars.Weak.IntValue;
         await PowerCmd.Apply<WeakPower>(
             cardPlay.Target,
-            base.DynamicVars.Weak.BaseValue,
-            base.Owner.Creature,
+            DynamicVars.Weak.BaseValue,
+            Owner.Creature,
             this
         );
 
         // 3. 减少力量（给予负数的力量Power）
+        int strengthAmount = DynamicVars["StrengthPower"].IntValue;
         await PowerCmd.Apply<StrengthPower>(
             cardPlay.Target,
-            -base.DynamicVars.Strength.BaseValue,  // 负数表示减少力量
-            base.Owner.Creature,
+            -strengthAmount,  // 负数表示减少力量
+            Owner.Creature,
             this
         );
-    }
-
-    protected override void OnUpgrade()
-    {
-        // 升级：虚弱 2→3，减力量 2→3
-        base.DynamicVars.Weak.UpgradeValueBy(1m);
-        base.DynamicVars.Strength.UpgradeValueBy(1m);
     }
 }

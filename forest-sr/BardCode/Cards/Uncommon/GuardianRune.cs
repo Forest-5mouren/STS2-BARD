@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -7,32 +8,42 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
 /// 守卫刻文｜GuardianRune
-/// 效果：获得18点格挡。每当你失去格挡时，对所有敌人造成等量伤害。
-/// 升级：格挡 18→22
+/// 效果：获得 {block} 点格挡。每当你失去格挡时，对所有敌人造成等量伤害。
+/// 升级：格挡 18 → 22
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class GuardianRune : BardCard
 {
+    private const string _blockKey = "block";
+
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockVar( 18,ValueProp.Move)
+    ];
+
+    // 关键词：魔法
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        BardKeywords.Magic
+    ];
+
+    // 此卡获得格挡（用于UI显示）
     public override bool GainsBlock => true;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
+    public GuardianRune() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
-        new BlockVar(18m, ValueProp.Move)  // 格挡值
-    };
+    }
 
-
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
+    // 升级：格挡 18 → 22
+    protected override void OnUpgrade()
     {
-        KeyWord.BardKeyword.Magic  // 法术标签
-    };
-
-    public GuardianRune()
-        : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
-    {
+        DynamicVars.Block.UpgradeValueBy(4);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -41,20 +52,15 @@ public sealed class GuardianRune : BardCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // 获得格挡
-        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay);
+        
+        await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.IntValue, ValueProp.Move), cardPlay);
 
-        // 施加守卫刻文能力Power
+        // 施加守卫刻文能力
         await PowerCmd.Apply<GuardianRunePower>(
             Owner.Creature,
-            1m,  // 标记层数
+            1,  // 标记层数
             Owner.Creature,
             this
         );
-    }
-
-    protected override void OnUpgrade()
-    {
-        // 升级：格挡 18 → 22
-        DynamicVars.Block.UpgradeValueBy(4m);
     }
 }

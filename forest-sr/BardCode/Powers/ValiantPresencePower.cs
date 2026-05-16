@@ -12,7 +12,7 @@ namespace Forest_Sr.BardCode.Powers;
 /// 英勇气势能力
 /// 效果：每当你失去活力时，获得等量的格挡
 /// </summary>
-public sealed class ValiantPresencePower : PowerModel
+public sealed class ValiantPresencePower : BardPower
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
@@ -37,7 +37,7 @@ public sealed class ValiantPresencePower : PowerModel
         Flash();
 
         // 获得格挡 = 消耗层数 × 当前 Power 层数（或固定倍数）
-        int blockAmount = (int)(base.Amount * reducedAmount);
-        await CreatureCmd.GainBlock(base.Owner, blockAmount, ValueProp.Unpowered, null);
+        int block = (int)(base.Amount * reducedAmount);
+        await CreatureCmd.GainBlock(base.Owner,block, ValueProp.Unpowered, null);
     }
 }

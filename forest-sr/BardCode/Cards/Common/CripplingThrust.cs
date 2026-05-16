@@ -1,37 +1,46 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 致残突刺｜CripplingThrust
-/// 效果：造成8点伤害，给予1层虚弱。
-/// 升级：伤害 8→10，虚弱 1→2
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class CripplingThrust : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(8m, ValueProp.Move),      // 伤害值
-        new PowerVar<WeakPower>(1m)             // 虚弱层数
-    };
+    private const int energyCost = 1;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromPower<WeakPower>()  // 虚弱提示
-    };
+    // 基础数值：伤害 + 虚弱层数
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(3,ValueProp.Move),
+        new PowerVar<WeakPower>(1),
+        new PowerVar<VulnerablePower>(1)
+    ];
 
-    public CripplingThrust()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    // 额外提示文本
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<WeakPower>()
+    ];
+
+    public CripplingThrust() : base(energyCost, type, rarity, targetType)
     {
     }
 
@@ -39,27 +48,32 @@ public sealed class CripplingThrust : BardCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
-        // 1. 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        // 1. 造成伤害（使用 CreatureCmd.Damage）
+        await CreatureCmd.Damage(
+            choiceContext,
+            cardPlay.Target,
+            DynamicVars.Damage.IntValue,
+            ValueProp.Move,
+            Owner.Creature,
+            this);
 
         // 2. 给予虚弱
         await PowerCmd.Apply<WeakPower>(
             cardPlay.Target,
-            base.DynamicVars.Weak.BaseValue,
-            base.Owner.Creature,
-            this
-        );
+            DynamicVars.Weak.IntValue,
+            Owner.Creature,
+            this);
+        // 2. 给予易伤
+        await PowerCmd.Apply<VulnerablePower>(
+            cardPlay.Target,
+            DynamicVars.Vulnerable.IntValue,
+            Owner.Creature,
+            this);
     }
-
     protected override void OnUpgrade()
     {
-        // 升级：伤害 8 → 10
-        base.DynamicVars.Damage.UpgradeValueBy(2m);
-        // 升级：虚弱 1 → 2
-        base.DynamicVars.Weak.UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(1);
+        DynamicVars.Weak.UpgradeValueBy(1);
+        DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 }

@@ -1,4 +1,4 @@
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
@@ -6,18 +6,26 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
+
 /// <summary>
 /// 收场｜CurtainCall
-/// 效果：造成6点伤害。本场战斗每使用过一种卡牌类型，就攻击一次。
-/// 升级：基础伤害+2（6→8）
+/// 效果：造成 {damage} 点伤害。本场战斗每使用过一种卡牌类型，就攻击一次。
+/// 升级：基础伤害 6→8
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class CurtainCall : BardCard
 {
     private const string _calculatedKey = "CalculatedHits";
 
+    // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
         new DamageVar(6m, ValueProp.Move),           // 基础伤害
@@ -33,11 +41,16 @@ public sealed class CurtainCall : BardCard
         )
     };
 
-    public CurtainCall()
-        : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
+    public CurtainCall() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
     }
 
+    // 升级：伤害 6 → 8
+    protected override void OnUpgrade()
+    {
+        // 使用动态变量的 Damage 属性
+        DynamicVars.Damage.UpgradeValueBy(2m);
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
@@ -50,11 +63,5 @@ public sealed class CurtainCall : BardCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-
-    }
-
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Damage.UpgradeValueBy(2m);  // 6 → 8
     }
 }

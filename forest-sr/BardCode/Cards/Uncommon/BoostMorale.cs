@@ -6,7 +6,8 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using System.Collections;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,38 +16,44 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
 /// 提振士气｜BoostMorale
-/// 效果：全体友方获得5点格挡。消耗所有活力，每有一点活力额外获得1点格挡。
-/// 升级：基础格挡 5→8
+/// 效果：全体友方获得 {block} 点格挡。消耗所有活力，每有一点活力额外获得 1 点格挡。
+/// 升级：基础格挡 5 → 8
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class BoostMorale : BardCard
 {
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new BlockVar(5m, ValueProp.Move)  // 基础格挡值
-    };
+    // 基础数值声明（基础格挡值 5）
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new BlockVar(5,ValueProp.Move)
+    ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromPower<VigorPower>()  // 活力提示
-    };
+    // 额外悬停提示：活力
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<VigorPower>()
+    ];
 
-    public BoostMorale()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
+    public BoostMorale() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllAllies)
     {
+    }
+
+    // 升级：基础格挡 5 → 8
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获取当前活力层数（参考 EnergySurge 的获取方式）
+        // 获取当前活力层数
         var vigorPower = Owner.Creature.GetPower<VigorPower>();
-        int vigorAmount = vigorPower?.Amount ?? 0;
+        int vigor = vigorPower?.Amount ?? 0;
 
         // 计算总格挡 = 基础格挡 + 活力层数
-        int totalBlock = DynamicVars.Block.IntValue + vigorAmount;
-        BlockVar blockVar = new BlockVar(totalBlock, ValueProp.Move);
+        int baseBlock = DynamicVars.Block.IntValue;
+        int totalBlock = baseBlock + vigor;
 
-        // 获取全体友方（参考 EnergySurge）
+        // 获取全体友方
         IEnumerable<Creature> allies = from c in CombatState.GetTeammatesOf(Owner.Creature)
                                        where c != null && c.IsAlive && c.IsPlayer
                                        select c;
@@ -54,7 +61,7 @@ public sealed class BoostMorale : BardCard
         // 对每个友方给予格挡
         foreach (Creature ally in allies)
         {
-            await CreatureCmd.GainBlock(ally, blockVar, cardPlay);
+            await CreatureCmd.GainBlock(ally, new BlockVar(totalBlock, ValueProp.Move), cardPlay);
         }
 
         // 消耗所有活力
@@ -62,12 +69,5 @@ public sealed class BoostMorale : BardCard
         {
             await PowerCmd.Remove(vigorPower);
         }
-
-    }
-
-    protected override void OnUpgrade()
-    {
-        // 升级：基础格挡 5 → 8
-        DynamicVars.Block.UpgradeValueBy(3m);
     }
 }

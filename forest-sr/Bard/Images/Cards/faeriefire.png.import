@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvo4eqloximfb"
-path="res://.godot/imported/faeriefire.png-a68dc5bc2139737d2a58bfc705709b30.ctex"
+uid="uid://cjeu4ktlsm78y"
+path="res://.godot/imported/Faeriefire.png-b1b1bf6046cb2a8e12b57b3fd0140c5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/faeriefire.png"
-dest_files=["res://.godot/imported/faeriefire.png-a68dc5bc2139737d2a58bfc705709b30.ctex"]
+source_file="res://Bard/Images/Cards/Faeriefire.png"
+dest_files=["res://.godot/imported/Faeriefire.png-b1b1bf6046cb2a8e12b57b3fd0140c5a.ctex"]
 
 [params]
 

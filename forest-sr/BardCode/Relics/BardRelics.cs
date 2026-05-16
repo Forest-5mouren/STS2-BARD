@@ -1,40 +1,54 @@
-using BaseLib.Abstracts;
-using BaseLib.Extensions;
-using BaseLib.Utils;
 using Forest_Sr.BardCode.Extensions;
 using Godot;
-using Forest_Sr.BardCode.Character;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
+using System;
 
 namespace Forest_Sr.BardCode.Relics;
 
-[Pool(typeof(BardRelicPool))]
-
-public abstract class BardRelics : CustomRelicModel
+public abstract class BardRelics : ModRelicTemplate
 {
-    public override string PackedIconPath
+    // ✅ 正确配置 AssetProfile
+    public override RelicAssetProfile AssetProfile => new(
+        IconPath: GetIconPath(),
+        IconOutlinePath: GetIconOutlinePath(),
+        BigIconPath: GetBigIconPath()
+    );
+
+    // 辅助方法：生成图标路径（注意添加 Bard/ 前缀）
+    private string GetIconPath()
     {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic.png".RelicImagePath();
-        }
+        string path = $"res://Bard/Images/Relics/{GetImageName()}.png";
+        return ResourceLoader.Exists(path) ? path : "res://Images/Relics/default_relic.png";
     }
 
-    protected override string PackedIconOutlinePath
+    private string GetIconOutlinePath()
     {
-        get
-        {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic_outline.png".RelicImagePath();
-        }
+        string path = $"res://Bard/Images/Relics/{GetImageName()}.png";
+        return ResourceLoader.Exists(path) ? path : "res://Images/Relics/default_relic.png";
     }
 
-    protected override string BigIconPath
+    private string GetBigIconPath()
     {
-        get
+        string path = $"res://Bard/Images/Relics/{GetImageName()}.png";
+        return ResourceLoader.Exists(path) ? path : "res://Images/Relics/default_relic.png";
+    }
+
+    // 获取图片文件名
+    private string GetImageName()
+    {
+        string id = Id.Entry;
+        // 去掉 "BARD_RELIC_" 前缀，转为小写
+        if (id.StartsWith("BARD_RELIC_"))
         {
-            var path = $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigRelicImagePath();
-            return ResourceLoader.Exists(path) ? path : "relic.png".BigRelicImagePath();
+            return id.Substring(11).ToLowerInvariant();
         }
+
+        int lastUnderscore = id.LastIndexOf('_');
+        if (lastUnderscore >= 0 && lastUnderscore < id.Length - 1)
+        {
+            return id.Substring(lastUnderscore + 1).ToLowerInvariant();
+        }
+        return id.ToLowerInvariant();
     }
 }

@@ -1,13 +1,19 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
+using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -16,47 +22,55 @@ namespace Forest_Sr.BardCode.Cards.Common;
 /// 效果：造成8点伤害，获得2点活力。
 /// 升级：伤害 8→10，活力 2→3
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class ValiantStrike : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(8m, ValueProp.Move),      // 伤害值
-        new PowerVar<VigorPower>(2m)            // 活力层数
-    };
+    private const int energyCost = 1;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new[]
-    {
-        HoverTipFactory.FromPower<VigorPower>()  // 活力提示
-    };
+    // 基础数值：伤害 + 活力层数
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar( 8, ValueProp.Move),
+        new PowerVar<VigorPower>(2)
+    ];
 
-    public ValiantStrike()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    // 额外提示文本
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<VigorPower>()
+    ];
+
+    public ValiantStrike() : base(energyCost, type, rarity, targetType)
     {
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
+
+
         // 1. 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+        await CreatureCmd.Damage(
+            choiceContext,
+            cardPlay.Target,
+            DynamicVars.Damage.IntValue,
+            ValueProp.Move,
+            Owner.Creature,
+            this);
 
         // 2. 获得活力
         await PowerCmd.Apply<VigorPower>(
-                base.Owner.Creature,
-                base.DynamicVars["VigorPower"].IntValue,
-                base.Owner.Creature,
-                this
-         );
+            Owner.Creature,
+            DynamicVars["VigorPower"].IntValue,
+            Owner.Creature,
+            this);
     }
 
     protected override void OnUpgrade()
     {
-        // 升级：伤害 8→10
-        base.DynamicVars.Damage.UpgradeValueBy(2m);
-        // 升级：活力 2→3
-        base.DynamicVars["VigorPower"].UpgradeValueBy(1m);
+        DynamicVars.Damage.UpgradeValueBy(2);  // 8 → 10
+        DynamicVars["VigorPower"].UpgradeValueBy(1);   // 2 → 3
     }
 }

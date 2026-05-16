@@ -1,56 +1,74 @@
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using MegaCrit.Sts2.Core.Entities.Creatures;
+using Forest_Sr.BardCode.Cards.KeyWord;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
-/// 克敌机先
+/// 克敌机先｜TrueStrike
+/// 效果：移除敌人的人工制品，然后施加 {vulnerable} 层易伤。
+/// 升级：易伤 2 → 3
 /// </summary>
-public sealed class TrueStrike() : BardCard(0,
-    CardType.Skill, CardRarity.Uncommon,
-    TargetType.AnyEnemy)
+[RegisterCard(typeof(BardCardPool))]
+public sealed class TrueStrike : BardCard
 {
+    
 
-    //protected override IEnumerable<DynamicVar> CanonicalVars => new global::_003C_003Ez__ReadOnlySingleElementList<DynamicVar>(new DynamicVar("Power", 2m));
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[] { new PowerVar<VulnerablePower>(2m) };  
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<VulnerablePower>(2)   // 易伤层数
+    ];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new CardKeyword[]{CardKeyword.Exhaust,KeyWord.BardKeyword.Magic}; //消耗,法术
+    // 关键词：消耗、魔法
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        "EXHAUST",
+        BardKeywords.Magic
+    ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => new IHoverTip[]
+    // 额外悬停提示
+    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
+        HoverTipFactory.FromPower<VulnerablePower>()
+    ];
+
+    public TrueStrike() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy)
     {
-    HoverTipFactory.FromPower<VulnerablePower>()
-    };
+    }
 
-
+    // 升级：易伤 2 → 3
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Vulnerable.UpgradeValueBy(1);
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
+        // 如果目标有人工制品，移除它
         if (cardPlay.Target.HasPower<ArtifactPower>())
         {
             await PowerCmd.Remove<ArtifactPower>(cardPlay.Target);
         }
 
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, base.DynamicVars.Vulnerable.IntValue, Owner.Creature, this);
-    }
-
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Vulnerable.UpgradeValueBy(1m);
+        // 施加易伤
+        int vulnerableAmount = DynamicVars.Vulnerable.IntValue;
+        await PowerCmd.Apply<VulnerablePower>(
+            cardPlay.Target,
+            DynamicVars.Vulnerable.BaseValue,
+            Owner.Creature,
+            this
+        );
     }
 }

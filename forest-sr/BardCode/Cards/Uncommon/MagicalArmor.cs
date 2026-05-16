@@ -1,40 +1,50 @@
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
-using System;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Common;
+
 /// <summary>
-/// 魔法护甲
+/// 魔法护甲｜MagicalArmor
+/// 效果：获得 {plating} 层护甲（每次受到攻击时减少伤害）。
+/// 升级：护甲 7 → 9
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class MagicalArmor : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new PowerVar<PlatingPower>(7m)
-    };
+    private const string _platingKey = "plating";
 
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DynamicVar(_platingKey, 7)
+    ];
 
-    public MagicalArmor()
-        : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
+    public MagicalArmor() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
+    }
+
+    // 升级：护甲 7 → 9
+    protected override void OnUpgrade()
+    {
+        DynamicVars[_platingKey].UpgradeValueBy(2);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<PlatingPower>(base.Owner.Creature, base.DynamicVars["PlatingPower"].BaseValue, base.Owner.Creature, this);
-    }
+        int platingAmount = DynamicVars[_platingKey].IntValue;
 
-    protected override void OnUpgrade()
-    {
-        base.DynamicVars["PlatingPower"].UpgradeValueBy(2m);
+        await PowerCmd.Apply<PlatingPower>(
+            Owner.Creature,
+            platingAmount,
+            Owner.Creature,
+            this
+        );
     }
-
 }

@@ -1,4 +1,4 @@
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -7,7 +7,8 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,33 +19,38 @@ namespace Forest_Sr.BardCode.Cards.Rare;
 /// <summary>
 /// 安定心神｜CalmEmotions
 /// 效果：清除所有负面效果（Debuff）。
-/// 升级：费用 1→0
+/// 升级：费用 3 → 2
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class CalmEmotions : BardCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
+    // 无动态变量
+    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+
+    // 关键词：消耗、魔法
+    protected override IEnumerable<string> RegisteredKeywordIds => [
+        "EXHAUST",
+        BardKeywords.Magic
+    ];
+
+    public CalmEmotions() : base(3, CardType.Skill, CardRarity.Rare, TargetType.AnyPlayer)
     {
-        CardKeyword.Exhaust, // 消耗
-        Forest_Sr.BardCode.Cards.KeyWord.BardKeyword.Magic
-    };
+    }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => Array.Empty<DynamicVar>();
-
-
-    public CalmEmotions()
-        : base(3, CardType.Skill, CardRarity.Rare, TargetType.AnyPlayer)
+    // 升级：费用 3 → 2
+    protected override void OnUpgrade()
     {
+        EnergyCost.UpgradeBy(-1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 统一处理目标（参考 Longstrider）
-        Creature target = cardPlay.Target ?? base.Owner.Creature;
-        Player targetPlayer = target.Player ?? base.Owner;
+        // 统一处理目标
+        Creature target = cardPlay.Target ?? Owner.Creature;
+        Player targetPlayer = target.Player ?? Owner;
 
         // 清除目标所有负面效果
         await ClearDebuffs(target);
-
     }
 
     /// <summary>
@@ -63,11 +69,5 @@ public sealed class CalmEmotions : BardCard
                 await PowerCmd.Remove(power);
             }
         }
-    }
-
-    protected override void OnUpgrade()
-    {
-        // 升级：费用 1 → 0
-        base.EnergyCost.UpgradeBy(-1);
     }
 }

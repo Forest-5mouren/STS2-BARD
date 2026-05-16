@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://rgcbgn2j64af"]
+[gd_scene load_steps=2 format=3 uid="uid://bb1ebq8p2yl3o"]
 
-[ext_resource type="Texture2D" uid="uid://d2w8bdv616lbv" path="res://Bard/Images/Visual/Bard.png" id="1_kaswt"]
+[ext_resource type="Texture2D" uid="uid://d2w8bdv616lbv" path="res://Bard/Images/Visual/Bard.png" id="1_rilx5"]
 
-[node name="BardMerchant" type="Node2D"]
+[node name="IroncladMerchant" type="Node2D"]
 
 [node name="Bard" type="Sprite2D" parent="."]
-position = Vector2(-3, -203.00003)
-scale = Vector2(0.48423684, 0.48423684)
-texture = ExtResource("1_kaswt")
+position = Vector2(-1, 0)
+scale = Vector2(0.24047825, 0.24047825)
+texture = ExtResource("1_rilx5")

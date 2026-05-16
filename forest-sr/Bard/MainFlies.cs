@@ -1,48 +1,49 @@
-using BaseLib.Utils;
-using Forest_Sr.BardCode.Cards.Other;
+using Forest_Sr.BardCode.Cards.Ancient;
+using Forest_Sr.BardCode.Cards.Basic;
+using Forest_Sr.BardCode.Character;
+using Forest_Sr.BardCode.Relics;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Events;
-using MegaCrit.Sts2.Core.Nodes.Screens.Timeline;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Saves;
-using MegaCrit.Sts2.Core.Saves.Managers;
-using MegaCrit.Sts2.Core.Timeline;
+using MegaCrit.Sts2.Core.Models.Characters;
+using STS2RitsuLib;
+using STS2RitsuLib.Interop;
+using STS2RitsuLib.Scaffolding.Content;
+using System.Reflection;
 
 namespace Forest_Sr.Bard;
-
-/**
- * Ideas
- * 
- * Self Bind
- * 
- * Bind effect - square texture based on model size, lines random generated (amount equal to bind amount)
- * shader of transparency of line based on average of point spread of the model
- * colored
- * 
- * Bind... rename? Necrobinder kinda overlaps.
- * */
 
 [ModInitializer(nameof(Initialize))]
 public class MainFile
 {
-	public const string ModId = "Bard"; //At the moment, this is used only for the Logger and harmony names.
+    public const string ModId = "Bard";
+    public static Logger Logger { get; private set; } = null!;
 
-	public static Logger Logger { get; } =
-		new(ModId, LogType.Generic);
+    public static void Initialize()
+    {
+        Logger = RitsuLibFramework.CreateLogger(ModId);
 
-	public static void Initialize()
-	{
-		Harmony harmony = new(ModId);
+        // 注册程序集（启用注解式注册）
+        ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
 
-		harmony.PatchAll();
+        // 可选：注册初始卡牌/遗物（使用注解方式则不需要）
+        RitsuLibFramework.CreateContentPack(ModId)
+            .Character<Forest_Sr.BardCode.Character.Bard>()
+            .CharacterStarterCard<Forest_Sr.BardCode.Character.Bard, BardAttack>(4, order: 10)
+            .CharacterStarterCard<Forest_Sr.BardCode.Character.Bard, BardBlock>(4, order: 20)
+            .CharacterStarterCard<Forest_Sr.BardCode.Character.Bard, ViciousMockery>(1, order: 30)
+            .CharacterStarterCard<Forest_Sr.BardCode.Character.Bard, BladeWard>(1, order: 40)
+            .CharacterStarterRelic<Forest_Sr.BardCode.Character.Bard, BardicInspiration>(1, order: 0)
+            .Apply();
+        //升级遗物
+        RitsuLibFramework.RegisterTouchOfOrobasRefinementMapping<BardicInspiration, BetterInspiration>();
+        //升级初始卡
+        RitsuLibFramework.RegisterArchaicToothTranscendenceMapping<ViciousMockery, PhantasmalKiller>();
+        // Harmony 补丁（如果需要）
+        var harmony = new Harmony(ModId);
+        harmony.PatchAll();
+        harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-		harmony.PatchAll(System.Reflection.Assembly.GetExecutingAssembly());
-
-		Logger.Info("Harmony patches applied!");
-
-	}
-	
+        Logger.Info("Bard mod initialized with RitsuLib!");
+    }
 }

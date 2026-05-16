@@ -1,30 +1,41 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 应急｜Emergency
-/// 效果：造成7点伤害。下一张法术或乐曲卡减少1费。
-/// 升级：伤害 7→9
+/// 效果：造成8点伤害。下一张法术或乐曲卡减少1费。
+/// 升级：伤害 8→10
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class Emergency : BardCard
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
-    {
-        new DamageVar(8m, ValueProp.Move)  // 伤害值
-    };
+    private const int energyCost = 1;
+    private const CardType type = CardType.Attack;
+    private const CardRarity rarity = CardRarity.Common;
+    private const TargetType targetType = TargetType.AnyEnemy;
+    private const bool shouldShowInCardLibrary = true;
 
-    public Emergency()
-        : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy)
+    // 基础数值：伤害值
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(8,ValueProp.Move)
+    ];
+
+    public Emergency() : base(energyCost, type, rarity, targetType)
     {
     }
 
@@ -32,25 +43,26 @@ public sealed class Emergency : BardCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
+
         // 1. 造成伤害
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue)
-            .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash", null, "sword_attack.mp3")
-            .Execute(choiceContext);
+        await CreatureCmd.Damage(
+            choiceContext,
+            cardPlay.Target,
+            DynamicVars.Damage.IntValue,
+            ValueProp.Move,
+            Owner.Creature,
+            this);
 
         // 2. 施加 NextSpellOrSongCostReductionPower（下一张法术或乐曲卡费用-1）
         await PowerCmd.Apply<NextSpellOrSongCostReductionPower>(
-            base.Owner.Creature,
-            1m,  // 减少1费
-            base.Owner.Creature,
-            this
-        );
+            Owner.Creature,
+            1,
+            Owner.Creature,
+            this);
     }
 
     protected override void OnUpgrade()
     {
-        // 升级：伤害 7 → 9
-        base.DynamicVars.Damage.UpgradeValueBy(2m);
+        DynamicVars.Damage.UpgradeValueBy(3);  // 8 → 10
     }
 }

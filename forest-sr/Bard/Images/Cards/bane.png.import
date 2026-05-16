@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dps0ufquivxh5"
-path="res://.godot/imported/bane.png-1b30970e6a263015ab1ca98bba16e82b.ctex"
+uid="uid://r320bx1tmxtq"
+path="res://.godot/imported/Bane.png-e1cdd076b21a3fcb5870f091b5f09874.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/bane.png"
-dest_files=["res://.godot/imported/bane.png-1b30970e6a263015ab1ca98bba16e82b.ctex"]
+source_file="res://Bard/Images/Cards/Bane.png"
+dest_files=["res://.godot/imported/Bane.png-e1cdd076b21a3fcb5870f091b5f09874.ctex"]
 
 [params]
 

@@ -1,52 +1,60 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
-using System;
+using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
+
 /// <summary>
-/// 治疗术
+/// 治疗术｜CureWounds
+/// 效果：回复 {heal} 点生命。
+/// 升级：治疗量 8 → 11
 /// </summary>
+[RegisterCard(typeof(BardCardPool))]
 public sealed class CureWounds : BardCard
 {
-	protected override List<DynamicVar> CanonicalVars => new List<DynamicVar>
-	{
-		new HealVar(8m)
-	};
+    private const string _healKey = "heal";
 
-	public override List<CardKeyword> CanonicalKeywords => new List<CardKeyword>
-	{
-		CardKeyword.Exhaust,
-		Forest_Sr.BardCode.Cards.KeyWord.BardKeyword.Magic
-	};
+    // 基础数值声明
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new HealVar(8)
+    ];
 
-	public CureWounds() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
-	{
-	}
+    // 关键词
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic,"Exhaust"];
+        
+    
 
-	protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-	{
-		// 确定治疗目标
-		Creature target = cardPlay.Target ?? base.Owner.Creature;
+    public CureWounds() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
+    {
+    }
 
-		// 播放治疗特效
-		NCombatRoom.Instance?.PlaySplashVfx(target, new Color("#FFD1DC"));
+    // 升级：治疗量 8 → 11
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Heal.UpgradeValueBy(3);
+    }
 
-		// 回复生命
-		await CreatureCmd.Heal(target, base.DynamicVars.Heal.IntValue);
-	}
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        // 确定治疗目标（如果没有指定目标，则治疗自己）
+        Creature target = cardPlay.Target ?? Owner.Creature;
 
-	protected override void OnUpgrade()
-	{
-		base.DynamicVars.Heal.UpgradeValueBy(3m);
-	}
+        // 播放治疗特效
+        NCombatRoom.Instance?.PlaySplashVfx(target, new Color("#FFD1DC"));
+
+        // 回复生命
+        int healAmount = DynamicVars.Heal.IntValue;
+        await CreatureCmd.Heal(target, healAmount);
+    }
 }
