@@ -63,6 +63,6 @@ public sealed class BladeWard : BardCard
     {
         // 升级时增加数值
         DynamicVars.Block.UpgradeValueBy(2);
-        DynamicVars[_powerVarName].UpgradeValueBy(1);
+        AddKeyword(CardKeyword.Retain);
     }
 }

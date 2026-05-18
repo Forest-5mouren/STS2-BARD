@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4oturnj8f5ka"
-path="res://.godot/imported/Thunderclap.png-9c4bf0703b6f8bb5bec5d0953069b6a9.ctex"
+uid="uid://b1ky05ag07acq"
+path="res://.godot/imported/ThunderClap.png-becde608599b05113270e42455a31807.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/Thunderclap.png"
-dest_files=["res://.godot/imported/Thunderclap.png-9c4bf0703b6f8bb5bec5d0953069b6a9.ctex"]
+source_file="res://Bard/Images/Cards/ThunderClap.png"
+dest_files=["res://.godot/imported/ThunderClap.png-becde608599b05113270e42455a31807.ctex"]
 
 [params]
 

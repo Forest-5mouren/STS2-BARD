@@ -52,7 +52,7 @@ public sealed class BardAttack : BardCard
     // 打出时的效果逻辑
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+        await DamageCmd.Attack(DynamicVars.Damage.IntValue)
             .FromCard(this)
             .Targeting(cardPlay.Target!)
             .Execute(choiceContext);

@@ -20,7 +20,7 @@ namespace Forest_Sr.BardCode.Cards.Common;
 /// 升级：伤害 +3（3 → 6）
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class Thunderclap : BardCard
+public sealed class ThunderClap : BardCard
 {
     private const int energyCost = 0;
     private const CardType type = CardType.Attack;
@@ -36,7 +36,7 @@ public sealed class Thunderclap : BardCard
     // 关键词
     protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
 
-    public Thunderclap() : base(energyCost, type, rarity, targetType)
+    public ThunderClap() : base(energyCost, type, rarity, targetType)
     {
     }
 

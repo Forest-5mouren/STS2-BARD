@@ -3,9 +3,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
@@ -22,18 +20,17 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class SeeYouAgain : BardCard
 {
-    private const string _recycleCountKey = "recycleCount";
-
-    // 基础数值声明
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar(_recycleCountKey, 2)   // 回收数量
-    ];
+    // 基础数值声明（使用 CardsVar 类型，参考 Dredge）
+    protected override IEnumerable<DynamicVar> CanonicalVars => new[]
+    {
+        new CardsVar(2)   // 回收数量
+    };
 
     // 关键词：乐曲
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    protected override IEnumerable<string> RegisteredKeywordIds => new[]
+    {
         BardKeywords.Song
-    ];
-
+    };
 
     public SeeYouAgain() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
@@ -42,33 +39,51 @@ public sealed class SeeYouAgain : BardCard
     // 升级：回收 2 → 3 张牌
     protected override void OnUpgrade()
     {
-        DynamicVars[_recycleCountKey].UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int recycleCount = DynamicVars[_recycleCountKey].IntValue;
+        // 获取回收数量
+        int recycleCount = DynamicVars.Cards.IntValue;
 
-        // 1. 从弃牌堆回收牌
-        CardSelectorPrefs prefs = new CardSelectorPrefs(SelectionScreenPrompt, recycleCount);
-        CardPile discardPile = PileType.Discard.GetPile(Owner);
-        CardModel recycledCard = (await CardSelectCmd.FromSimpleGrid(choiceContext, discardPile.Cards, Owner, prefs)).FirstOrDefault();
+        // 获取手牌容量限制（参考 Dredge：10 - 手牌数量）
+        int maxRecycle = 10 - PileType.Hand.GetPile(Owner).Cards.Count;
+        int actualRecycle = System.Math.Min(recycleCount, maxRecycle);
 
-        if (recycledCard != null)
+        if (actualRecycle > 0)
         {
-            await CardPileCmd.Add(recycledCard, PileType.Hand, source: this);
-        }
+            // 1. 从弃牌堆回收牌（参考 Dredge 的实现）
+            CardPile discardPile = PileType.Discard.GetPile(Owner);
 
-        // 2. 丢弃1张手牌
-        await CardCmd.Discard(
-            choiceContext,
-            await CardSelectCmd.FromHandForDiscard(
+            var recycledCards = await CardSelectCmd.FromSimpleGrid(
                 choiceContext,
+                discardPile.Cards,
                 Owner,
-                new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1),
-                null,
-                this
-            )
-        );
+                new CardSelectorPrefs(SelectionScreenPrompt, actualRecycle)
+            );
+
+            if (recycledCards.Any())
+            {
+                await CardPileCmd.Add(recycledCards, PileType.Hand, source: this);
+            }
+
+            // 2. 丢弃1张手牌（如果回收了牌）
+            if (recycledCards.Any())
+            {
+                var cardsToDiscard = await CardSelectCmd.FromHandForDiscard(
+                    choiceContext,
+                    Owner,
+                    new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 1),
+                    null,
+                    this
+                );
+
+                if (cardsToDiscard.Any())
+                {
+                    await CardCmd.Discard(choiceContext, cardsToDiscard);
+                }
+            }
+        }
     }
 }

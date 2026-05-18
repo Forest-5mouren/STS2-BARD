@@ -38,7 +38,7 @@ public sealed class Polymorph : BardCard
         HoverTipFactory.Static(StaticHoverTip.Transform)
     ];
 
-    public Polymorph() : base(2, CardType.Skill, CardRarity.Rare, TargetType.Self)
+    public Polymorph() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
     }
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkcxuehpmurjm"
-path="res://.godot/imported/Longstrider.png-55f23448f71a88ecacf8ab175f4b8847.ctex"
+uid="uid://6cf8t8rhc1wj"
+path="res://.godot/imported/LongStrider.png-d9b4f0e049c45f747defff297715a18b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/Longstrider.png"
-dest_files=["res://.godot/imported/Longstrider.png-55f23448f71a88ecacf8ab175f4b8847.ctex"]
+source_file="res://Bard/Images/Cards/LongStrider.png"
+dest_files=["res://.godot/imported/LongStrider.png-d9b4f0e049c45f747defff297715a18b.ctex"]
 
 [params]
 

@@ -12,56 +12,56 @@
   "BARD_POWER_HEROISM_POWER.smartDescription": "回合开始时，重新获得 {Block} 点[gold]格挡[/gold]",
 
   "BARD_POWER_DEADLY_PERFORMANCE_POWER.title": "夺命演奏",
-  "BARD_POWER_DEADLY_PERFORMANCE_POWER.description": "每当你释放[gold]魔法[/gold]时，对随机敌人造成 {Amount:diff()} 点伤害",
-  "BARD_POWER_DEADLY_PERFORMANCE_POWER.smartDescription": "每当你释放[gold]魔法[/gold]时，对随机敌人造成 {Amount:diff()} 点伤害",
+  "BARD_POWER_DEADLY_PERFORMANCE_POWER.description": "每当你释放[gold]魔法[/gold]时，对随机敌人造成[blue]{Amount}[/blue]点伤害",
+  "BARD_POWER_DEADLY_PERFORMANCE_POWER.smartDescription": "每当你释放[gold]魔法[/gold]时，对随机敌人造成[blue]{Amount}[/blue]点伤害",
 
   "BARD_POWER_MELODIC_WARD_POWER.title": "旋律护身",
-  "BARD_POWER_MELODIC_WARD_POWER.description": "每当你释放[gold]魔法[/gold]时，获得 {Amount:diff()} 点[gold]格挡[/gold]",
-  "BARD_POWER_MELODIC_WARD_POWER.smartDescription": "每当你释放[gold]魔法[/gold]时，获得 {Amount:diff()} 点[gold]格挡[/gold]",
+  "BARD_POWER_MELODIC_WARD_POWER.description": "每当你释放[gold]魔法[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]",
+  "BARD_POWER_MELODIC_WARD_POWER.smartDescription": "每当你释放[gold]魔法[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]",
 
   "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.title": "法术共鸣",
   "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.description": "本回合下一张法术牌费用 -{Amount:diff()}",
   "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.smartDescription": "下一张法术牌费用减少 {Amount:diff()}",
 
   "BARD_POWER_VALIANT_PRESENCE_POWER.title": "英勇气势",
-  "BARD_POWER_VALIANT_PRESENCE_POWER.description": "每当你失去[gold]活力[/gold]时，获得 {Amount:diff()} 倍层数的[gold]格挡[/gold]",
-  "BARD_POWER_VALIANT_PRESENCE_POWER.smartDescription": "失去活力时，每层获得 {Amount:diff()} 点格挡",
+  "BARD_POWER_VALIANT_PRESENCE_POWER.description": "每当你失去[gold]活力[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]格挡[/gold]",
+  "BARD_POWER_VALIANT_PRESENCE_POWER.smartDescription": "失去活力时，每层获得[blue]{Amount}[/blue]点格挡",
 
   "BARD_POWER_ALLEGRO_POWER.title": "快板",
   "BARD_POWER_ALLEGRO_POWER.description": "每回合开始时获得 1 点[gold]能量[/gold]",
   "BARD_POWER_ALLEGRO_POWER.smartDescription": "每回合开始时获得 1 点[gold]能量[/gold]",
 
   "BARD_POWER_BRISK_BEAT_POWER.title": "轻快节拍",
-  "BARD_POWER_BRISK_BEAT_POWER.description": "每回合开始时抽 {Amount:diff()} 张牌",
-  "BARD_POWER_BRISK_BEAT_POWER.smartDescription": "每回合开始时抽 {Amount:diff()} 张牌",
+  "BARD_POWER_BRISK_BEAT_POWER.description": "每回合开始时抽[blue]{Amount}[/blue]张牌",
+  "BARD_POWER_BRISK_BEAT_POWER.smartDescription": "每回合开始时抽[blue]{Amount}[/blue]张牌",
 
   "BARD_POWER_DANCING_YOUTH_POWER.title": "舞动青春",
-  "BARD_POWER_DANCING_YOUTH_POWER.description": "若上一回合打出至少2种类型的牌，抽 {Amount:diff()} 张牌",
-  "BARD_POWER_DANCING_YOUTH_POWER.smartDescription": "若上一回合打出至少2种类型的牌，抽 {Amount:diff()} 张牌",
+  "BARD_POWER_DANCING_YOUTH_POWER.description": "若上一回合打出至少2种类型的牌，抽[blue]{Amount}[/blue]张牌",
+  "BARD_POWER_DANCING_YOUTH_POWER.smartDescription": "若上一回合打出至少2种类型的牌，抽[blue]{Amount}[/blue]张牌",
 
   "BARD_POWER_IMPROVISE_POWER.title": "即兴",
-  "BARD_POWER_IMPROVISE_POWER.description": "每回合随机获得 {Amount:diff()} 首乐曲",
-  "BARD_POWER_IMPROVISE_POWER.smartDescription": "每回合随机获得 {Amount:diff()} 首乐曲",
+  "BARD_POWER_IMPROVISE_POWER.description": "每回合随机获得[blue]{Amount}[/blue]首乐曲",
+  "BARD_POWER_IMPROVISE_POWER.smartDescription": "每回合随机获得[blue]{Amount}[/blue]首乐曲",
 
   "BARD_POWER_WAR_SONG_POWER.title": "战歌",
-  "BARD_POWER_WAR_SONG_POWER.description": "每当使用[gold]乐曲卡[/gold]时，获得 {Amount:diff()} 层[gold]活力[/gold]",
-  "BARD_POWER_WAR_SONG_POWER.smartDescription": "每当使用[gold]乐曲卡[/gold]时，获得 {Amount:diff()} 层[gold]活力[/gold]",
+  "BARD_POWER_WAR_SONG_POWER.description": "每当使用[gold]乐曲卡[/gold]时，获得[blue]{Amount}[/blue]层[gold]活力[/gold]",
+  "BARD_POWER_WAR_SONG_POWER.smartDescription": "每当使用[gold]乐曲卡[/gold]时，获得[blue]{Amount}[/blue]层[gold]活力[/gold]",
 
   "BARD_POWER_OVERCLOCK_CASTING_POWER.title": "超频施法",
   "BARD_POWER_OVERCLOCK_CASTING_POWER.description": "你的[gold]法术牌[/gold]获得[gold]消耗[/gold]和再次打出",
   "BARD_POWER_OVERCLOCK_CASTING_POWER.smartDescription": "你的[gold]法术牌[/gold]获得[gold]消耗[/gold]和再次打出",
 
   "BARD_POWER_MANA_SURGE_POWER.title": "法力充沛",
-  "BARD_POWER_MANA_SURGE_POWER.description": "每回合第一次释放[gold]法术[/gold]时，抽 {Amount:diff()} 张牌",
-  "BARD_POWER_MANA_SURGE_POWER.smartDescription": "每回合第一次释放[gold]法术[/gold]时，抽 {Amount:diff()} 张牌",
+  "BARD_POWER_MANA_SURGE_POWER.description": "每回合第一次释放[gold]魔法[/gold]时，抽[blue]{Amount}[/blue]张牌",
+  "BARD_POWER_MANA_SURGE_POWER.smartDescription": "每回合第一次释放[gold]魔法[/gold]时，抽[blue]{Amount}[/blue]张牌",
 
   "BARD_POWER_MAGIC_WEAPON_POWER.title": "魔法武器",
   "BARD_POWER_MAGIC_WEAPON_POWER.description": "你的所有非[gold]魔法[/gold]攻击牌获得[gold]魔法[/gold]词条",
   "BARD_POWER_MAGIC_WEAPON_POWER.smartDescription": "你的所有非[gold]魔法[/gold]攻击牌获得[gold]魔法[/gold]词条",
 
   "BARD_POWER_THUNDERCLAP_POWER.title": "轰雷",
-  "BARD_POWER_THUNDERCLAP_POWER.description": "本回合获得[gold]负面效果[/gold]时，受到 {Amount:diff()} 点伤害",
-  "BARD_POWER_THUNDERCLAP_POWER.smartDescription": "本回合获得[gold]负面效果[/gold]时，受到 {Amount:diff()} 点伤害",
+  "BARD_POWER_THUNDERCLAP_POWER.description": "本回合获得[gold]负面效果[/gold]时，受到[blue]{Amount}[/blue]点伤害",
+  "BARD_POWER_THUNDERCLAP_POWER.smartDescription": "本回合获得[gold]负面效果[/gold]时，受到[blue]{Amount}[/blue]点伤害",
 
   "BARD_POWER_MIRROR_IMAGE_POWER.title": "镜像",
   "BARD_POWER_MIRROR_IMAGE_POWER.description": "每次被攻击时，减少4*层数的伤害，然后镜像减少1层",
@@ -72,8 +72,8 @@
   "BARD_POWER_GUARDIAN_RUNE_POWER.smartDescription": "每当你失去[gold]格挡[/gold]时，对所有敌人造成等量伤害",
 
   "BARD_POWER_INSPIRATION_RESONANCE_POWER.title": "灵感共鸣",
-  "BARD_POWER_INSPIRATION_RESONANCE_POWER.description": "本回合内，每打出一张[gold]乐曲牌[/gold]，回复 {Amount:diff()} 点{Energy:energyIcons(1)}",
-  "BARD_POWER_INSPIRATION_RESONANCE_POWER.smartDescription": "本回合内，每打出一张[gold]乐曲牌[/gold]，回复 {Amount:diff()} 点{Energy:energyIcons(1)}",
+  "BARD_POWER_INSPIRATION_RESONANCE_POWER.description": "本回合内，每打出一张[gold]乐曲牌[/gold]，回复[blue]{Amount}[/blue]点{Energy:energyIcons(1)}",
+  "BARD_POWER_INSPIRATION_RESONANCE_POWER.smartDescription": "本回合内，每打出一张[gold]乐曲牌[/gold]，回复[blue]{Amount}[/blue]点{Energy:energyIcons(1)}",
 
   "BARD_POWER_ECHOING_MELODY_POWER.title": "余音绕梁",
   "BARD_POWER_ECHOING_MELODY_POWER.description": "每回合开始时，打出上回合最后一张[gold]乐曲牌[/gold]的[gold]消耗[/gold]复制",

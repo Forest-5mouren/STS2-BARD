@@ -18,7 +18,7 @@
   "BARD_CARD_COURAGE_SONG.description": "获得{VigorPower:diff()}层活力。",
 
   "BARD_CARD_BRISK_BEAT.title": "轻快节拍",
-  "BARD_CARD_BRISK_BEAT.description": "全体友方获得{Duration:diff()}回合的轻快节拍：每回合开始时抽1张牌。",
+  "BARD_CARD_BRISK_BEAT.description": "抽1张牌。\n全体友方获得{Duration:diff()}回合的轻快节拍：每回合开始时抽1张牌。",
 
   "BARD_CARD_CRIPPLING_THRUST.title": "致残突刺",
   "BARD_CARD_CRIPPLING_THRUST.description": "造成{Damage:diff()}点伤害。\n给予{WeakPower:diff()}层[gold]虚弱[/gold]。\n给予{VulnerablePower:diff()}层[gold]易伤[/gold]。",
@@ -33,14 +33,14 @@
   "BARD_CARD_HARMONY_SHIELD.description": "获得{dexterity:diff()}层临时敏捷。\n获得{Block:diff()}点格挡。",
 
   "BARD_CARD_MADE_HAND.title": "法师之手",
-  "BARD_CARD_MADE_HAND.description": "给[gold]手牌[/gold]中的{retainAmount:diff()}张牌添加[gold]保留[/gold]。\n抽 {Cards:diff()} 张牌。",
+  "BARD_CARD_MADE_HAND.description": "抽 {Cards:diff()} 张牌。\n给[gold]手牌[/gold]中的{retainAmount:diff()}张牌添加[gold]保留[/gold]。",
   "BARD_CARD_MADE_HAND.selectionScreenPrompt": "选择要添加[gold]保留[/gold]的卡牌。",
 
   "BARD_CARD_TRUE_STRIKE.title": "克敌机先",
   "BARD_CARD_TRUE_STRIKE.description": "去除敌人身上的所有[gold]人工制品[/gold]。\n并给予{VulnerablePower:diff()}层[gold]易伤[/gold]。",
 
-  "BARD_CARD_THUNDERCLAP.title": "鸣雷破",
-  "BARD_CARD_THUNDERCLAP.description": "对所有敌人造成{Damage:diff()}点伤害",
+  "BARD_CARD_THUNDER_CLAP.title": "鸣雷破",
+  "BARD_CARD_THUNDER_CLAP.description": "对所有敌人造成{Damage:diff()}点伤害",
 
   "BARD_CARD_INVISBILITY.title": "隐身术",
   "BARD_CARD_INVISBILITY.description": "使一个友方获得{intangible:diff()}层[gold]无实体[/gold]。",
@@ -51,8 +51,8 @@
   "BARD_CARD_HASTE.title": "加速术",
   "BARD_CARD_HASTE.description": "下回合开始持续2回合。每回合获得 +2 [gold]能量[/gold] 和 +2 [gold]抽牌[/gold]。2回合结束后获得 2 层[gold]易伤[/gold]和2层[gold]虚弱[/gold]。",
 
-  "BARD_CARD_LONGSTRIDER.title": "大步奔行",
-  "BARD_CARD_LONGSTRIDER.description": "使目标获得 {DexterityPower:diff()} 层[gold]敏捷[/gold]，并抽 {Cards:diff()} 张牌。",
+  "BARD_CARD_LONG_STRIDER.title": "大步奔行",
+  "BARD_CARD_LONG_STRIDER.description": "使目标获得 {DexterityPower:diff()} 层[gold]敏捷[/gold]，并抽 {Cards:diff()} 张牌。",
 
   "BARD_CARD_FAERIE_FIRE.title": "妖火",
   "BARD_CARD_FAERIE_FIRE.description": "对所有敌人给予{VulnerablePower:diff()}层[gold]易伤[/gold]。",
@@ -115,7 +115,7 @@
   "BARD_CARD_VALIANT_PRESENCE.description": "每当你失去[gold]活力[/gold]时，获得等量的[gold]格挡[/gold]。",
 
   "BARD_CARD_POLYMORPH.title": "变形术",
-  "BARD_CARD_POLYMORPH.description": "获得 {Block:diff()} 点[gold]格挡[/gold]。\n将手牌中的一张牌随机变形为一张诗人的牌，本回合免费打出。",
+  "BARD_CARD_POLYMORPH.description": "获得 {Block:diff()} 点[gold]格挡[/gold]。\n将手牌中的{transformCount:diff()}张牌随机变形为一张诗人职业牌，本回合免费打出。",
 
   "BARD_CARD_FLURRY_THRUST.title": "连续突刺",
   "BARD_CARD_FLURRY_THRUST.description": "造成{Damage:diff()}点伤害。\n本回合打出过攻击牌：再重复一次。\n本回合打出过技能牌：再重复一次。",
@@ -177,9 +177,6 @@
   "BARD_CARD_MIRROR_IMAGE.title": "镜影术",
   "BARD_CARD_MIRROR_IMAGE.description": "获得{mirror:diff()}层[gold]镜像[/gold]。\n每次被攻击时，减少{reductionPerLayer:diff()}*层数的伤害，然后减少1层。",
 
-  "BARD_CARD_SLEEP.title": "睡眠术",
-  "BARD_CARD_SLEEP.description": "使一个血量低于{Threshold:diff()}的敌人陷入[gold]睡眠[/gold]1回合。",
-
   "BARD_CARD_BOOST_MORALE.title": "提振士气",
   "BARD_CARD_BOOST_MORALE.description": "全体友方获得{Block:diff()}点[gold]格挡[/gold]。\n消耗所有[gold]活力[/gold]，每有一点活力额外获得1点[gold]格挡[/gold]。",
 
@@ -199,12 +196,12 @@
   "BARD_CARD_INSPIRATION_RESONANCE.description": "本回合内，每打出一张[gold]乐曲牌[/gold]，回复{Energy:energyIcons(1)}。",
 
   "BARD_CARD_SEE_YOU_AGAIN.title": "See You Again",
-  "BARD_CARD_SEE_YOU_AGAIN.description": "从[gold]弃牌堆[/gold]回收{recycleCount:diff()}张牌，然后丢弃1张[gold]手牌[/gold]。",
-  "BARD_CARD_SEE_YOU_AGAIN.selectionScreenPrompt": "选择一张牌加入你的手牌",
+  "BARD_CARD_SEE_YOU_AGAIN.description": "从[gold]弃牌堆[/gold]回收{Cards:diff()}张牌，然后丢弃1张[gold]手牌[/gold]。",
+  "BARD_CARD_SEE_YOU_AGAIN.selectionScreenPrompt": "选择{Cards:diff()}张牌加入你的手牌",
 
   "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.title": "Never Gonna Give You Up",
-  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.description": "从[gold]消耗牌堆[/gold]回收{recycleCount:diff()}张牌。",
-  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.selectionScreenPrompt": "选择一张牌加入你的手牌",
+  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.description": "从[gold]消耗牌堆[/gold]回收{Cards:diff()}张牌。",
+  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.selectionScreenPrompt": "选择{Cards:diff()}张牌加入你的手牌",
 
   "BARD_CARD_FLIGHT_OF_THE_BUMBLEBEE.title": "野蜂飞翔",
   "BARD_CARD_FLIGHT_OF_THE_BUMBLEBEE.description": "随机造成{Damage:diff()}点伤害{Repeat:diff()}次。",
@@ -232,8 +229,8 @@
   "BARD_CARD_ECHOING_MELODY.title": "余音绕梁",
   "BARD_CARD_ECHOING_MELODY.description": "给予自己{WeakPower:diff()}层虚弱。每回合开始时，打出上回合最后一张[gold]乐曲牌[/gold]的带消耗复制。",
 
-  "BARD_CARD_FIREBALL.title": "火球术",
-  "BARD_CARD_FIREBALL.description": "对所有敌人造成{Damage:diff()}点伤害。",
+  "BARD_CARD_FIRE_BALL.title": "火球术",
+  "BARD_CARD_FIRE_BALL.description": "对所有敌人造成{Damage:diff()}点伤害。",
 
   "BARD_CARD_MAGICAL_ARMOR.title": "魔法护甲",
   "BARD_CARD_MAGICAL_ARMOR.description": "获得{plating:diff()}层[gold]覆甲[/gold]。",

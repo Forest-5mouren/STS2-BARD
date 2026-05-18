@@ -17,7 +17,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：伤害 27 → 33
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class Fireball : BardCard
+public sealed class FireBall : BardCard
 {
     
 
@@ -29,7 +29,7 @@ public sealed class Fireball : BardCard
         BardKeywords.Magic
     ];
 
-    public Fireball() : base(3, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    public FireBall() : base(3, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
     {
     }
 

@@ -49,13 +49,10 @@ public sealed class CripplingThrust : BardCard
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
         // 1. 造成伤害（使用 CreatureCmd.Damage）
-        await CreatureCmd.Damage(
-            choiceContext,
-            cardPlay.Target,
-            DynamicVars.Damage.IntValue,
-            ValueProp.Move,
-            Owner.Creature,
-            this);
+        await DamageCmd.Attack(DynamicVars.Damage.IntValue)
+            .FromCard(this)
+            .Targeting(cardPlay.Target!)
+            .Execute(choiceContext);
 
         // 2. 给予虚弱
         await PowerCmd.Apply<WeakPower>(

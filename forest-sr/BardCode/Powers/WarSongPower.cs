@@ -27,7 +27,7 @@ public sealed class WarSongPower : BardPower
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
         // 检查是否是乐曲卡
-        if (!cardPlay.Card.HasModKeyword(BardKeywords.Magic)) return;
+        if (!cardPlay.Card.HasModKeyword(BardKeywords.Song)) return;
 
         // 获得活力
         await PowerCmd.Apply<VigorPower>(

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp6vlxmaqya7d"
-path="res://.godot/imported/Bard58B068eb420d46dcb19c314677e6b487.png-798dc6634e29de6739a712634789a39d.ctex"
+path="res://.godot/imported/Bard58b068eb420d46dcb19c314677e6b487.png-b686c9245dd6998269ac95d8fd2f5efb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Cards/Bard58B068eb420d46dcb19c314677e6b487.png"
-dest_files=["res://.godot/imported/Bard58B068eb420d46dcb19c314677e6b487.png-798dc6634e29de6739a712634789a39d.ctex"]
+source_file="res://Bard/Images/Cards/Bard58b068eb420d46dcb19c314677e6b487.png"
+dest_files=["res://.godot/imported/Bard58b068eb420d46dcb19c314677e6b487.png-b686c9245dd6998269ac95d8fd2f5efb.ctex"]
 
 [params]
 

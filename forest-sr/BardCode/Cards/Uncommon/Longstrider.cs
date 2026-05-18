@@ -21,7 +21,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：抽牌 1 → 2
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class Longstrider : BardCard
+public sealed class LongStrider : BardCard
 {
     
     
@@ -37,7 +37,7 @@ public sealed class Longstrider : BardCard
         BardKeywords.Magic
     ];
 
-    public Longstrider() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
+    public LongStrider() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
     {
     }
 

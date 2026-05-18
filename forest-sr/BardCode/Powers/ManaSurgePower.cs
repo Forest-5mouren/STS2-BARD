@@ -40,11 +40,9 @@ public sealed class ManaSurgePower : BardPower
         _usedThisTurn = true;
 
         // 抽牌
-        if (DynamicVars.Cards.IntValue > 0)
-        {
-            Flash();
-            await CardPileCmd.Draw(context, DynamicVars.Cards.IntValue, base.Owner.Player);
-        }
+        Flash();
+        await CardPileCmd.Draw(context, base.Amount, base.Owner.Player);
+        
     }
 
     /// <summary>
