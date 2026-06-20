@@ -1,5 +1,6 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Cards.Other;
+using Forest_Sr.BardCode.Powers;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -86,5 +87,36 @@ public sealed class EnhanceAbility : BardCard
             Owner,
             canSkip: true
         );
+
+        // 处理被选中的卡牌效果
+        if (selected != null)
+        {
+            if (selected.Id == ModelDb.Card<BullStrength>().Id)
+            {
+                await PowerCmd.Apply<StrengthPower>(
+                    Owner.Creature,
+                    DynamicVars["StrengthPower"].IntValue,
+                    Owner.Creature,
+                    this);
+            }
+            else if (selected.Id == ModelDb.Card<CatGrace>().Id)
+            {
+                await PowerCmd.Apply<DexterityPower>(
+                    Owner.Creature,
+                    DynamicVars["DexterityPower"].IntValue,
+                    Owner.Creature,
+                    this);
+            }
+            else if (selected.Id == ModelDb.Card<FoxCunning>().Id)
+            {
+                await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
+                await PowerCmd.Apply<NextSpellCostReductionPower>(
+                    Owner.Creature,
+                    1m,
+                    Owner.Creature,
+                    this);
+            }
+        }
     }
 }
+

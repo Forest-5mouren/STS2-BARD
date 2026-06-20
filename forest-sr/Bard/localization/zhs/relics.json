@@ -1,10 +1,10 @@
 {
   "BARD_RELIC_BARDIC_INSPIRATION.title": "诗人激励",
-  "BARD_RELIC_BARDIC_INSPIRATION.description": "回合开始时候，给予所有友方2层活力.",
+  "BARD_RELIC_BARDIC_INSPIRATION.description": "每当你打出一张[gold]魔法牌[/gold]或[gold]乐曲牌[/gold]，获得 1 层[gold]和声[/gold]。\n回合开始时，全体友方获得和声层数的[gold]活力[/gold]，然后和声清零。",
   "BARD_RELIC_BARDIC_INSPIRATION.flavor": "一把陪伴诗人多年鲁特琴",
 
   "BARD_RELIC_BETTER_INSPIRATION.title": "诗人激励+",
-  "BARD_RELIC_BETTER_INSPIRATION.description": "回合开始时候，给予所有友方6层活力.",
+  "BARD_RELIC_BETTER_INSPIRATION.description": "每当你打出一张[gold]魔法牌[/gold]或[gold]乐曲牌[/gold]，和声+1。\n回合开始时，全体友方获得和声层数的[gold]活力[/gold]，然后和声调为2。",
   "BARD_RELIC_BETTER_INSPIRATION.flavor": "一把陪伴诗人多年鲁特琴,又经过了魔力的保养",
 
   "BARD_RELIC_SNAKE_CHARMER_FLUTE.title": "唤蛇长笛",
@@ -17,3 +17,7 @@
 
 
 }
+
+
+
+

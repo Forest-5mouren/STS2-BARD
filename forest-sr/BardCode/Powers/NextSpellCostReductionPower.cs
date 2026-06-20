@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Powers;
 
 /// <summary>
-/// 法术共鸣
-/// 效果：本回合下一张法术牌费用-1
+/// 魔法共鸣
+/// 效果：本回合下一张魔法牌费用-1
 /// </summary>
 public sealed class NextSpellCostReductionPower : BardPower
 {
@@ -46,7 +46,7 @@ public sealed class NextSpellCostReductionPower : BardPower
         }
         if (!isValidPile) return false;
 
-        // 检查是否是法术牌
+        // 检查是否是魔法牌
         if (!card.HasModKeyword(BardKeywords.Magic)) return false;
 
         // 减少费用
@@ -64,7 +64,7 @@ public sealed class NextSpellCostReductionPower : BardPower
         // 检查是否是当前玩家打出的牌
         if (cardPlay.Card.Owner.Creature != base.Owner) return;
 
-        // 检查是否是法术牌
+        // 检查是否是魔法牌
         if (!cardPlay.Card.HasModKeyword(BardKeywords.Magic)) return;
 
         // 检查卡牌是否在手牌或正在打出

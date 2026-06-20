@@ -41,10 +41,10 @@ public sealed class SnakeCharmerFlute : BardRelics
 
     public override RelicRarity Rarity => RelicRarity.Common;
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext)
     {
         // 只对遗物拥有者生效，且只在第一回合
-        if (player == Owner && combatState.RoundNumber == 1)
+        if (player == Owner && player.Creature.CombatState.RoundNumber == 1)
         {
             int count = DynamicVars[_countKey].IntValue;
             List<CardModel> cardsToAdd = new List<CardModel>();

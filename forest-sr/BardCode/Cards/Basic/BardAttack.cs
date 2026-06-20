@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Character;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -5,62 +6,63 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using static MegaCrit.Sts2.Core.Entities.Multiplayer.NetFullCombatState;
 
 namespace Forest_Sr.BardCode.Cards.Basic;
-// 注册卡牌到诗人卡池
+
+/// <summary>
+/// 刺耳尖叫｜Bard Strike
+/// 效果：造成 5(8) 点伤害，施加 1 层易伤。乐曲。
+/// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class BardAttack : BardCard
 {
-    // 基础耗能
     private const int energyCost = 1;
-    // 卡牌类型
     private const CardType type = CardType.Attack;
-    // 卡牌稀有度
     private const CardRarity rarity = CardRarity.Basic;
-    // 目标类型（AnyEnemy表示任意敌人）
     private const TargetType targetType = TargetType.AnyEnemy;
-    // 是否在卡牌图鉴中显示
-    private const bool shouldShowInCardLibrary = true;
-    // 卡牌标签（Strike）
-    protected override IEnumerable<string> RegisteredCardTagIds => new[] { "strike" };
 
-    // 卡图资源
-    //public override CardAssetProfile AssetProfile => new(
-    //    PortraitPath: $"res://Test/images/cards/{GetType().Name}.png"
-    // 卡框等，有需求自己添加。需要自行判断卡牌类型（攻击、技能、能力等）设置，建议写在基类里。
-    // 如果使用自定义卡池，需要改下material（TODO）
-    // FramePath: "", // 卡牌背景
-    // PortraitBorderPath: "", // 边框（状态牌感染使用的）
-    // BannerTexturePath: "" // 横幅（不同类型）
-    //);
+    // 乐曲标签
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
+    protected override IEnumerable<string> RegisteredCardTagIds => ["strike"];
 
-    // 卡牌基础数值
+    // 基础数值：伤害 + 易伤
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(6, ValueProp.Move)
+        new DamageVar(5, ValueProp.Move),
+        new PowerVar<VulnerablePower>(1)
     ];
 
-    public BardAttack() : base(energyCost, type, rarity, targetType)
-    {
-    }
+    public BardAttack() : base(energyCost, type, rarity, targetType) { }
 
-    // 打出时的效果逻辑
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
+        // 造成伤害
         await DamageCmd.Attack(DynamicVars.Damage.IntValue)
             .FromCard(this)
             .Targeting(cardPlay.Target!)
-            .Execute(choiceContext);
+            .Execute(ctx);
+
+        // 施加易伤
+        if (cardPlay.Target != null)
+        {
+            await PowerCmd.Apply<VulnerablePower>(
+                cardPlay.Target,
+                DynamicVars["VulnerablePower"].IntValue,
+                Owner.Creature,
+                this);
+        }
     }
 
-    // 升级后的效果逻辑
+    // 升级：伤害 5 → 8
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3);
     }
 }
+

@@ -33,9 +33,9 @@ public sealed class Enlarge : BardCard
 
     // 关键词
     protected override IEnumerable<string> RegisteredKeywordIds => [
-        "EXHAUST",
         BardKeywords.Magic
     ];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     // 额外悬停提示
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
@@ -56,7 +56,6 @@ public sealed class Enlarge : BardCard
     {
         // 确定目标（如果没有指定，则选择自己）
         Creature target = cardPlay.Target ?? Owner.Creature;
-        if (target == null) return;
 
         // 播放红色特效
         NCombatRoom.Instance?.PlaySplashVfx(target, new Color(Colors.Red));

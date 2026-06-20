@@ -25,7 +25,10 @@ public sealed class Hearsay : BardCard
     private CardModel _mockSelectedCard;
 
     // 关键词（升级后会被移除）
-    protected override IEnumerable<string> RegisteredKeywordIds => ["EXHAUST"];
+    public override List<CardKeyword> CanonicalKeywords => [
+        CardKeyword.Exhaust
+    ];
+
 
     public Hearsay() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {

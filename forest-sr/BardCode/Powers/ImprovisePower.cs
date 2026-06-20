@@ -1,5 +1,4 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -18,7 +17,7 @@ using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Powers;
 
 /// <summary>
-/// 即兴能力：每回合开始时随机获得一首乐曲
+/// 即兴能力：每回合开始时随机获得一首乐曲（排除吟唱牌）
 /// </summary>
 [RegisterPower]
 public sealed class ImprovisePower : BardPower
@@ -30,7 +29,7 @@ public sealed class ImprovisePower : BardPower
     /// <summary>
     /// 抽牌前触发（每回合开始时）
     /// </summary>
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext)
     {
         // 只对自己生效
         if (player != Owner.Player) return;
@@ -40,9 +39,9 @@ public sealed class ImprovisePower : BardPower
             .GetUnlockedCards(player.UnlockState, player.RunState.CardMultiplayerConstraint)
             .ToList();
 
-        // 使用 HasModKeyword 检查乐曲牌
+        // 使用 HasModKeyword 检查乐曲牌，排除吟唱牌
         var songCards = allUnlockedCards
-            .Where(card => card.HasModKeyword(BardKeywords.Song))
+            .Where(card => card.HasModKeyword(BardKeywords.Song) && !card.HasModKeyword(BardKeywords.Chant))
             .ToList();
 
         if (songCards.Count == 0) return;

@@ -29,9 +29,7 @@ public sealed class StreetPerformance : BardCard
     ];
 
     // 关键词：消耗
-    protected override IEnumerable<string> RegisteredKeywordIds => [
-        "EXHAUST"
-    ];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public StreetPerformance() : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {

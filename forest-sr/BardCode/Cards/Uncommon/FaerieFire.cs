@@ -30,9 +30,9 @@ public sealed class FaerieFire : BardCard
 
     // 关键词
     protected override IEnumerable<string> RegisteredKeywordIds => [
-        "EXHAUST",
         BardKeywords.Magic
     ];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     // 额外悬停提示
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [

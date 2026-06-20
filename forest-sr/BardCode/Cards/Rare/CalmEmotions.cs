@@ -29,11 +29,11 @@ public sealed class CalmEmotions : BardCard
 
     // 关键词：消耗、魔法
     protected override IEnumerable<string> RegisteredKeywordIds => [
-        "EXHAUST",
         BardKeywords.Magic
     ];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
-    public CalmEmotions() : base(3, CardType.Skill, CardRarity.Rare, TargetType.AnyPlayer)
+    public CalmEmotions() : base(2, CardType.Skill, CardRarity.Rare, TargetType.AnyPlayer)
     {
     }
 
@@ -47,7 +47,6 @@ public sealed class CalmEmotions : BardCard
     {
         // 统一处理目标
         Creature target = cardPlay.Target ?? Owner.Creature;
-        Player targetPlayer = target.Player ?? Owner;
 
         // 清除目标所有负面效果
         await ClearDebuffs(target);

@@ -60,7 +60,7 @@ public sealed class SeeYouAgain : BardCard
                 choiceContext,
                 discardPile.Cards,
                 Owner,
-                new CardSelectorPrefs(SelectionScreenPrompt, actualRecycle)
+                new CardSelectorPrefs(CardSelectorPrefs.SelectionScreenPrompt, actualRecycle)
             );
 
             if (recycledCards.Any())

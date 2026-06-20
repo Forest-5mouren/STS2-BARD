@@ -15,8 +15,8 @@ using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Powers;
 
 /// <summary>
-/// 法术/乐曲共鸣
-/// 效果：本回合下一张法术或乐曲牌费用-1
+/// 魔法/乐曲共鸣
+/// 效果：本回合下一张魔法或乐曲牌费用-1
 /// </summary>
 [RegisterPower]
 public sealed class NextSpellOrSongCostReductionPower : BardPower
@@ -43,7 +43,7 @@ public sealed class NextSpellOrSongCostReductionPower : BardPower
         bool isValidPile = card.Pile?.Type == PileType.Hand || card.Pile?.Type == PileType.Play;
         if (!isValidPile) return false;
 
-        // 检查是否是法术牌或乐曲牌（使用 HasModKeyword 方法）
+        // 检查是否是魔法牌或乐曲牌（使用 HasModKeyword 方法）
         bool isSpell = card.HasModKeyword(BardKeywords.Magic);
         bool isSong = card.HasModKeyword(BardKeywords.Song);
         if (!isSpell && !isSong) return false;
@@ -63,7 +63,7 @@ public sealed class NextSpellOrSongCostReductionPower : BardPower
         // 检查是否是当前玩家打出的牌
         if (cardPlay.Card.Owner.Creature != Owner) return;
 
-        // 检查是否是法术牌或乐曲牌
+        // 检查是否是魔法牌或乐曲牌
         bool isSpell = cardPlay.Card.HasModKeyword(BardKeywords.Magic);
         bool isSong = cardPlay.Card.HasModKeyword(BardKeywords.Song);
         if (!isSpell && !isSong) return;

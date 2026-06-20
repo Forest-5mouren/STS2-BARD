@@ -5,6 +5,8 @@
   "BARD_KEYWORD_SONG.title": "乐曲",
   "BARD_KEYWORD_SONG.description": "吟游诗人所谱写的小曲，不需要魔法，仅凭声音就能发挥音乐的力量",
 
-  "BARD_KEYWORD_HARMONY.title": "和谐",
-  "BARD_KEYWORD_HARMONY.description": "和谐关键词的效果描述"
+  "BARD_KEYWORD_CHANT.title": "吟唱",
+  "BARD_KEYWORD_CHANT.description": "吟唱卡牌的效果不会立即触发，改为在下一回合开始时自动生效。不会因受到伤害而中断。"
 }
+
+

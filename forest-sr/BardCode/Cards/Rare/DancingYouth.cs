@@ -15,7 +15,7 @@ namespace Forest_Sr.BardCode.Cards.Rare;
 
 /// <summary>
 /// 舞动青春｜DancingYouth
-/// 效果：能力。每回合开始时，若上一回合打出了至少2种类型的牌，抽1张牌。
+/// 效果：能力。回合结束时若和声大于3，下回合抽1张牌。
 /// 升级：费用 1→0
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
@@ -36,7 +36,7 @@ public sealed class DancingYouth : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 施加能力Power，在每回合开始时触发
+        // 施加能力Power，在每回合结束时触发
         await PowerCmd.Apply<DancingYouthPower>(
             Owner.Creature,
             1,  // 层数（用于标记）

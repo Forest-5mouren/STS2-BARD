@@ -29,7 +29,7 @@ public sealed class ValiantDash : BardCard
     ];
 
     // 关键词：升级后无消耗，获得保留
-    protected override IEnumerable<string> RegisteredKeywordIds => ["EXHAUST"];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Retain);

@@ -26,16 +26,16 @@ public sealed class OverclockCasting : BardCard
     ];
 
     // 关键词：虚无（升级后移除）
-    protected override IEnumerable<string> RegisteredKeywordIds => ["ETHEREAL"];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
 
     public OverclockCasting() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
     }
 
-    // 升级：移除虚无（已通过 RegisteredKeywordIds 处理）
+    // 升级：移除虚无
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Eternal);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

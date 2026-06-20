@@ -19,9 +19,9 @@
   "BARD_POWER_MELODIC_WARD_POWER.description": "每当你释放[gold]魔法[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]",
   "BARD_POWER_MELODIC_WARD_POWER.smartDescription": "每当你释放[gold]魔法[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]",
 
-  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.title": "法术共鸣",
-  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.description": "本回合下一张法术牌费用 -{Amount:diff()}",
-  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.smartDescription": "下一张法术牌费用减少 {Amount:diff()}",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.title": "魔法共鸣",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.description": "本回合下一张魔法牌费用 -{Amount:diff()}",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.smartDescription": "下一张魔法牌费用减少 {Amount:diff()}",
 
   "BARD_POWER_VALIANT_PRESENCE_POWER.title": "英勇气势",
   "BARD_POWER_VALIANT_PRESENCE_POWER.description": "每当你失去[gold]活力[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]格挡[/gold]",
@@ -36,8 +36,8 @@
   "BARD_POWER_BRISK_BEAT_POWER.smartDescription": "每回合开始时抽[blue]{Amount}[/blue]张牌",
 
   "BARD_POWER_DANCING_YOUTH_POWER.title": "舞动青春",
-  "BARD_POWER_DANCING_YOUTH_POWER.description": "若上一回合打出至少2种类型的牌，抽[blue]{Amount}[/blue]张牌",
-  "BARD_POWER_DANCING_YOUTH_POWER.smartDescription": "若上一回合打出至少2种类型的牌，抽[blue]{Amount}[/blue]张牌",
+  "BARD_POWER_DANCING_YOUTH_POWER.description": "回合结束时若和声大于3，下回合抽[blue]{Amount}[/blue]张牌",
+  "BARD_POWER_DANCING_YOUTH_POWER.smartDescription": "回合结束和声>3时下回合抽[blue]{Amount}[/blue]张牌",
 
   "BARD_POWER_IMPROVISE_POWER.title": "即兴",
   "BARD_POWER_IMPROVISE_POWER.description": "每回合随机获得[blue]{Amount}[/blue]首乐曲",
@@ -48,8 +48,8 @@
   "BARD_POWER_WAR_SONG_POWER.smartDescription": "每当使用[gold]乐曲卡[/gold]时，获得[blue]{Amount}[/blue]层[gold]活力[/gold]",
 
   "BARD_POWER_OVERCLOCK_CASTING_POWER.title": "超频施法",
-  "BARD_POWER_OVERCLOCK_CASTING_POWER.description": "你的[gold]法术牌[/gold]获得[gold]消耗[/gold]和再次打出",
-  "BARD_POWER_OVERCLOCK_CASTING_POWER.smartDescription": "你的[gold]法术牌[/gold]获得[gold]消耗[/gold]和再次打出",
+  "BARD_POWER_OVERCLOCK_CASTING_POWER.description": "你的[gold]魔法牌[/gold]获得[gold]消耗[/gold]和再次打出",
+  "BARD_POWER_OVERCLOCK_CASTING_POWER.smartDescription": "你的[gold]魔法牌[/gold]获得[gold]消耗[/gold]和再次打出",
 
   "BARD_POWER_MANA_SURGE_POWER.title": "法力充沛",
   "BARD_POWER_MANA_SURGE_POWER.description": "每回合第一次释放[gold]魔法[/gold]时，抽[blue]{Amount}[/blue]张牌",
@@ -84,6 +84,41 @@
   "BARD_POWER_NEVER_GIVE_UP_POWER.smartDescription": "即将死亡时，改为回复{HealAmount}点[gold]生命[/gold]，[gold]消耗[/gold]并抽{DrawAmount}张牌",
 
   "BARD_POWER_RHYTHM_STORM_POWER.title": "韵律风暴",
-  "BARD_POWER_RHYTHM_STORM_POWER.description": "当你使用乐曲或释放法术时，获得2层活力，当你获得活力时，对所有敌人造成3点伤害",
-  "BARD_POWER_RHYTHM_STORM_POWER.smartDescription": "当你使用乐曲或释放法术时，获得2层活力，当你获得活力时，对所有敌人造成3点伤害"
+  "BARD_POWER_RHYTHM_STORM_POWER.description": "当你使用乐曲或释放魔法时，获得2层活力，当你获得活力时，对所有敌人造成3点伤害",
+  "BARD_POWER_RHYTHM_STORM_POWER.smartDescription": "当你使用乐曲或释放魔法时，获得2层活力，当你获得活力时，对所有敌人造成3点伤害",
+
+  "BARD_POWER_WEAKNESS_SHRIEK_POWER.title": "虚弱尖叫",
+  "BARD_POWER_WEAKNESS_SHRIEK_POWER.description": "本回合降低{StrengthReduction}点力量，{DexterityReduction}点敏捷",
+  "BARD_POWER_WEAKNESS_SHRIEK_POWER.smartDescription": "本回合降低{StrengthReduction}点力量，{DexterityReduction}点敏捷",
+
+  "BARD_POWER_DARK_CACOPHONY_POWER.title": "黑暗喧嚣",
+  "BARD_POWER_DARK_CACOPHONY_POWER.description": "每回合开始时对所有敌人造成{Damage}点伤害",
+  "BARD_POWER_DARK_CACOPHONY_POWER.smartDescription": "每回合开始时对所有敌人造成{Damage}点伤害",
+
+  "BARD_POWER_COURAGE_SONG_CHANT.title": "勇气之歌",
+  "BARD_POWER_COURAGE_SONG_CHANT.description": "下回合获得力量与活力",
+  "BARD_POWER_COURAGE_SONG_CHANT.smartDescription": "等待吟唱…",
+
+  "BARD_POWER_BANSHEE_WAIL_CHANT.title": "女妖之嚎",
+  "BARD_POWER_BANSHEE_WAIL_CHANT.description": "下回合全体敌人获得虚弱与易伤",
+  "BARD_POWER_BANSHEE_WAIL_CHANT.smartDescription": "等待吟唱…",
+
+  "BARD_POWER_INSPIRING_MELODY_CHANT.title": "激昂旋律",
+  "BARD_POWER_INSPIRING_MELODY_CHANT.description": "下回合全体队友获得力量与敏捷",
+  "BARD_POWER_INSPIRING_MELODY_CHANT.smartDescription": "等待吟唱…",
+
+  "BARD_POWER_CLEAR_CHANT_CHANT.title": "清晰赞歌",
+  "BARD_POWER_CLEAR_CHANT_CHANT.description": "下回合搜索魔法牌",
+  "BARD_POWER_CLEAR_CHANT_CHANT.smartDescription": "等待吟唱…",
+
+  "BARD_POWER_SERENE_SONG_CHANT.title": "宁静之歌",
+  "BARD_POWER_SERENE_SONG_CHANT.description": "下回合全体队友回复生命",
+  "BARD_POWER_SERENE_SONG_CHANT.smartDescription": "等待吟唱…",
+
+  "BARD_POWER_ARCANE_ECHO_POWER.title": "奥术回响",
+  "BARD_POWER_ARCANE_ECHO_POWER.description": "和声达{Amount:diff()}层时回收魔法牌",
+  "BARD_POWER_ARCANE_ECHO_POWER.smartDescription": "和声（{Amount:diff()}层触发）"
 }
+
+
+

@@ -30,8 +30,8 @@ public sealed class NeverGonnaGiveYouUp : BardCard
     protected override IEnumerable<string> RegisteredKeywordIds => new[]
     {
         BardKeywords.Song,
-        "Exhaust"
     };
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public NeverGonnaGiveYouUp() : base(1, CardType.Skill, CardRarity.Rare, TargetType.Self)
     {

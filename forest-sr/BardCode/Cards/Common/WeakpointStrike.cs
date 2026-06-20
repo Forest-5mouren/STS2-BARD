@@ -20,7 +20,7 @@ namespace Forest_Sr.BardCode.Cards.Common;
 /// 弱点打击｜WeakpointStrike
 /// 效果：造成3点伤害，施加1层易伤。
 /// 升级：伤害 3→4，易伤 1→2
-/// </summary>
+/// </summary>占位符
 [RegisterCard(typeof(BardCardPool))]
 public sealed class WeakpointStrike : BardCard
 {

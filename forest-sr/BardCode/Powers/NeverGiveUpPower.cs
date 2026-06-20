@@ -40,11 +40,8 @@ public sealed class NeverGiveUpPower : BardPower
         // 防御性检查
         if (creature == null) return true;
         if (Owner == null) return true;
-
         // 不是自己，正常死亡
         if (creature != Owner) return true;
-        // 已经触发过，正常死亡
-        if (_wasTriggered) return true;
         // 否则阻止死亡
         return false;
     }
@@ -65,30 +62,15 @@ public sealed class NeverGiveUpPower : BardPower
         {
             return;
         }
-
-
-
         Flash();  // 能力闪烁效果
 
         // 获取回复量和抽牌数（可以从 CanonicalVars 获取）
         int healAmount = 5;
-        int drawAmount = 3;
 
         // 回复生命
         await CreatureCmd.Heal(creature, healAmount);
 
-        // 抽牌（确保 PlayerChoiceContext 不为 null）
-        await CardPileCmd.Draw(null, drawAmount, Owner.Player);
-
         // 消耗此能力
         await PowerCmd.Remove(this);
-        try
-        {
-            await PowerCmd.Decrement(this);
-        }
-        catch (Exception e)
-        {
-            Bard.MainFile.Logger.Error($"NeverGiveUpPower.AfterPreventingDeath error: {e.Message}");
-        }
     }
 }

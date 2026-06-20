@@ -83,11 +83,11 @@ public sealed class PhantasmalKiller : BardCard
         );
     }
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext)
     {
         // 如果上一回合打出了此卡，且此卡不在手牌中，则将其加入手牌
         if (player == Owner && CombatManager.Instance.History.CardPlaysFinished.Any(
-            e => e.RoundNumber == CombatState.RoundNumber - 1 && e.CardPlay.Card == this))
+            e => e.RoundNumber == player.Creature.CombatState.RoundNumber - 1 && e.CardPlay.Card == this))
         {
             if (Pile == null || Pile.Type != PileType.Hand)
             {

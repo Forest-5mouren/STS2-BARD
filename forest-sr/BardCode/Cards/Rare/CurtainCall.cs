@@ -28,13 +28,13 @@ public sealed class CurtainCall : BardCard
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
-        new DamageVar(6m, ValueProp.Move),           // 基础伤害
+        new DamageVar(8m, ValueProp.Move),           // 基础伤害
         new CalculationBaseVar(0m),                  // 计算基数
         new CalculationExtraVar(1m),                 // 额外乘数
         new CalculatedVar(_calculatedKey).WithMultiplier((card, _) =>
             // 计算使用过的卡牌类型数量
             CombatManager.Instance.History.CardPlaysStarted
-                .Where(e => e.CardPlay.Card.Owner == card.Owner)
+                .Where(e => e.CardPlay.Card.Owner == this.Owner)
                 .Select(e => e.CardPlay.Card.Type)
                 .Distinct()
                 .Count()

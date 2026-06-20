@@ -16,7 +16,7 @@ using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 
-namespace Forest_Sr.BardCode.Cards.Uncommon;
+namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 英雄气概｜Heroism
@@ -67,8 +67,8 @@ public sealed class Heroism : BardCard
     protected override void OnUpgrade()
     {
         // 升级：持续时间 +1（3 → 4）
-        DynamicVars["duration"].UpgradeValueBy(1);
+        //DynamicVars["duration"].UpgradeValueBy(1);
         // 可选：格挡值 +2（5 → 7）
-        // DynamicVars.Block.UpgradeValueBy(2);
+        DynamicVars.Block.UpgradeValueBy(2);
     }
 }

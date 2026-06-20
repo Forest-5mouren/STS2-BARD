@@ -22,7 +22,6 @@ public sealed class HastePower : BardPower
     public override PowerStackType StackType => PowerStackType.Counter;
 
     // 叠加行为：不新建独立实例
-    public override bool IsInstanced => false;
 
     // 不允许负层数
     public override bool AllowNegative => false;

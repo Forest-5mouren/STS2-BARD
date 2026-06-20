@@ -2,57 +2,57 @@ using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Forest_Sr.BardCode;
 
 namespace Forest_Sr.BardCode.Relics;
 
 /// <summary>
 /// 诗人激励
-/// 效果：每回合开始时，给全体友方提供 {vigor} 层活力。
+/// 效果：每打出一张法术或乐曲牌，和声+1。
+/// 回合开始时，全体队友获得和声层数的活力，然后和声清零。
 /// </summary>
 [RegisterRelic(typeof(BardRelicPool))]
 public sealed class BardicInspiration : BardRelics
 {
-
-    // 基础数值声明
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VigorPower>(2)
-    ];
-
-    // 额外悬停提示
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
-        HoverTipFactory.FromPower<VigorPower>()
-    ];
-
     public override RelicRarity Rarity => RelicRarity.Starter;
 
-    // 每回合开始时触发
-    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    // 打出法术或乐曲牌时增加和声计数
+    public override async Task AfterCardPlayed(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        // 闪烁效果
-        Flash();
-
-
-        // 给全体友方施加活力
-        await PowerCmd.Apply<VigorPower>(
-            player.Creature.CombatState.Allies,
-            DynamicVars["VigorPower"].IntValue,
-            player.Creature,
-            null
-        );
+        if (cardPlay.Card.Owner != Owner) return;
+        if (cardPlay.Card.HasModKeyword(BardKeywords.Song) ||
+            cardPlay.Card.HasModKeyword(BardKeywords.Magic))
+        {
+            HarmonyTracker.Count++;
+            Flash();
+        }
+        await Task.CompletedTask;
     }
 
-    //public override RelicModel? GetUpgradeReplacement() => new BetterInspiration();
+    // 回合开始时：全体队友获得对应层数的活力，和声清零
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
+    {
+        if (player != Owner || player.Creature?.IsDead != false) return;
+
+        if (HarmonyTracker.Count > 0)
+        {
+            foreach (Creature ally in player.Creature.CombatState.Allies)
+            {
+                await PowerCmd.Apply<VigorPower>(ally, HarmonyTracker.Count, player.Creature, null);
+            }
+            HarmonyTracker.Count = 0;
+        }
+    }
 }
+

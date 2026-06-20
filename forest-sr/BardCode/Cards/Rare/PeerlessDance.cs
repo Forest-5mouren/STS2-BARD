@@ -28,8 +28,8 @@ public sealed class PeerlessDance : BardCard
         new DynamicVar(_selectCountKey, 1)   // 选择数量
     ];
 
-    // 关键词：消耗（升级后移除）
-    protected override IEnumerable<string> RegisteredKeywordIds => ["EXHAUST"];
+    // 关键词
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     // 额外悬停提示
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [

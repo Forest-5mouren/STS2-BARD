@@ -22,10 +22,10 @@ public class MainFile
     public static void Initialize()
     {
         var assembly = Assembly.GetExecutingAssembly();
-        RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
-        ModTypeDiscoveryHub.RegisterModAssembly(ModId, assembly);
 
         Logger = RitsuLibFramework.CreateLogger(ModId);
+
+        RitsuLibFramework.EnsureGodotScriptsRegistered(assembly, Logger);
 
         // 注册程序集（启用注解式注册）
         ModTypeDiscoveryHub.RegisterModAssembly(ModId, Assembly.GetExecutingAssembly());
@@ -45,7 +45,6 @@ public class MainFile
         RitsuLibFramework.RegisterArchaicToothTranscendenceMapping<ViciousMockery, PhantasmalKiller>();
         // Harmony 补丁（如果需要）
         var harmony = new Harmony(ModId);
-        harmony.PatchAll();
         harmony.PatchAll(Assembly.GetExecutingAssembly());
 
         Logger.Info("Bard mod initialized with RitsuLib!");

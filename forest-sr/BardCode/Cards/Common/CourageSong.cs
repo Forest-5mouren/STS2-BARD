@@ -2,11 +2,10 @@ using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
@@ -16,41 +15,32 @@ namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 勇气之歌｜CourageSong
-/// 效果：获得活力
+/// 效果：吟唱。下回合开始时获得 1 层力量，2 层活力。乐曲。
+/// 升级：力量 1→2，活力 2→3
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class CourageSong : BardCard
 {
-    private const int energyCost = 0;
-    private const CardType type = CardType.Skill;
-    private const CardRarity rarity = CardRarity.Common;
-    private const TargetType targetType = TargetType.Self;
-    private const bool shouldShowInCardLibrary = true;
-
-    // 基础数值：活力层数（基础3，升级5）
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VigorPower>(3)
+        new PowerVar<StrengthPower>(1),
+        new PowerVar<VigorPower>(2)
     ];
 
-    // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song, BardKeywords.Chant];
 
-    public CourageSong() : base(energyCost, type, rarity, targetType)
+    public CourageSong() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self) { }
+
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-    }
-
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-
-        await PowerCmd.Apply<VigorPower>(
-            Owner.Creature,                  // 目标（自己）
-            DynamicVars["VigorPower"].IntValue,   // 层数
-            Owner.Creature,                  // 来源（自己）
-            this);                           // 关联卡牌
+        var chant = await PowerCmd.Apply<CourageSongChant>(Owner.Creature, 1, Owner.Creature, this);
+        chant.StrengthAmount = DynamicVars["StrengthPower"].IntValue;
+        chant.VigorAmount = DynamicVars["VigorPower"].IntValue;
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["VigorPower"].UpgradeValueBy(2);  
+        DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        DynamicVars["VigorPower"].UpgradeValueBy(1);
     }
 }
+

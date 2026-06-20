@@ -6,12 +6,11 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using STS2RitsuLib.Scaffolding.Content;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Forest_Sr.BardCode.Cards.Uncommon;  // 注意修改为你的命名空间
+namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
 /// 爆发力｜ExplosivePower
@@ -21,23 +20,23 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;  // 注意修改为你的命名空�
 [RegisterCard(typeof(BardCardPool))]
 public sealed class ExplosivePower : BardCard
 {
-    private const string _vigorCostKey = "vigorCost";
+    // 基础数值声明（使用 PowerVar 类型）
+    protected override IEnumerable<DynamicVar> CanonicalVars => new[]
+    {
+        new PowerVar<VigorPower>(3)  // 消耗的活力数量
+    };
 
-    // 基础数值声明
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar(_vigorCostKey, 3)
-    ];
-
-    // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [
-        "EXHAUST"
-    ];
+    // 关键词：消耗
+    public override IEnumerable<CardKeyword> CanonicalKeywords => new[]
+    {
+        CardKeyword.Exhaust
+    };
 
     public ExplosivePower() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
     }
 
-    // 升级：添加保留关键词
+    // 升级：添加保留关键词（参考 Anointed）
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Retain);
@@ -45,37 +44,36 @@ public sealed class ExplosivePower : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获取当前的活力层数
+        // 获取消耗数量
+        int vigorCost = DynamicVars["VigorPower"].IntValue;
+
+        // 获取当前的活力层数（参考 Anointed 的查询方式）
         var vigorPower = Owner.Creature.GetPower<VigorPower>();
-        int vigor = vigorPower?.Amount ?? 0;
-        int vigorCost = DynamicVars[_vigorCostKey].IntValue;
+        int currentVigor = vigorPower?.Amount ?? 0;
 
         // 检查是否有足够的活力
-        if (vigor < vigorCost || vigorPower == null)
+        if (currentVigor < vigorCost || vigorPower == null)
         {
             return;
         }
 
         // 消耗指定层数的活力
-        await PowerCmd.ModifyAmount( vigorPower, -vigorCost, Owner.Creature, this);
+        await PowerCmd.ModifyAmount(vigorPower, -vigorCost, Owner.Creature, this);
 
-        // 需要抽的牌类型
+        // 需要抽取的牌类型（参考 Anointed 使用 Where + ToList）
         CardType[] targetTypes = { CardType.Attack, CardType.Skill, CardType.Power };
 
         foreach (var targetType in targetTypes)
         {
-            // 确保抽牌堆有牌
-            await CardPileCmd.ShuffleIfNecessary(choiceContext, Owner);
+            // 获取抽牌堆中符合条件的牌（参考 Anointed）
+            var cards = PileType.Draw.GetPile(Owner).Cards
+                .Where(c => c.Type == targetType )
+                .ToList();
 
-            // 获取抽牌堆
-            var drawPile = PileType.Draw.GetPile(Owner);
-
-            // 查找指定类型的第一张牌（排除不可打出的牌）
-            var card = drawPile.Cards.FirstOrDefault(c => c.Type == targetType && !c.HasModKeyword("UNPLAYABLE"));
-
-            // 如果找到了，抽这张牌
-            if (card != null)
+            // 如果有符合条件的牌，抽取第一张
+            if (cards.Any())
             {
+                var card = cards.First();
                 await CardPileCmd.RemoveFromCombat(card);
                 await CardPileCmd.Add(card, PileType.Hand, source: this);
             }

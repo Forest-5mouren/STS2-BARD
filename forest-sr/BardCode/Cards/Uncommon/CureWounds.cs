@@ -31,9 +31,10 @@ public sealed class CureWounds : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic,"Exhaust"];
-        
-    
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
+
 
     public CureWounds() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyPlayer)
     {

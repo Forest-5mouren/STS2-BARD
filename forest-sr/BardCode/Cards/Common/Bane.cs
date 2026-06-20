@@ -29,7 +29,8 @@ public sealed class Bane : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic, "Exhaust"];
+    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     // 额外提示文本
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [

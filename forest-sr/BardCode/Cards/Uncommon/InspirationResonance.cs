@@ -8,44 +8,37 @@ using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Forest_Sr.BardCode.Cards.Common;
+namespace Forest_Sr.BardCode.Cards.Uncommon;
 
 /// <summary>
 /// 灵感共鸣｜InspirationResonance
-/// 效果：消耗。本回合内，每打出一张乐曲牌，回复 {energy} 点能量。
-/// 升级：回复能量 1→2，获得保留
+/// 效果：虚无。消耗。本回合内，每打出一张乐曲牌，回复 {energy} 点能量。
+/// 升级：回复能量 1→2，失去虚无。
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class InspirationResonance : BardCard
 {
-    
-
-    // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new EnergyVar(1)
     ];
 
-    // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => ["EXHAUST"];
-    protected override void OnUpgrade()
-    {
-        AddKeyword(CardKeyword.Retain);
-    }
+    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
 
-    public InspirationResonance() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
-    {
-    }
+    public InspirationResonance() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
 
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        int energyPerSong = DynamicVars.Energy.IntValue;
-
-        // 不需要 choiceContext
+        // 施加灵感共鸣能力（本回合内打乐曲回复能量）
         await PowerCmd.Apply<InspirationResonancePower>(
             Owner.Creature,
-            energyPerSong,
+            DynamicVars.Energy.IntValue,
             Owner.Creature,
-            this
-        );
+            this);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Energy.UpgradeValueBy(1);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }
