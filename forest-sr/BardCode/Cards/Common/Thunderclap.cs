@@ -34,7 +34,7 @@ public sealed class ThunderClap : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     public ThunderClap() : base(energyCost, type, rarity, targetType)
     {

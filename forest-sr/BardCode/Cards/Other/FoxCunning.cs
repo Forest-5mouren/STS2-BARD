@@ -32,7 +32,7 @@ namespace Forest_Sr.BardCode.Cards.Other
 
             await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, base.Owner);
             // 本回合下一张法术牌费用-1
-            await PowerCmd.Apply<NextSpellCostReductionPower>(
+            await PowerCmd.Apply<NextSpellCostReductionPower>(choiceContext, 
                 base.Owner.Creature,
                 1m,
                 base.Owner.Creature,

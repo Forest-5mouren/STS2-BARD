@@ -22,7 +22,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class Hearsay : BardCard
 {
-    private CardModel _mockSelectedCard;
+    private CardModel? _mockSelectedCard; // 临时存储选中的卡牌（预览用途）
 
     // 关键词（升级后会被移除）
     public override List<CardKeyword> CanonicalKeywords => [
@@ -82,7 +82,7 @@ public sealed class Hearsay : BardCard
             selectedCard.EnergyCost.SetThisTurnOrUntilPlayed(0);
 
             // 添加到手牌（注意：creator 参数）
-            await CardPileCmd.AddGeneratedCardToCombat(selectedCard, PileType.Hand,true);
+            await CardPileCmd.AddGeneratedCardToCombat(selectedCard, PileType.Hand, Owner, CardPilePosition.Random);
         }
     }
 
@@ -93,3 +93,4 @@ public sealed class Hearsay : BardCard
        RemoveKeyword(CardKeyword.Exhaust);
     }
 }
+

@@ -1,75 +1,47 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Forest_Sr.BardCode.Cards.KeyWord;
-using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
+using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-
-namespace Forest_Sr.BardCode.Cards.Common;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
+namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
-/// 轰雷剑｜ThunderclapBlade
-/// 效果：造成 {damage} 点伤害。使敌人获得 {thunderclap} 层洪雷。
-/// 升级：伤害 6→8，洪雷层数 5→7
+/// 鸣雷剑｜ThunderclapBlade
+/// 效果：造成 {damage} 点伤害，施加 2 层易伤。攻击，法术。
+/// 升级：伤害 12→16
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class ThunderclapBlade : BardCard
-{
-    
-    private const string _thunderclapKey = "thunderclap";
-
-    // 基础数值声明
+public sealed class ThunderclapBlade : BardCard{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar( 6, MegaCrit.Sts2.Core.ValueProps.ValueProp.Move),       // 伤害值
-        new DynamicVar(_thunderclapKey, 5)   // 洪雷层数
+        new DamageVar(12, ValueProp.Move),
+        new PowerVar<VulnerablePower>(2)
     ];
 
-    // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
-        BardKeywords.Magic
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
-    // 额外悬停提示
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
-        HoverTipFactory.FromPower<ThunderclapPower>()
-    ];
+    public ThunderclapBlade() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy) { }
 
-    public ThunderclapBlade() : base(1, CardType.Attack, CardRarity.Uncommon, TargetType.AnyEnemy)
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-    }
-
-    // 升级：伤害 6→8，洪雷层数 5→7
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Damage.UpgradeValueBy(2);       // 6 → 8
-        DynamicVars[_thunderclapKey].UpgradeValueBy(2);  // 5 → 7
-    }
-
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
-
-        // 1. 造成伤害
-        
         await DamageCmd.Attack(DynamicVars.Damage.IntValue)
             .FromCard(this)
-            .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
+            .Targeting(cardPlay.Target!)
+            .Execute(ctx);
 
-        // 2. 给予洪雷效果
-        int thunderclapAmount = DynamicVars[_thunderclapKey].IntValue;
-        await PowerCmd.Apply<ThunderclapPower>(
-            cardPlay.Target,
-            thunderclapAmount,
-            Owner.Creature,
-            this
-        );
+        if (cardPlay.Target != null)
+        {
+            await PowerCmd.Apply<VulnerablePower>(ctx, cardPlay.Target, DynamicVars["VulnerablePower"].IntValue, Owner.Creature, this);
+        }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 }

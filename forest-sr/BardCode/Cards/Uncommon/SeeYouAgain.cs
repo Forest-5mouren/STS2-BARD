@@ -27,10 +27,7 @@ public sealed class SeeYouAgain : BardCard
     };
 
     // 关键词：乐曲
-    protected override IEnumerable<string> RegisteredKeywordIds => new[]
-    {
-        BardKeywords.Song
-    };
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
 
     public SeeYouAgain() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self)
     {
@@ -60,12 +57,12 @@ public sealed class SeeYouAgain : BardCard
                 choiceContext,
                 discardPile.Cards,
                 Owner,
-                new CardSelectorPrefs(CardSelectorPrefs.SelectionScreenPrompt, actualRecycle)
+                new CardSelectorPrefs(SelectionScreenPrompt, actualRecycle)
             );
 
             if (recycledCards.Any())
             {
-                await CardPileCmd.Add(recycledCards, PileType.Hand, source: this);
+                await CardPileCmd.Add(recycledCards, PileType.Hand, CardPilePosition.Random, this);
             }
 
             // 2. 丢弃1张手牌（如果回收了牌）
@@ -87,3 +84,5 @@ public sealed class SeeYouAgain : BardCard
         }
     }
 }
+
+

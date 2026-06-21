@@ -54,7 +54,7 @@ public sealed class Emergency : BardCard
             this);
 
         // 2. 施加 NextSpellOrSongCostReductionPower（下一张法术或乐曲卡费用-1）
-        await PowerCmd.Apply<NextSpellOrSongCostReductionPower>(
+        await PowerCmd.Apply<NextSpellOrSongCostReductionPower>(choiceContext, 
             Owner.Creature,
             1,
             Owner.Creature,

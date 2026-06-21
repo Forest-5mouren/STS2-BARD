@@ -59,7 +59,7 @@ public sealed class Eyebite : BardCard
 
         // 2. 给予虚弱
         int weakAmount = DynamicVars.Weak.IntValue;
-        await PowerCmd.Apply<WeakPower>(
+        await PowerCmd.Apply<WeakPower>(choiceContext, 
             cardPlay.Target,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,
@@ -68,7 +68,7 @@ public sealed class Eyebite : BardCard
 
         // 3. 减少力量（给予负数的力量Power）
         int strengthAmount = DynamicVars["StrengthPower"].IntValue;
-        await PowerCmd.Apply<StrengthPower>(
+        await PowerCmd.Apply<StrengthPower>(choiceContext, 
             cardPlay.Target,
             -strengthAmount,  // 负数表示减少力量
             Owner.Creature,

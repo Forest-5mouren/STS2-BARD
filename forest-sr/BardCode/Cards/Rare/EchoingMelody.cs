@@ -47,7 +47,7 @@ public sealed class EchoingMelody : BardCard
         int weakAmount = DynamicVars.Weak.IntValue;
 
         // 1. 给予自己虚弱
-        await PowerCmd.Apply<WeakPower>(
+        await PowerCmd.Apply<WeakPower>(choiceContext, 
             Owner.Creature,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,
@@ -55,7 +55,7 @@ public sealed class EchoingMelody : BardCard
         );
 
         // 2. 施加能力Power
-        await PowerCmd.Apply<EchoingMelodyPower>(
+        await PowerCmd.Apply<EchoingMelodyPower>(choiceContext, 
             Owner.Creature,
             1,
             Owner.Creature,

@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
@@ -43,11 +44,9 @@ public sealed class InspirationResonancePower : BardPower
     /// <summary>
     /// 回合结束时移除自身
     /// </summary>
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
-        if (side == Owner.Side)
-        {
-            await PowerCmd.Remove(this);
-        }
+        if (player != Owner?.Player) return;
+        await PowerCmd.Remove(this);
     }
 }

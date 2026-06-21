@@ -49,10 +49,11 @@ public sealed class BardicInspiration : BardRelics
         {
             foreach (Creature ally in player.Creature.CombatState.Allies)
             {
-                await PowerCmd.Apply<VigorPower>(ally, HarmonyTracker.Count, player.Creature, null);
+                await PowerCmd.Apply<VigorPower>(ctx, ally, HarmonyTracker.Count, player.Creature, null);
             }
             HarmonyTracker.Count = 0;
         }
     }
 }
+
 

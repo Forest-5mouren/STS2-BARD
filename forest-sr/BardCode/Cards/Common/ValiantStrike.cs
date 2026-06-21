@@ -61,7 +61,7 @@ public sealed class ValiantStrike : BardCard
             this);
 
         // 2. 获得活力
-        await PowerCmd.Apply<VigorPower>(
+        await PowerCmd.Apply<VigorPower>(choiceContext, 
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,

@@ -36,7 +36,7 @@ public sealed class RhythmStorm : BardCard
     ];
 
     // 关键词：魔法、乐曲// 升级：获得固有
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic, BardKeywords.Song];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic, BardKeywords.Song];
 
     public RhythmStorm() : base(1, CardType.Power, CardRarity.Ancient, TargetType.Self)
     {
@@ -47,7 +47,7 @@ public sealed class RhythmStorm : BardCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // 施加能力（层数为1作为标记）
-        await PowerCmd.Apply<RhythmStormPower>(
+        await PowerCmd.Apply<RhythmStormPower>(choiceContext, 
             Owner.Creature,
             1,
             Owner.Creature,

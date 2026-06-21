@@ -58,7 +58,7 @@ public sealed class ExplosivePower : BardCard
         }
 
         // 消耗指定层数的活力
-        await PowerCmd.ModifyAmount(vigorPower, -vigorCost, Owner.Creature, this);
+        await PowerCmd.ModifyAmount(choiceContext, vigorPower, -vigorCost, Owner.Creature, this, false);
 
         // 需要抽取的牌类型（参考 Anointed 使用 Where + ToList）
         CardType[] targetTypes = { CardType.Attack, CardType.Skill, CardType.Power };
@@ -75,7 +75,7 @@ public sealed class ExplosivePower : BardCard
             {
                 var card = cards.First();
                 await CardPileCmd.RemoveFromCombat(card);
-                await CardPileCmd.Add(card, PileType.Hand, source: this);
+                await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Random, this);
             }
         }
     }

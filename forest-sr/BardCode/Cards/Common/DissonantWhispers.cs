@@ -43,7 +43,7 @@ public sealed class DissonantWhispers : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     public DissonantWhispers() : base(energyCost, type, rarity, targetType)
     {
@@ -69,7 +69,7 @@ public sealed class DissonantWhispers : BardCard
             this);
 
         // 施加虚弱
-        await PowerCmd.Apply<WeakPower>(
+        await PowerCmd.Apply<WeakPower>(choiceContext, 
             cardPlay.Target,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,

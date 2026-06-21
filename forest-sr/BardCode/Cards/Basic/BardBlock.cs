@@ -28,8 +28,8 @@ public sealed class BardBlock : BardCard
     private const TargetType targetType = TargetType.Self;
 
     // 乐曲标签
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
-    protected override IEnumerable<string> RegisteredCardTagIds => ["defend"];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Defend };
 
     // 基础数值：格挡 + 临时敏捷
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -45,7 +45,7 @@ public sealed class BardBlock : BardCard
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.IntValue, ValueProp.Move, cardPlay);
 
         // 获得临时敏捷（回合结束消失）
-        await PowerCmd.Apply<SlideStepPower>(
+        await PowerCmd.Apply<SlideStepPower>(ctx, 
             Owner.Creature,
             DynamicVars["tempDexterity"].IntValue,
             Owner.Creature,
@@ -59,4 +59,5 @@ public sealed class BardBlock : BardCard
         DynamicVars["tempDexterity"].UpgradeValueBy(1);
     }
 }
+
 

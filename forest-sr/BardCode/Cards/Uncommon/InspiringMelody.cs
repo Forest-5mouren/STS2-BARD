@@ -25,13 +25,13 @@ public sealed class InspiringMelody : BardCard
         new PowerVar<DexterityPower>(1)
     ];
 
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song, BardKeywords.Chant];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, BardKeywords.Chant];
 
     public InspiringMelody() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        var chant = await PowerCmd.Apply<InspiringMelodyChant>(Owner.Creature, 1, Owner.Creature, this);
+        var chant = await PowerCmd.Apply<InspiringMelodyChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant.StrengthAmount = DynamicVars["StrengthPower"].IntValue;
         chant.DexterityAmount = DynamicVars["DexterityPower"].IntValue;
     }
@@ -42,3 +42,4 @@ public sealed class InspiringMelody : BardCard
         DynamicVars["DexterityPower"].UpgradeValueBy(1);
     }
 }
+

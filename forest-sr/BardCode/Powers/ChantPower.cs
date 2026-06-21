@@ -1,6 +1,8 @@
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -8,6 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 using System.Linq;
 using System.Threading.Tasks;
 using STS2RitsuLib.Keywords;
+using Forest_Sr.BardCode.Cards.Ancient;
 
 namespace Forest_Sr.BardCode.Powers;
 
@@ -40,8 +43,8 @@ public sealed class CourageSongChant : ChantPower
 
     protected override async Task OnChantTrigger(PlayerChoiceContext ctx)
     {
-        await PowerCmd.Apply<StrengthPower>(Owner, StrengthAmount, Owner, null);
-        await PowerCmd.Apply<VigorPower>(Owner, VigorAmount, Owner, null);
+        await PowerCmd.Apply<StrengthPower>(ctx, Owner, StrengthAmount, Owner, null);
+        await PowerCmd.Apply<VigorPower>(ctx, Owner, VigorAmount, Owner, null);
     }
 }
 
@@ -57,8 +60,8 @@ public sealed class BansheeWailChant : ChantPower
     {
         foreach (Creature enemy in Owner.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<WeakPower>(enemy, WeakAmount, Owner, null);
-            await PowerCmd.Apply<VulnerablePower>(enemy, VulnerableAmount, Owner, null);
+            await PowerCmd.Apply<WeakPower>(ctx, enemy, WeakAmount, Owner, null);
+            await PowerCmd.Apply<VulnerablePower>(ctx, enemy, VulnerableAmount, Owner, null);
         }
     }
 }
@@ -75,8 +78,8 @@ public sealed class InspiringMelodyChant : ChantPower
     {
         foreach (Creature ally in Owner.CombatState.Allies)
         {
-            await PowerCmd.Apply<StrengthPower>(ally, StrengthAmount, Owner, null);
-            await PowerCmd.Apply<DexterityPower>(ally, DexterityAmount, Owner, null);
+            await PowerCmd.Apply<StrengthPower>(ctx, ally, StrengthAmount, Owner, null);
+            await PowerCmd.Apply<DexterityPower>(ctx, ally, DexterityAmount, Owner, null);
         }
     }
 }
@@ -103,11 +106,11 @@ public sealed class ClearChantChant : ChantPower
 
         if (spells != null && spells.Count > 0)
         {
-            await CardPileCmd.Add(spells, PileType.Hand, source: null);
+            await CardPileCmd.Add(spells, PileType.Hand, CardPilePosition.Random, null, false);
         }
 
         // 给予自己易伤
-        await PowerCmd.Apply<VulnerablePower>(Owner, VulnerableAmount, Owner, null);
+        await PowerCmd.Apply<VulnerablePower>(ctx, Owner, VulnerableAmount, Owner, null);
     }
 }
 
@@ -126,3 +129,36 @@ public sealed class SereneSongChant : ChantPower
         }
     }
 }
+
+/// <summary>
+/// 幻影杀手返回能力：下回合开始时将幻影杀手移回手牌
+/// </summary>
+public sealed class PhantasmalKillerReturnPower : BardPower
+{
+    public override PowerType Type => PowerType.Buff;
+    public override PowerStackType StackType => PowerStackType.Single;
+
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
+    {
+        if (player != Owner?.Player) return;
+        Flash();
+
+        // 在弃牌堆/抽牌堆/消耗堆中查找幻影杀手，移回手牌
+        foreach (var pileType in new[] { PileType.Discard, PileType.Draw, PileType.Exhaust })
+        {
+            var pile = pileType.GetPile(player);
+            var card = pile?.Cards.FirstOrDefault(c => c is PhantasmalKiller);
+            if (card != null)
+            {
+                await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Random, null, false);
+                break;
+            }
+        }
+
+        await PowerCmd.Remove(this);
+    }
+}
+
+
+
+

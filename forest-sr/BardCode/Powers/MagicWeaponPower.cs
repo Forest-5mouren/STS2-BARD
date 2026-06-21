@@ -1,11 +1,7 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Models;
-using STS2RitsuLib.Interop.AutoRegistration;
+using MegaCrit.Sts2.Core.Combat;using MegaCrit.Sts2.Core.Entities.Cards;using MegaCrit.Sts2.Core.Entities.Creatures;using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;using MegaCrit.Sts2.Core.HoverTips;using MegaCrit.Sts2.Core.Models;using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
 using System;
 using System.Collections.Generic;
@@ -42,7 +38,7 @@ public sealed class MagicWeaponPower : BardPower
     /// <summary>
     /// 当 Power 层数变化时触发
     /// </summary>
-    public override Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         if (!(power is MagicWeaponPower)) return Task.CompletedTask;
         if (power.Owner != Owner) return Task.CompletedTask;
@@ -94,3 +90,5 @@ public sealed class MagicWeaponPower : BardPower
         return false;
     }
 }
+
+

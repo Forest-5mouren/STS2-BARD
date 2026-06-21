@@ -35,7 +35,7 @@ public sealed class Improvise : BardCard
         int amount = DynamicVars[_cardsKey].IntValue;
 
         // 施加 ImprovisePower，每回合随机获得一首乐曲
-        await PowerCmd.Apply<ImprovisePower>(
+        await PowerCmd.Apply<ImprovisePower>(choiceContext, 
             
             Owner.Creature,
             amount,  // 获得数量（默认1）
@@ -49,3 +49,4 @@ public sealed class Improvise : BardCard
         AddKeyword(CardKeyword.Innate);
     }
 }
+

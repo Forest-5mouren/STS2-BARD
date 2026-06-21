@@ -31,7 +31,7 @@ public sealed class Reduce : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -61,7 +61,7 @@ public sealed class Reduce : BardCard
 
         // 施加缩小能力
         int duration = DynamicVars[_durationKey].IntValue;
-        await PowerCmd.Apply<ShrinkPower>(
+        await PowerCmd.Apply<ShrinkPower>(choiceContext, 
             target,
             duration,
             Owner.Creature,

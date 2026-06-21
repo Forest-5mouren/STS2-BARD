@@ -29,8 +29,8 @@ public sealed class BardAttack : BardCard
     private const TargetType targetType = TargetType.AnyEnemy;
 
     // 乐曲标签
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
-    protected override IEnumerable<string> RegisteredCardTagIds => ["strike"];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
 
     // 基础数值：伤害 + 易伤
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -51,7 +51,7 @@ public sealed class BardAttack : BardCard
         // 施加易伤
         if (cardPlay.Target != null)
         {
-            await PowerCmd.Apply<VulnerablePower>(
+            await PowerCmd.Apply<VulnerablePower>(ctx, 
                 cardPlay.Target,
                 DynamicVars["VulnerablePower"].IntValue,
                 Owner.Creature,
@@ -65,4 +65,5 @@ public sealed class BardAttack : BardCard
         DynamicVars.Damage.UpgradeValueBy(3);
     }
 }
+
 

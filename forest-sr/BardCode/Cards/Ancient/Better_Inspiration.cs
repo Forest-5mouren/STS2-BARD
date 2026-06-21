@@ -49,7 +49,7 @@ public sealed class BetterInspiration : BardRelics
         {
             foreach (Creature ally in player.Creature.CombatState.Allies)
             {
-                await PowerCmd.Apply<VigorPower>(ally, HarmonyTracker.Count, player.Creature, null);
+                await PowerCmd.Apply<VigorPower>(ctx, ally, HarmonyTracker.Count, player.Creature, null);
             }
         }
 
@@ -57,5 +57,6 @@ public sealed class BetterInspiration : BardRelics
         HarmonyTracker.Count = 2;
     }
 }
+
 
 

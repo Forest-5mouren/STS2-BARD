@@ -24,13 +24,13 @@ public sealed class SereneSong : BardCard
         new HealVar(8)
     ];
 
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song, BardKeywords.Chant];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, BardKeywords.Chant];
 
     public SereneSong() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        var chant = await PowerCmd.Apply<SereneSongChant>(Owner.Creature, 1, Owner.Creature, this);
+        var chant = await PowerCmd.Apply<SereneSongChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant.HealAmount = DynamicVars.Heal.IntValue;
     }
 
@@ -39,4 +39,5 @@ public sealed class SereneSong : BardCard
         DynamicVars.Heal.UpgradeValueBy(3);
     }
 }
+
 

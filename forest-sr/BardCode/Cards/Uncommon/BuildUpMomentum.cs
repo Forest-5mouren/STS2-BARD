@@ -49,7 +49,7 @@ public sealed class BuildUpMomentum : BardCard
     {
         // 1. 获得活力
          
-        await PowerCmd.Apply<VigorPower>(
+        await PowerCmd.Apply<VigorPower>(choiceContext, 
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,
@@ -58,7 +58,7 @@ public sealed class BuildUpMomentum : BardCard
 
         // 2. 本回合保留手牌
         int retainAmount = DynamicVars[_retainKey].IntValue;
-        await PowerCmd.Apply<RetainHandPower>(
+        await PowerCmd.Apply<RetainHandPower>(choiceContext, 
             Owner.Creature,
             retainAmount,
             Owner.Creature,

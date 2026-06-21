@@ -30,7 +30,7 @@ public sealed class MirrorImage : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -56,7 +56,7 @@ public sealed class MirrorImage : BardCard
         int reductionPerLayer = DynamicVars[_reductionKey].IntValue;
 
         // 施加镜像Power
-        var power = await PowerCmd.Apply<MirrorImagePower>(
+        var power = await PowerCmd.Apply<MirrorImagePower>(choiceContext, 
             Owner.Creature,
             mirrorAmount,
             Owner.Creature,

@@ -1,72 +1,44 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
-using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-
-namespace Forest_Sr.BardCode.Cards.Common;
-
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
+namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
-/// 尖锐刺耳｜EarPiercingShriek
-/// 效果：对所有敌人造成 {damage} 点伤害，给予 {weak} 层虚弱。
-/// 升级：伤害 13→15，虚弱 1→2
+/// 刺耳尖叫｜EarPiercingShriek
+/// 效果：所有敌人本回合降低 {strReduction} 点力量，{dexReduction} 点敏捷。消耗。乐曲。
+/// 升级：降低值 3→5
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class EarPiercingShriek : BardCard
-{
-    
-    private const string _weakKey = "weak";
-
-    // 基础数值声明
+public sealed class EarPiercingShriek : BardCard{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar( 13,ValueProp.Move),    // 伤害值
-        new PowerVar<WeakPower>( 1)        // 虚弱层数
+        new DynamicVar("strReduction", 3),
+        new DynamicVar("dexReduction", 3)
     ];
 
-    // 关键词：乐曲
-    protected override IEnumerable<string> RegisteredKeywordIds => [
-        BardKeywords.Song
-    ];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, CardKeyword.Exhaust];
 
-    // 额外悬停提示
-    protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
-        HoverTipFactory.FromPower<WeakPower>()
-    ];
+    public EarPiercingShriek() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies) { }
 
-    public EarPiercingShriek() : base(2, CardType.Attack, CardRarity.Uncommon, TargetType.AllEnemies)
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
+        int strReduction = DynamicVars["strReduction"].IntValue;
+        int dexReduction = DynamicVars["dexReduction"].IntValue;
+        foreach (var enemy in CombatState.HittableEnemies)
+        {
+            await PowerCmd.Apply<TemporaryStrengthPower>(ctx, enemy, -strReduction, Owner.Creature, this);
+            await PowerCmd.Apply<TemporaryDexterityPower>(ctx, enemy, -dexReduction, Owner.Creature, this);
+        }
     }
 
-    // 升级：伤害 12→14，虚弱 2→3
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(2);  // 12 → 14
-        DynamicVars.Weak.UpgradeValueBy(1);    // 2 → 3
-    }
-
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        // 造成伤害
-        
-        await DamageCmd.Attack(DynamicVars.Damage.IntValue)
-            .FromCard(this)
-            .TargetingAllOpponents(CombatState)
-            .Execute(choiceContext);
-
-        // 给予虚弱
-        
-        await PowerCmd.Apply<WeakPower>(
-            CombatState.HittableEnemies,
-            DynamicVars.Weak.BaseValue,
-            Owner.Creature,
-            this
-        );
+        DynamicVars["strReduction"].UpgradeValueBy(2);
+        DynamicVars["dexReduction"].UpgradeValueBy(2);
     }
 }

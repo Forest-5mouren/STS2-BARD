@@ -55,7 +55,7 @@ public sealed class AllNightComposition : BardCard
         // 塞眩晕
         CardModel card = CombatState.CreateCard<Dazed>(Owner);
         CardCmd.PreviewCardPileAdd(
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, true)
+            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, Owner, CardPilePosition.Random)
         );
 
         // 短暂延迟，让特效和动画有足够时间播放

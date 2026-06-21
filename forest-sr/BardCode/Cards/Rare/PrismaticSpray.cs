@@ -32,7 +32,7 @@ public sealed class PrismaticSpray : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 

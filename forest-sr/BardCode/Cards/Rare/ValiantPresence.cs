@@ -50,7 +50,7 @@ public sealed class ValiantPresence : BardCard
         int conversionRate = DynamicVars[_blockForVigorKey].IntValue;
 
         // 施加英勇气势能力
-        await PowerCmd.Apply<ValiantPresencePower>(
+        await PowerCmd.Apply<ValiantPresencePower>(choiceContext, 
             Owner.Creature,
             conversionRate,  // 转换比例（1:1）
             Owner.Creature,

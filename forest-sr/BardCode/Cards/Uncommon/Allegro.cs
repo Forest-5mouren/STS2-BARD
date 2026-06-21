@@ -34,7 +34,7 @@ public sealed class Allegro : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
 
     public Allegro() : base(energyCost, type, rarity, targetType)
     {
@@ -52,7 +52,7 @@ public sealed class Allegro : BardCard
         // 对每个友方施加快板能力
         foreach (Creature ally in allies)
         {
-            await PowerCmd.Apply<AllegroPower>(
+            await PowerCmd.Apply<AllegroPower>(choiceContext, 
                 ally,
                 duration,
                 Owner.Creature,

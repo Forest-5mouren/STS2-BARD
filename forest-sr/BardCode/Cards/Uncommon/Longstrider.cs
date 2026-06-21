@@ -33,7 +33,7 @@ public sealed class LongStrider : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -56,7 +56,7 @@ public sealed class LongStrider : BardCard
 
         // 施加敏捷
         int dexterityAmount = DynamicVars.Dexterity.IntValue;
-        await PowerCmd.Apply<DexterityPower>(
+        await PowerCmd.Apply<DexterityPower>(choiceContext, 
             target,
             dexterityAmount,
             Owner.Creature,

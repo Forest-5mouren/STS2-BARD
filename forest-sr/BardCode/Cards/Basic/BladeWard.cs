@@ -31,7 +31,7 @@ public sealed class BladeWard : BardCard
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromPower<WeakPower>()
     ];
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     // 基础数值：格挡 + 自定义能力层数
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -52,7 +52,7 @@ public sealed class BladeWard : BardCard
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
 
         // 3. 施加剑刃防护能力（使用正确的 5 参数重载）
-        await PowerCmd.Apply<BladeWardPower>(
+        await PowerCmd.Apply<BladeWardPower>(choiceContext, 
             Owner.Creature,                          // 目标
             DynamicVars[_powerVarName].BaseValue,    // 层数
             Owner.Creature,                          // 来源

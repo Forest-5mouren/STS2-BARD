@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Keywords;
@@ -48,12 +49,10 @@ public sealed class ManaSurgePower : BardPower
     /// <summary>
     /// 回合结束时重置标记
     /// </summary>
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
-        if (side == base.Owner.Side)
-        {
-            _usedThisTurn = false;
-        }
+        if (player != Owner?.Player) return;
+        _usedThisTurn = false;
         await Task.CompletedTask;
     }
 }

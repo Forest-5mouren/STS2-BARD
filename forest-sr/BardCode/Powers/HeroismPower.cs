@@ -50,7 +50,7 @@ public sealed class HeroismPower : BardPower
         {
             Flash();
             await CreatureCmd.GainBlock(Owner, DynamicVars.Block.IntValue, ValueProp.Unpowered, null);
-            await PowerCmd.ModifyAmount(this, -1m, null, null);
+            await PowerCmd.ModifyAmount(new BlockingPlayerChoiceContext(), this, -1m, null, null, false);
         }
     }
 }

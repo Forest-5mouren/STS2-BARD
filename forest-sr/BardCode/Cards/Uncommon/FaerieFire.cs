@@ -5,64 +5,44 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 namespace Forest_Sr.BardCode.Cards.Uncommon;
-
 /// <summary>
-/// 妖火｜FaerieFire
-/// 效果：对所有敌人造成 {vulnerable} 层易伤。
-/// 升级：易伤 3 → 5
+/// 妖火术｜FaerieFire
+/// 效果：所有敌人获得 {vulnerable} 层易伤。消耗。法术。
+/// 升级：易伤 2→3
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class FaerieFire : BardCard
-{
-    
-
-    // 基础数值声明
+public sealed class FaerieFire : BardCard{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VulnerablePower>( 3)   // 易伤层数
+        new PowerVar<VulnerablePower>(2)
     ];
 
-    // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [
-        BardKeywords.Magic
-    ];
-    public override List<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic, CardKeyword.Exhaust];
 
-    // 额外悬停提示
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
         HoverTipFactory.FromPower<VulnerablePower>()
     ];
 
-    public FaerieFire() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies)
-    {
-    }
+    public FaerieFire() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies) { }
 
-    // 升级：易伤 3 → 5
-    protected override void OnUpgrade()
-    {
-        DynamicVars.Vulnerable.UpgradeValueBy(2);
-    }
-
-    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-
-        int vulnerableAmount = DynamicVars.Vulnerable.IntValue;
-
+        int vulnerableAmount = DynamicVars["VulnerablePower"].IntValue;
         foreach (Creature enemy in CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<VulnerablePower>(
-                enemy,
-                DynamicVars.Vulnerable.BaseValue,
-                Owner.Creature,
-                this
-            );
+            await PowerCmd.Apply<VulnerablePower>(ctx, enemy, vulnerableAmount, Owner.Creature, this);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars["VulnerablePower"].UpgradeValueBy(1);
     }
 }

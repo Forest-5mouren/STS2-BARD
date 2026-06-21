@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -74,11 +75,9 @@ public sealed class BladeWardPower : BardPower
     /// <summary>
     /// 回合结束时减少持续时间
     /// </summary>
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
-        if (side == CombatSide.Enemy)
-        {
-            await PowerCmd.TickDownDuration(this);
-        }
+        if (player != Owner?.Player) return;
+        await PowerCmd.TickDownDuration(this);
     }
 }

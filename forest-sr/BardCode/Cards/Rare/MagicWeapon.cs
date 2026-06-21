@@ -54,7 +54,7 @@ public sealed class MagicWeapon : BardCard
         int strengthAmount = DynamicVars["StrengthPower"].IntValue;
 
         // 1. 获得力量
-        await PowerCmd.Apply<StrengthPower>(
+        await PowerCmd.Apply<StrengthPower>(choiceContext, 
             Owner.Creature,
             strengthAmount,
             Owner.Creature,
@@ -63,7 +63,7 @@ public sealed class MagicWeapon : BardCard
 
         // 2. 施加魔法武器能力Power
         int markerAmount = DynamicVars[_markerKey].IntValue;
-        await PowerCmd.Apply<MagicWeaponPower>(
+        await PowerCmd.Apply<MagicWeaponPower>(choiceContext, 
             Owner.Creature,
             markerAmount,
             Owner.Creature,

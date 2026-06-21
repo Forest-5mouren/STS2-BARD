@@ -29,7 +29,7 @@ public sealed class Haste : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -54,7 +54,7 @@ public sealed class Haste : BardCard
 
         int duration = DynamicVars[_durationKey].IntValue;
 
-        await PowerCmd.Apply<HastePower>(
+        await PowerCmd.Apply<HastePower>(choiceContext, 
             Owner.Creature,
             duration,
             Owner.Creature,

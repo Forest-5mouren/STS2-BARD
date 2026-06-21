@@ -49,7 +49,7 @@ public sealed class VirtuosaViolin : BardRelics
             // 对所有敌人施加末日
             foreach (Creature enemy in Owner.Creature.CombatState.HittableEnemies)
             {
-                await PowerCmd.Apply<DoomPower>(
+                await PowerCmd.Apply<DoomPower>(context, 
                     enemy,
                     doomAmount,
                     Owner.Creature,

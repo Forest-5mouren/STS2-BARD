@@ -29,7 +29,7 @@ public sealed class InspirationResonance : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         // 施加灵感共鸣能力（本回合内打乐曲回复能量）
-        await PowerCmd.Apply<InspirationResonancePower>(
+        await PowerCmd.Apply<InspirationResonancePower>(ctx, 
             Owner.Creature,
             DynamicVars.Energy.IntValue,
             Owner.Creature,
@@ -42,3 +42,4 @@ public sealed class InspirationResonance : BardCard
         RemoveKeyword(CardKeyword.Ethereal);
     }
 }
+

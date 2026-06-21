@@ -26,13 +26,13 @@ public sealed class CourageSong : BardCard
         new PowerVar<VigorPower>(2)
     ];
 
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song, BardKeywords.Chant];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, BardKeywords.Chant];
 
     public CourageSong() : base(0, CardType.Skill, CardRarity.Common, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        var chant = await PowerCmd.Apply<CourageSongChant>(Owner.Creature, 1, Owner.Creature, this);
+        var chant = await PowerCmd.Apply<CourageSongChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant.StrengthAmount = DynamicVars["StrengthPower"].IntValue;
         chant.VigorAmount = DynamicVars["VigorPower"].IntValue;
     }
@@ -43,4 +43,5 @@ public sealed class CourageSong : BardCard
         DynamicVars["VigorPower"].UpgradeValueBy(1);
     }
 }
+
 

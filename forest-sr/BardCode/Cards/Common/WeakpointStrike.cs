@@ -60,7 +60,7 @@ public sealed class WeakpointStrike : BardCard
             this);
 
         // 施加易伤
-        await PowerCmd.Apply<VulnerablePower>(
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, 
             cardPlay.Target,
             DynamicVars.Vulnerable.BaseValue,
             Owner.Creature,

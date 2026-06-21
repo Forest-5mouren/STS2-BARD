@@ -31,7 +31,7 @@ namespace Forest_Sr.BardCode.Cards.Other
 
         public async Task OnChosen(PlayerChoiceContext choiceContext)
         {
-            await PowerCmd.Apply<StrengthPower>(
+            await PowerCmd.Apply<StrengthPower>(choiceContext, 
                 base.Owner.Creature,
                 base.DynamicVars["StrengthPower"].IntValue,
                 base.Owner.Creature,
@@ -40,3 +40,4 @@ namespace Forest_Sr.BardCode.Cards.Other
         }
     }
 }
+

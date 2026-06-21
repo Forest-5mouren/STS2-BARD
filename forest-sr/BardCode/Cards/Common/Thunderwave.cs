@@ -42,7 +42,7 @@ public sealed class Thunderwave : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     public Thunderwave() : base(energyCost, type, rarity, targetType)
     {
@@ -67,7 +67,7 @@ public sealed class Thunderwave : BardCard
         .Execute(choiceContext);
 
         // 施加 CrushUnderPower 能力
-        await PowerCmd.Apply<CrushUnderPower>(
+        await PowerCmd.Apply<CrushUnderPower>(choiceContext, 
             enemies,
             strengthLoss,
             Owner.Creature,

@@ -40,7 +40,7 @@ public sealed class MagicalArmor : BardCard
     {
         int platingAmount = DynamicVars[_platingKey].IntValue;
 
-        await PowerCmd.Apply<PlatingPower>(
+        await PowerCmd.Apply<PlatingPower>(choiceContext, 
             Owner.Creature,
             platingAmount,
             Owner.Creature,

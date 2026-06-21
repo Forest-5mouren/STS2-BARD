@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -20,7 +21,9 @@ namespace Forest_Sr.BardCode.Cards.Common;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class RhythmStrike : BardCard
 {
-    protected override IEnumerable<string> RegisteredCardTagIds => new[] { "strike" };
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
+
+    protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(8, ValueProp.Move),
@@ -32,13 +35,11 @@ public sealed class RhythmStrike : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        // 造成伤害
         await DamageCmd.Attack(DynamicVars.Damage.IntValue)
             .FromCard(this)
             .Targeting(cardPlay.Target!)
             .Execute(ctx);
 
-        // 和声大于3时获得额外收益
         if (HarmonyTracker.Count > 3)
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
@@ -52,4 +53,3 @@ public sealed class RhythmStrike : BardCard
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 }
-

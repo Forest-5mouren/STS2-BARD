@@ -47,7 +47,7 @@ public sealed class WarSong : BardCard
          
 
         // 施加战歌能力Power
-        await PowerCmd.Apply<WarSongPower>(
+        await PowerCmd.Apply<WarSongPower>(choiceContext, 
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,

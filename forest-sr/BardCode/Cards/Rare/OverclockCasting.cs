@@ -45,7 +45,7 @@ public sealed class OverclockCasting : BardCard
         int markerAmount = DynamicVars[_markerKey].IntValue;
 
         // 施加超频施法能力Power
-        await PowerCmd.Apply<OverclockCastingPower>(
+        await PowerCmd.Apply<OverclockCastingPower>(choiceContext, 
             Owner.Creature,
             markerAmount,
             Owner.Creature,
@@ -53,3 +53,4 @@ public sealed class OverclockCasting : BardCard
         );
     }
 }
+

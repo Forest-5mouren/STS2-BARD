@@ -27,13 +27,13 @@ public sealed class ClearChant : BardCard
         new PowerVar<VulnerablePower>(1)
     ];
 
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song, BardKeywords.Chant];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, BardKeywords.Chant];
 
     public ClearChant() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        var chant = await PowerCmd.Apply<ClearChantChant>(Owner.Creature, 1, Owner.Creature, this);
+        var chant = await PowerCmd.Apply<ClearChantChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant.DrawAmount = DynamicVars.Cards.IntValue;
         chant.VulnerableAmount = DynamicVars["VulnerablePower"].IntValue;
     }
@@ -43,3 +43,4 @@ public sealed class ClearChant : BardCard
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 }
+

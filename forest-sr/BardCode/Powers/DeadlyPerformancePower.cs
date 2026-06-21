@@ -44,7 +44,7 @@ public sealed class DeadlyPerformancePower : BardPower
             VfxCmd.PlayOnCreatureCenter(target, "vfx/vfx_attack_slash");
 
             // 造成伤害（注意：需要传入 context）
-            await CreatureCmd.Damage(context, target, base.Amount , ValueProp.Unpowered, Owner);
+            await CreatureCmd.Damage(context, target, base.Amount, ValueProp.Unpowered, Owner, null);
         }
     }
 }

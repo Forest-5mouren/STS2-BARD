@@ -41,7 +41,7 @@ public sealed class EnhanceAbility : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -93,7 +93,7 @@ public sealed class EnhanceAbility : BardCard
         {
             if (selected.Id == ModelDb.Card<BullStrength>().Id)
             {
-                await PowerCmd.Apply<StrengthPower>(
+                await PowerCmd.Apply<StrengthPower>(choiceContext, 
                     Owner.Creature,
                     DynamicVars["StrengthPower"].IntValue,
                     Owner.Creature,
@@ -101,7 +101,7 @@ public sealed class EnhanceAbility : BardCard
             }
             else if (selected.Id == ModelDb.Card<CatGrace>().Id)
             {
-                await PowerCmd.Apply<DexterityPower>(
+                await PowerCmd.Apply<DexterityPower>(choiceContext, 
                     Owner.Creature,
                     DynamicVars["DexterityPower"].IntValue,
                     Owner.Creature,
@@ -110,7 +110,7 @@ public sealed class EnhanceAbility : BardCard
             else if (selected.Id == ModelDb.Card<FoxCunning>().Id)
             {
                 await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
-                await PowerCmd.Apply<NextSpellCostReductionPower>(
+                await PowerCmd.Apply<NextSpellCostReductionPower>(choiceContext, 
                     Owner.Creature,
                     1m,
                     Owner.Creature,
@@ -119,4 +119,5 @@ public sealed class EnhanceAbility : BardCard
         }
     }
 }
+
 

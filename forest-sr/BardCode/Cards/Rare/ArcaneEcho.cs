@@ -24,13 +24,13 @@ public sealed class ArcaneEcho : BardCard
         new DynamicVar("threshold", 4)
     ];
 
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     public ArcaneEcho() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<ArcaneEchoPower>(
+        await PowerCmd.Apply<ArcaneEchoPower>(ctx, 
             Owner.Creature,
             DynamicVars["threshold"].IntValue,  // Amount = threshold
             Owner.Creature,
@@ -42,3 +42,4 @@ public sealed class ArcaneEcho : BardCard
         DynamicVars["threshold"].UpgradeValueBy(-1);  // 4→3
     }
 }
+

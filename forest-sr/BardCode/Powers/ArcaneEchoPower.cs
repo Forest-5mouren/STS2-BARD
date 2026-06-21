@@ -2,6 +2,7 @@ using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -47,18 +48,16 @@ public sealed class ArcaneEchoPower : BardPower
             {
                 var rng = Owner.Player.RunState.Rng.CombatCardGeneration;
                 var selected = rng.NextItem(spells);
-                await CardPileCmd.AddGeneratedCardToCombat(selected, PileType.Hand, true);
+                await CardPileCmd.AddGeneratedCardToCombat(selected, PileType.Hand, Owner.Player, CardPilePosition.Random);
             }
         }
     }
 
-    // 回合结束时清零和声计数
-    public override async Task AfterTurnEnd(PlayerChoiceContext ctx, MegaCrit.Sts2.Core.Combat.CombatSide side)
+    // 玩家回合开始时清零和声计数（替代 v1.0.7 移除的 AfterTurnEnd）
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
-        if (side == Owner.Side)
-        {
-            _currentHarmony = 0;
-        }
+        if (player != Owner?.Player) return;
+        _currentHarmony = 0;
         await Task.CompletedTask;
     }
 }

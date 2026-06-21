@@ -55,13 +55,13 @@ public sealed class CripplingThrust : BardCard
             .Execute(choiceContext);
 
         // 2. 给予虚弱
-        await PowerCmd.Apply<WeakPower>(
+        await PowerCmd.Apply<WeakPower>(choiceContext, 
             cardPlay.Target,
             DynamicVars.Weak.IntValue,
             Owner.Creature,
             this);
         // 2. 给予易伤
-        await PowerCmd.Apply<VulnerablePower>(
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, 
             cardPlay.Target,
             DynamicVars.Vulnerable.IntValue,
             Owner.Creature,

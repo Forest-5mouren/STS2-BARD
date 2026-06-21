@@ -48,8 +48,8 @@ public sealed class SlideStep : BardCard
     {
         int dexterityAmount = DynamicVars["dexterity"].IntValue;
 
-        // 施加临时敏捷（使用 SlideStepPower 或直接使用 DexterityPower）
-        await PowerCmd.Apply<SlideStepPower>(
+        // 施加临时敏捷（使用 SlideStepPower）
+        await PowerCmd.Apply<SlideStepPower>(choiceContext, 
             Owner.Creature,
             dexterityAmount,
             Owner.Creature,

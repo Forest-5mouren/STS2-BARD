@@ -25,13 +25,13 @@ public sealed class DarkCacophony : BardCard
         new DamageVar(3, ValueProp.Unblockable | ValueProp.Unpowered)
     ];
 
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
 
     public DarkCacophony() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DarkCacophonyPower>(Owner.Creature, DynamicVars.Damage.IntValue, Owner.Creature, this);
+        await PowerCmd.Apply<DarkCacophonyPower>(ctx, Owner.Creature, DynamicVars.Damage.IntValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
@@ -39,4 +39,5 @@ public sealed class DarkCacophony : BardCard
         DynamicVars.Damage.UpgradeValueBy(2);
     }
 }
+
 

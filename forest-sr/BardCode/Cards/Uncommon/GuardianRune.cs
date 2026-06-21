@@ -29,7 +29,7 @@ public sealed class GuardianRune : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -56,7 +56,7 @@ public sealed class GuardianRune : BardCard
         await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.IntValue, ValueProp.Move), cardPlay);
 
         // 施加守卫刻文能力
-        await PowerCmd.Apply<GuardianRunePower>(
+        await PowerCmd.Apply<GuardianRunePower>(choiceContext, 
             Owner.Creature,
             1,  // 标记层数
             Owner.Creature,

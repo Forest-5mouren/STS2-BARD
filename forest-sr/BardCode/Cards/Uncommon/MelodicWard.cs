@@ -46,7 +46,7 @@ public sealed class MelodicWard : BardCard
         
 
         // 施放旋律护身能力
-        await PowerCmd.Apply<MelodicWardPower>(
+        await PowerCmd.Apply<MelodicWardPower>(choiceContext, 
             Owner.Creature,
             DynamicVars.Block.IntValue,
             Owner.Creature,

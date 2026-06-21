@@ -25,7 +25,7 @@ public sealed class FireBall : BardCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar( 27,ValueProp.Move)
     ];
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 

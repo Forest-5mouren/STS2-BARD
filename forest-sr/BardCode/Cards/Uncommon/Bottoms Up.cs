@@ -60,7 +60,7 @@ public sealed class BottomsUp : BardCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // 获得力量
-        await PowerCmd.Apply<StrengthPower>(
+        await PowerCmd.Apply<StrengthPower>(choiceContext, 
             Owner.Creature,
             DynamicVars["StrengthPower"].IntValue,
             Owner.Creature,
@@ -68,7 +68,7 @@ public sealed class BottomsUp : BardCard
         );
 
         // 获得活力
-        await PowerCmd.Apply<VigorPower>(
+        await PowerCmd.Apply<VigorPower>(choiceContext, 
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,
@@ -80,7 +80,8 @@ public sealed class BottomsUp : BardCard
         for (int i = 0; i < dizzyCount; i++)
         {
             CardModel dizzy = CombatState.CreateCard<Dazed>(Owner);
-            await CardPileCmd.AddGeneratedCardToCombat(dizzy, PileType.Discard, true);
+            await CardPileCmd.AddGeneratedCardToCombat(dizzy, PileType.Discard, Owner, CardPilePosition.Random);
         }
     }
 }
+

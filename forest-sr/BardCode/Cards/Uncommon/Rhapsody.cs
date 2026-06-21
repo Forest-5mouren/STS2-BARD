@@ -31,7 +31,7 @@ public sealed class Rhapsody : BardCard
     ];
 
     // 关键词：乐曲
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Song
     ];
 

@@ -42,7 +42,7 @@ public sealed class ManaSurge : BardCard
         
 
         // 施加法力充沛能力Power
-        await PowerCmd.Apply<ManaSurgePower>(
+        await PowerCmd.Apply<ManaSurgePower>(choiceContext, 
             Owner.Creature,
             DynamicVars.Cards.IntValue,
             Owner.Creature,

@@ -32,7 +32,6 @@ public sealed class EchoingMelodyPower : BardPower
         // ✅ 修正：使用 HasModKeyword 检查乐曲牌
         var entry = CombatManager.Instance.History.CardPlaysFinished
             .LastOrDefault(e => e.CardPlay.Card.Owner == player
-                && e.RoundNumber == lastRound
                 && e.CardPlay.Card.HasModKeyword(BardKeywords.Song)
                 && !e.CardPlay.Card.IsDupe);
 

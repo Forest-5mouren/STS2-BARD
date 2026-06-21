@@ -36,7 +36,7 @@ public sealed class BestowCurse : BardCard
     ];
 
     // 关键词：魔法
-    protected override IEnumerable<string> RegisteredKeywordIds => [
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [
         BardKeywords.Magic
     ];
 
@@ -90,7 +90,7 @@ public sealed class BestowCurse : BardCard
             .Execute(choiceContext);
 
         // 施加虚弱
-        await PowerCmd.Apply<WeakPower>(
+        await PowerCmd.Apply<WeakPower>(choiceContext, 
             cardPlay.Target,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,
@@ -98,7 +98,7 @@ public sealed class BestowCurse : BardCard
         );
 
         // 减少临时力量
-        await PowerCmd.Apply<CrushUnderPower>(
+        await PowerCmd.Apply<CrushUnderPower>(choiceContext, 
             cardPlay.Target,
             strengthLoss,
             Owner.Creature,

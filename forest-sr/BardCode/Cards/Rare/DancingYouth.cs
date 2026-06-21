@@ -37,7 +37,7 @@ public sealed class DancingYouth : BardCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 施加能力Power，在每回合结束时触发
-        await PowerCmd.Apply<DancingYouthPower>(
+        await PowerCmd.Apply<DancingYouthPower>(choiceContext, 
             Owner.Creature,
             1,  // 层数（用于标记）
             Owner.Creature,
@@ -45,3 +45,4 @@ public sealed class DancingYouth : BardCard
         );
     }
 }
+

@@ -70,7 +70,7 @@ public sealed class HoneyedTongue : BardCard
         if (WasLastCardPlayedSkill)
         {
             // 改为给予所有敌人虚弱
-            await PowerCmd.Apply<WeakPower>(
+            await PowerCmd.Apply<WeakPower>(choiceContext, 
                 CombatState.HittableEnemies,
                 DynamicVars.Weak.BaseValue,
                 Owner.Creature,
@@ -79,7 +79,7 @@ public sealed class HoneyedTongue : BardCard
         else
         {
             // 基础效果：给予所有敌人易伤
-            await PowerCmd.Apply<VulnerablePower>(
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, 
                 CombatState.HittableEnemies,
                 DynamicVars.Vulnerable.BaseValue,
                 Owner.Creature,

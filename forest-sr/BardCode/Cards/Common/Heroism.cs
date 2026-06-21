@@ -38,7 +38,7 @@ public sealed class Heroism : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     // 额外提示文本
     protected override IEnumerable<IHoverTip> AdditionalHoverTips => [
@@ -55,7 +55,7 @@ public sealed class Heroism : BardCard
         int duration = DynamicVars["duration"].IntValue;
 
         // 施加英雄气概效果
-        var power = await PowerCmd.Apply<HeroismPower>(
+        var power = await PowerCmd.Apply<HeroismPower>(choiceContext, 
             target,
             duration,
             Owner.Creature,

@@ -41,7 +41,7 @@ public sealed class SnakeCharmerFlute : BardRelics
 
     public override RelicRarity Rarity => RelicRarity.Common;
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
         // 只对遗物拥有者生效，且只在第一回合
         if (player == Owner && player.Creature.CombatState.RoundNumber == 1)
@@ -64,7 +64,8 @@ public sealed class SnakeCharmerFlute : BardRelics
             }
 
             // 将生成的卡牌添加到手牌
-            await CardPileCmd.AddGeneratedCardsToCombat(cardsToAdd, PileType.Hand, addedByPlayer: true);
+            await CardPileCmd.AddGeneratedCardsToCombat(cardsToAdd, PileType.Hand, Owner, CardPilePosition.Random);
         }
     }
 }
+

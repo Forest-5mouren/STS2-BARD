@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
@@ -25,7 +26,7 @@ public sealed class ThunderclapPower : BardPower
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    public override async Task AfterPowerAmountChanged(PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
+    public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
         // 官方写法：amount != 0 && 是Debuff && 目标是敌人  && 不是临时Power
         if (amount != 0m &&
@@ -48,11 +49,10 @@ public sealed class ThunderclapPower : BardPower
     }
 
     // 回合结束时移除（如果需要）
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
-        if (side == base.Owner.Side)
-        {
-            await PowerCmd.Remove(this);
-        }
+        if (player != Owner?.Player) return;
+        await PowerCmd.Remove(this);
     }
 }
+

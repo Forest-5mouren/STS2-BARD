@@ -76,7 +76,7 @@ public sealed class NextSpellOrSongCostReductionPower : BardPower
         if (!_used)
         {
             _used = true;
-            await PowerCmd.ModifyAmount(this, -1m, null, null);
+            await PowerCmd.ModifyAmount(new BlockingPlayerChoiceContext(), this, -1m, null, null, false);
         }
     }
 }

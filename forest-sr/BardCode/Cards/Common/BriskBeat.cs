@@ -30,7 +30,7 @@ public sealed class BriskBeat : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Song];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
 
     public BriskBeat() : base(energyCost, type, rarity, targetType)
     {
@@ -50,7 +50,7 @@ public sealed class BriskBeat : BardCard
         foreach (Creature ally in allies)
         {
 
-            await PowerCmd.Apply<BriskBeatPower>(
+            await PowerCmd.Apply<BriskBeatPower>(choiceContext, 
                 ally,               // 目标
                 duration,           // 层数 = 持续回合数
                 Owner.Creature,     // 来源

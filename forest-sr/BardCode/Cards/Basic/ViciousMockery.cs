@@ -38,7 +38,7 @@ public sealed class ViciousMockery : BardCard
     ];
 
     // 自定义关键词（需要先注册）
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     public ViciousMockery() : base(energyCost, type, rarity, targetType)
     {
@@ -59,7 +59,7 @@ public sealed class ViciousMockery : BardCard
         );
 
         // 施加虚弱（使用正确的 5 参数重载）
-        await PowerCmd.Apply<WeakPower>(
+        await PowerCmd.Apply<WeakPower>(choiceContext, 
             cardPlay.Target,                  // 目标
             DynamicVars.Weak.BaseValue,       // 层数
             Owner.Creature,                   // 来源

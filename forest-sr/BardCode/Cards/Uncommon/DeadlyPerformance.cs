@@ -49,7 +49,7 @@ public sealed class DeadlyPerformance : BardCard
         
 
         // 施放能力，将伤害值传给能力
-        await PowerCmd.Apply<DeadlyPerformancePower>(
+        await PowerCmd.Apply<DeadlyPerformancePower>(choiceContext, 
             Owner.Creature,
             DynamicVars.Damage.IntValue,
             Owner.Creature,

@@ -43,7 +43,7 @@ public sealed class MadeHand : BardCard
     ];
 
     // 关键词
-    protected override IEnumerable<string> RegisteredKeywordIds => [BardKeywords.Magic];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
 
     public MadeHand() : base(energyCost, type, rarity, targetType)
     {
@@ -79,3 +79,4 @@ public sealed class MadeHand : BardCard
         // DynamicVars["retainAmount"].UpgradeValueBy(1);
     }
 }
+

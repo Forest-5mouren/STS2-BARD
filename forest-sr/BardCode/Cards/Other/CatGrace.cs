@@ -28,7 +28,7 @@ namespace Forest_Sr.BardCode.Cards.Other
 
         public async Task OnChosen(PlayerChoiceContext choiceContext)
         {
-            await PowerCmd.Apply<DexterityPower>(
+            await PowerCmd.Apply<DexterityPower>(choiceContext, 
                 base.Owner.Creature,
                 base.DynamicVars["DexterityPower"].IntValue,
                 base.Owner.Creature,

@@ -38,7 +38,7 @@ public sealed class BriskBeatPower : BardPower
     {
         if (player == Owner?.Player)
         {
-            await PowerCmd.ModifyAmount(this, -1m, null, null);
+            await PowerCmd.ModifyAmount(new BlockingPlayerChoiceContext(), this, -1m, null, null, false);
         }
 
         if (Amount <= 0)
