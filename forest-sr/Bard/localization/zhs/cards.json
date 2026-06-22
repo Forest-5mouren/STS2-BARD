@@ -1,15 +1,15 @@
 {
   "BARD_CARD_BARD_ATTACK.title": "刺耳尖叫",
-  "BARD_CARD_BARD_ATTACK.description": "造成{Damage:diff()}点伤害，给予{VulnerablePower:diff()}层[gold]易伤[/gold]。\n[#8b8b8b](此卡依旧视为打击)[/#]",
+  "BARD_CARD_BARD_ATTACK.description": "造成{Damage:diff()}点伤害，给予{VulnerablePower:diff()}层[gold]易伤[/gold]。\n(此卡视为打击)",
 
   "BARD_CARD_BARD_BLOCK.title": "和谐之盾",
-  "BARD_CARD_BARD_BLOCK.description": "获得{Block:diff()}点[gold]格挡[/gold]，获得{tempDexterity:diff()}层[gold]临时敏捷[/gold]。\n[#8b8b8b](此卡依旧视为防御)[/#]",
+  "BARD_CARD_BARD_BLOCK.description": "获得{Block:diff()}点[gold]格挡[/gold]，获得{tempDexterity:diff()}层[gold]临时敏捷[/gold]。\n(此卡视为防御)",
 
   "BARD_CARD_VICIOUS_MOCKERY.title": "恶言相加",
   "BARD_CARD_VICIOUS_MOCKERY.description": "敌人失去{Damage:diff()}点生命,\n给予{WeakPower:diff()}层[gold]虚弱[/gold]。",
 
   "BARD_CARD_BLADE_WARD.title": "剑刃防护",
-  "BARD_CARD_BLADE_WARD.description": "获得{Block:diff()}点格挡,\n在本回合中，有[gold]虚弱[/gold]状态的敌人对你造成伤害减少50%",
+  "BARD_CARD_BLADE_WARD.description": "获得{Block:diff()}点格挡,\n在本回合中，有[gold]虚弱[/gold]状态的敌人对你造成伤害减少50%。",
 
   "BARD_CARD_BANE.title": "灾祸术",
   "BARD_CARD_BANE.description": "对所有敌人给予{WeakPower:diff()}层[gold]虚弱[/gold]。",
@@ -257,6 +257,7 @@
 
   "BARD_CARD_SERENE_SONG.title": "宁静之歌",
   "BARD_CARD_SERENE_SONG.description": "吟唱。下回合开始时，全体队友回复{Heal:diff()}点生命。",
+  
   "BARD_CARD_ARCANE_ECHO.title": "奥术回响",
   "BARD_CARD_ARCANE_ECHO.description": "能力。每当[gold]和声[/gold]达到 {threshold:diff()} 层时，从[gold]消耗堆[/gold]随机回收一张[gold]魔法牌[/gold]。"
 }

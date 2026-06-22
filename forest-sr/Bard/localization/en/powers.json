@@ -1,0 +1,121 @@
+{
+  "BARD_POWER_BLADE_WARD_POWER.title": "Blade Ward",
+  "BARD_POWER_BLADE_WARD_POWER.description": "Weak enemies deal half damage to you this turn",
+  "BARD_POWER_BLADE_WARD_POWER.smartDescription": "{Amount:diff()} Blade Ward remaining",
+
+  "BARD_POWER_HASTE_POWER.title": "Haste",
+  "BARD_POWER_HASTE_POWER.description": "Gain 2 Energy and draw 2 cards at turn start. After 2 turns, gain 2 Vulnerable and 2 Weak",
+  "BARD_POWER_HASTE_POWER.smartDescription": "{Amount:diff()} Haste remaining",
+
+  "BARD_POWER_HEROISM_POWER.title": "Heroism",
+  "BARD_POWER_HEROISM_POWER.description": "At turn start, regain {Block} [gold]Block[/gold]",
+  "BARD_POWER_HEROISM_POWER.smartDescription": "At turn start, regain {Block} [gold]Block[/gold]",
+
+  "BARD_POWER_DEADLY_PERFORMANCE_POWER.title": "Deadly Performance",
+  "BARD_POWER_DEADLY_PERFORMANCE_POWER.description": "Whenever you cast a [gold]Magic[/gold] card, deal [blue]{Amount}[/blue] damage to a random enemy",
+  "BARD_POWER_DEADLY_PERFORMANCE_POWER.smartDescription": "Whenever you cast a [gold]Magic[/gold] card, deal [blue]{Amount}[/blue] damage to a random enemy",
+
+  "BARD_POWER_MELODIC_WARD_POWER.title": "Melodic Ward",
+  "BARD_POWER_MELODIC_WARD_POWER.description": "Whenever you cast a [gold]Magic[/gold] card, gain [blue]{Amount}[/blue] [gold]Block[/gold]",
+  "BARD_POWER_MELODIC_WARD_POWER.smartDescription": "Whenever you cast a [gold]Magic[/gold] card, gain [blue]{Amount}[/blue] [gold]Block[/gold]",
+
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.title": "Spell Resonance",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.description": "Next [gold]Magic[/gold] card costs {Amount:diff()} less",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.smartDescription": "Next [gold]Magic[/gold] card costs {Amount:diff()} less",
+
+  "BARD_POWER_VALIANT_PRESENCE_POWER.title": "Valiant Presence",
+  "BARD_POWER_VALIANT_PRESENCE_POWER.description": "Whenever you lose [gold]Vigor[/gold], gain [blue]{Amount}[/blue]x that much [gold]Block[/gold]",
+  "BARD_POWER_VALIANT_PRESENCE_POWER.smartDescription": "Losing Vigor grants [blue]{Amount}[/blue] Block per stack",
+
+  "BARD_POWER_ALLEGRO_POWER.title": "Allegro",
+  "BARD_POWER_ALLEGRO_POWER.description": "Gain 1 [gold]Energy[/gold] at turn start",
+  "BARD_POWER_ALLEGRO_POWER.smartDescription": "Gain 1 [gold]Energy[/gold] at turn start",
+
+  "BARD_POWER_BRISK_BEAT_POWER.title": "Brisk Beat",
+  "BARD_POWER_BRISK_BEAT_POWER.description": "Draw [blue]{Amount}[/blue] cards at turn start",
+  "BARD_POWER_BRISK_BEAT_POWER.smartDescription": "Draw [blue]{Amount}[/blue] cards at turn start",
+
+  "BARD_POWER_DANCING_YOUTH_POWER.title": "Dancing Youth",
+  "BARD_POWER_DANCING_YOUTH_POWER.description": "If Harmony > 3 at end of turn, draw [blue]{Amount}[/blue] cards next turn",
+  "BARD_POWER_DANCING_YOUTH_POWER.smartDescription": "If Harmony > 3 at end of turn, draw [blue]{Amount}[/blue] cards next turn",
+
+  "BARD_POWER_IMPROVISE_POWER.title": "Improvise",
+  "BARD_POWER_IMPROVISE_POWER.description": "Gain [blue]{Amount}[/blue] random Song cards each turn",
+  "BARD_POWER_IMPROVISE_POWER.smartDescription": "Gain [blue]{Amount}[/blue] random Song cards each turn",
+
+  "BARD_POWER_WAR_SONG_POWER.title": "War Song",
+  "BARD_POWER_WAR_SONG_POWER.description": "Whenever you play a [gold]Song[/gold] card, gain [blue]{Amount}[/blue] [gold]Vigor[/gold]",
+  "BARD_POWER_WAR_SONG_POWER.smartDescription": "Whenever you play a [gold]Song[/gold] card, gain [blue]{Amount}[/blue] [gold]Vigor[/gold]",
+
+  "BARD_POWER_OVERCLOCK_CASTING_POWER.title": "Overclock Casting",
+  "BARD_POWER_OVERCLOCK_CASTING_POWER.description": "Your [gold]Magic[/gold] cards gain [gold]Exhaust[/gold] and [gold]Recur[/gold]",
+  "BARD_POWER_OVERCLOCK_CASTING_POWER.smartDescription": "Your [gold]Magic[/gold] cards gain [gold]Exhaust[/gold] and [gold]Recur[/gold]",
+
+  "BARD_POWER_MANA_SURGE_POWER.title": "Mana Surge",
+  "BARD_POWER_MANA_SURGE_POWER.description": "First time you cast a [gold]Magic[/gold] card each turn, draw [blue]{Amount}[/blue] cards",
+  "BARD_POWER_MANA_SURGE_POWER.smartDescription": "First time you cast a [gold]Magic[/gold] card each turn, draw [blue]{Amount}[/blue] cards",
+
+  "BARD_POWER_MAGIC_WEAPON_POWER.title": "Magic Weapon",
+  "BARD_POWER_MAGIC_WEAPON_POWER.description": "Your non-[gold]Magic[/gold] [gold]Attack[/gold] cards gain [gold]Magic[/gold]",
+  "BARD_POWER_MAGIC_WEAPON_POWER.smartDescription": "Your non-[gold]Magic[/gold] [gold]Attack[/gold] cards gain [gold]Magic[/gold]",
+
+  "BARD_POWER_THUNDERCLAP_POWER.title": "Thunderclap",
+  "BARD_POWER_THUNDERCLAP_POWER.description": "When gaining a [gold]negative effect[/gold] this turn, take [blue]{Amount}[/blue] damage",
+  "BARD_POWER_THUNDERCLAP_POWER.smartDescription": "When gaining a [gold]negative effect[/gold] this turn, take [blue]{Amount}[/blue] damage",
+
+  "BARD_POWER_MIRROR_IMAGE_POWER.title": "Mirror Image",
+  "BARD_POWER_MIRROR_IMAGE_POWER.description": "When attacked, reduce damage by 4 per stack, then lose 1 stack",
+  "BARD_POWER_MIRROR_IMAGE_POWER.smartDescription": "When attacked, reduce damage by 4 per stack, then lose 1 stack",
+
+  "BARD_POWER_GUARDIAN_RUNE_POWER.title": "Guardian Rune",
+  "BARD_POWER_GUARDIAN_RUNE_POWER.description": "Whenever you lose [gold]Block[/gold], deal equal damage to ALL enemies",
+  "BARD_POWER_GUARDIAN_RUNE_POWER.smartDescription": "Whenever you lose [gold]Block[/gold], deal equal damage to ALL enemies",
+
+  "BARD_POWER_INSPIRATION_RESONANCE_POWER.title": "Inspiration Resonance",
+  "BARD_POWER_INSPIRATION_RESONANCE_POWER.description": "This turn, each [gold]Song[/gold] card refunds [blue]{Amount}[/blue] {Energy:energyIcons(1)}",
+  "BARD_POWER_INSPIRATION_RESONANCE_POWER.smartDescription": "This turn, each [gold]Song[/gold] card refunds [blue]{Amount}[/blue] {Energy:energyIcons(1)}",
+
+  "BARD_POWER_ECHOING_MELODY_POWER.title": "Echoing Melody",
+  "BARD_POWER_ECHOING_MELODY_POWER.description": "At turn start, play an Exhausting copy of the last [gold]Song[/gold] played last turn",
+  "BARD_POWER_ECHOING_MELODY_POWER.smartDescription": "At turn start, play an Exhausting copy of the last [gold]Song[/gold] played last turn",
+
+  "BARD_POWER_NEVER_GIVE_UP_POWER.title": "Never Give Up",
+  "BARD_POWER_NEVER_GIVE_UP_POWER.description": "When about to die, heal {HealAmount} HP instead, [gold]Exhaust[/gold] and draw {DrawAmount} cards",
+  "BARD_POWER_NEVER_GIVE_UP_POWER.smartDescription": "When about to die, heal {HealAmount} HP instead, [gold]Exhaust[/gold] and draw {DrawAmount} cards",
+
+  "BARD_POWER_RHYTHM_STORM_POWER.title": "Rhythm Storm",
+  "BARD_POWER_RHYTHM_STORM_POWER.description": "When playing a Song or casting Magic, gain 2 Vigor. When gaining Vigor, deal 3 damage to ALL enemies",
+  "BARD_POWER_RHYTHM_STORM_POWER.smartDescription": "When playing a Song or casting Magic, gain 2 Vigor. When gaining Vigor, deal 3 damage to ALL enemies",
+
+  "BARD_POWER_WEAKNESS_SHRIEK_POWER.title": "Weakness Shriek",
+  "BARD_POWER_WEAKNESS_SHRIEK_POWER.description": "Reduce {StrengthReduction} Strength and {DexterityReduction} Dexterity this turn",
+  "BARD_POWER_WEAKNESS_SHRIEK_POWER.smartDescription": "Reduce {StrengthReduction} Strength and {DexterityReduction} Dexterity this turn",
+
+  "BARD_POWER_DARK_CACOPHONY_POWER.title": "Dark Cacophony",
+  "BARD_POWER_DARK_CACOPHONY_POWER.description": "At turn start, ALL enemies take {Damage} damage",
+  "BARD_POWER_DARK_CACOPHONY_POWER.smartDescription": "At turn start, ALL enemies take {Damage} damage",
+
+  "BARD_POWER_COURAGE_SONG_CHANT.title": "Song of Courage",
+  "BARD_POWER_COURAGE_SONG_CHANT.description": "Next turn, gain Strength and Vigor",
+  "BARD_POWER_COURAGE_SONG_CHANT.smartDescription": "Waiting to chant\u2026",
+
+  "BARD_POWER_BANSHEE_WAIL_CHANT.title": "Banshee Wail",
+  "BARD_POWER_BANSHEE_WAIL_CHANT.description": "Next turn, ALL enemies gain Weak and Vulnerable",
+  "BARD_POWER_BANSHEE_WAIL_CHANT.smartDescription": "Waiting to chant\u2026",
+
+  "BARD_POWER_INSPIRING_MELODY_CHANT.title": "Inspiring Melody",
+  "BARD_POWER_INSPIRING_MELODY_CHANT.description": "Next turn, ALL allies gain Strength and Dexterity",
+  "BARD_POWER_INSPIRING_MELODY_CHANT.smartDescription": "Waiting to chant\u2026",
+
+  "BARD_POWER_CLEAR_CHANT_CHANT.title": "Clear Chant",
+  "BARD_POWER_CLEAR_CHANT_CHANT.description": "Next turn, search for Magic cards",
+  "BARD_POWER_CLEAR_CHANT_CHANT.smartDescription": "Waiting to chant\u2026",
+
+  "BARD_POWER_SERENE_SONG_CHANT.title": "Serene Song",
+  "BARD_POWER_SERENE_SONG_CHANT.description": "Next turn, ALL allies heal HP",
+  "BARD_POWER_SERENE_SONG_CHANT.smartDescription": "Waiting to chant\u2026",
+
+  "BARD_POWER_ARCANE_ECHO_POWER.title": "Arcane Echo",
+  "BARD_POWER_ARCANE_ECHO_POWER.description": "When Harmony reaches {Amount:diff()} stacks, recover a Magic card from Exhaust",
+  "BARD_POWER_ARCANE_ECHO_POWER.smartDescription": "Harmony ({Amount:diff()} to trigger)"
+}

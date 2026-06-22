@@ -1,0 +1,210 @@
+{
+  "BARD_CARD_BARD_ATTACK.title": "Shrill Scream",
+  "BARD_CARD_BARD_ATTACK.description": "Deal {Damage:diff()} damage. Apply {VulnerablePower:diff()} [gold]Vulnerable[/gold].\n(Strike)",
+
+  "BARD_CARD_BARD_BLOCK.title": "Harmony Shield",
+  "BARD_CARD_BARD_BLOCK.description": "Gain {Block:diff()} [gold]Block[/gold]. Gain {tempDexterity:diff()} [gold]Temporary Dexterity[/gold].\n(Defend)",
+
+  "BARD_CARD_VICIOUS_MOCKERY.title": "Vicious Mockery",
+  "BARD_CARD_VICIOUS_MOCKERY.description": "Enemy loses {Damage:diff()} HP.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
+
+  "BARD_CARD_BLADE_WARD.title": "Blade Ward",
+  "BARD_CARD_BLADE_WARD.description": "Gain {Block:diff()} Block.\nThis turn, [gold]Weak[/gold] enemies deal 50% less damage to you.",
+
+  "BARD_CARD_BANE.title": "Bane",
+  "BARD_CARD_BANE.description": "Apply {WeakPower:diff()} [gold]Weak[/gold] to ALL enemies.",
+
+  "BARD_CARD_COURAGE_SONG.title": "Song of Courage",
+  "BARD_CARD_COURAGE_SONG.description": "[gold]Chant[/gold]. Next turn, gain {StrengthPower:diff()} [gold]Strength[/gold] and {VigorPower:diff()} [gold]Vigor[/gold].",
+
+  "BARD_CARD_BRISK_BEAT.title": "Brisk Beat",
+  "BARD_CARD_BRISK_BEAT.description": "Draw 1 card.\nALL allies gain {Duration:diff()} Brisk Beat: draw 1 card at start of turn.",
+
+  "BARD_CARD_CRIPPLING_THRUST.title": "Crippling Thrust",
+  "BARD_CARD_CRIPPLING_THRUST.description": "Deal {Damage:diff()} damage.\nApply {WeakPower:diff()} [gold]Weak[/gold].\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].",
+
+  "BARD_CARD_DISENGAGE.title": "Disengage",
+  "BARD_CARD_DISENGAGE.description": "Gain {Block:diff()} [gold]Block[/gold].\nIf the last card played was an [gold]Attack[/gold], draw 2 cards.\nIf the last card played was a [gold]Skill[/gold], gain {Block:diff()} [gold]Block[/gold].",
+
+  "BARD_CARD_EMERGENCY.title": "Emergency",
+  "BARD_CARD_EMERGENCY.description": "Deal {Damage:diff()} damage.\nThe next [gold]Magic[/gold] or [gold]Song[/gold] card costs 1 less.",
+
+  "BARD_CARD_MADE_HAND.title": "Mage Hand",
+  "BARD_CARD_MADE_HAND.description": "Draw {Cards:diff()} cards.\n[gold]Retain[/gold] {retainAmount:diff()} cards in your hand.",
+  "BARD_CARD_MADE_HAND.selectionScreenPrompt": "Choose cards to gain [gold]Retain[/gold].",
+
+  "BARD_CARD_TRUE_STRIKE.title": "True Strike",
+  "BARD_CARD_TRUE_STRIKE.description": "Remove all [gold]Artifact[/gold] from the enemy.\nApply {VulnerablePower:diff()} [gold]Vulnerable[/gold].",
+
+  "BARD_CARD_THUNDER_CLAP.title": "Thunder Clap",
+  "BARD_CARD_THUNDER_CLAP.description": "Deal {Damage:diff()} damage to ALL enemies.",
+
+  "BARD_CARD_INVISBILITY.title": "Invisibility",
+  "BARD_CARD_INVISBILITY.description": "Grant an ally {intangible:diff()} [gold]Intangible[/gold].",
+
+  "BARD_CARD_CURE_WOUNDS.title": "Cure Wounds",
+  "BARD_CARD_CURE_WOUNDS.description": "Heal an ally for {Heal:diff()} HP.",
+
+  "BARD_CARD_HASTE.title": "Haste",
+  "BARD_CARD_HASTE.description": "Lasts 2 turns. Each turn gain +2 [gold]Energy[/gold] and +2 [gold]Draw[/gold]. After 2 turns, gain 2 [gold]Vulnerable[/gold] and 2 [gold]Weak[/gold].",
+
+  "BARD_CARD_LONG_STRIDER.title": "Longstrider",
+  "BARD_CARD_LONG_STRIDER.description": "Grant a target {DexterityPower:diff()} [gold]Dexterity[/gold] and draw {Cards:diff()} cards.",
+
+  "BARD_CARD_FAERIE_FIRE.title": "Faerie Fire",
+  "BARD_CARD_FAERIE_FIRE.description": "Apply {VulnerablePower:diff()} [gold]Vulnerable[/gold] to ALL enemies.",
+
+  "BARD_CARD_HEROISM.title": "Heroism",
+  "BARD_CARD_HEROISM.description": "Gain {duration:diff()} [gold]Heroism[/gold]: at turn start, regain {Block:diff()} [gold]Block[/gold].",
+
+  "BARD_CARD_SWORD_DANCE.title": "Sword Dance",
+  "BARD_CARD_SWORD_DANCE.description": "Deal {Damage:diff()} damage.\nIf the last card was an [gold]Attack[/gold], attack twice instead.\nIf the last card was a [gold]Skill[/gold], gain {Block:diff()} Block.",
+
+  "BARD_CARD_RHYTHM_STRIKE.title": "Rhythm Strike",
+  "BARD_CARD_RHYTHM_STRIKE.description": "Deal {Damage:diff()} damage.\nIf [gold]Harmony[/gold] is above 3, gain {Energy:energyIcons(1)} [gold]Energy[/gold] and draw {Cards:diff()} cards.",
+
+  "BARD_CARD_ALL_NIGHT_COMPOSITION.title": "All-Night Composition",
+  "BARD_CARD_ALL_NIGHT_COMPOSITION.description": "Gain {Energy:energyIcons(1)} [gold]Energy[/gold]. Add 1 [red]Dazed[/red] to your draw pile.",
+
+  "BARD_CARD_DEADLY_PERFORMANCE.title": "Deadly Performance",
+  "BARD_CARD_DEADLY_PERFORMANCE.description": "Whenever you cast a [gold]Magic[/gold] card, deal {Damage:diff()} damage to a random enemy.",
+
+  "BARD_CARD_MELODIC_WARD.title": "Melodic Ward",
+  "BARD_CARD_MELODIC_WARD.description": "Whenever you cast a [gold]Magic[/gold] card, gain {Block:diff()} [gold]Block[/gold].",
+
+  "BARD_CARD_ALLEGRO.title": "Allegro",
+  "BARD_CARD_ALLEGRO.description": "ALL allies gain {duration:diff()} Allegro: gain 1 [gold]Energy[/gold] at start of turn.",
+
+  "BARD_CARD_HEARSAY.title": "Hearsay",
+  "BARD_CARD_HEARSAY.description": "Obtain a random [gold]Song[/gold] or [gold]Magic[/gold] card. It costs 0 this turn.",
+
+  "BARD_CARD_DANCING_YOUTH.title": "Dancing Youth",
+  "BARD_CARD_DANCING_YOUTH.description": "At turn start, if you played 2+ card types last turn, draw 1 card.",
+
+  "BARD_CARD_IMPROVISE.title": "Improvise",
+  "BARD_CARD_IMPROVISE.description": "At turn start, gain a random [gold]Song[/gold] card. It gains [gold]Exhaust[/gold].",
+
+  "BARD_CARD_CURTAIN_CALL.title": "Curtain Call",
+  "BARD_CARD_CURTAIN_CALL.description": "Deal {Damage:diff()} damage. Deal damage once for each card type played this combat.{InCombat:\n({CalculatedHits:diff()} hits)|}",
+
+  "BARD_CARD_VALIANT_STRIKE.title": "Valiant Strike",
+  "BARD_CARD_VALIANT_STRIKE.description": "Deal {Damage:diff()} damage.\nGain {VigorPower:diff()} [gold]Vigor[/gold].",
+
+  "BARD_CARD_VALIANT_DASH.title": "Valiant Dash",
+  "BARD_CARD_VALIANT_DASH.description": "Consume all [gold]Vigor[/gold]. Draw 1 card per 3 Vigor consumed.",
+
+  "BARD_CARD_BUILD_UP_MOMENTUM.title": "Build Up Momentum",
+  "BARD_CARD_BUILD_UP_MOMENTUM.description": "Gain {VigorPower:diff()} [gold]Vigor[/gold].\n[gold]Retain[/gold] your hand this turn.",
+
+  "BARD_CARD_WAR_SONG.title": "War Song",
+  "BARD_CARD_WAR_SONG.description": "Whenever you play a [gold]Song[/gold] card, gain {VigorPower:diff()} [gold]Vigor[/gold].",
+
+  "BARD_CARD_EYEBITE.title": "Eyebite",
+  "BARD_CARD_EYEBITE.description": "Apply 1 [gold]Stun[/gold] to an enemy.\nApply {WeakPower:diff()} [gold]Weak[/gold].\nReduce {StrengthPower:diff()} [gold]Strength[/gold].",
+
+  "BARD_CARD_OVERCLOCK_CASTING.title": "Overclock Casting",
+  "BARD_CARD_OVERCLOCK_CASTING.description": "Your [gold]Magic[/gold] cards gain [gold]Exhaust[/gold] and [gold]Recur[/gold].",
+
+  "BARD_CARD_CALM_EMOTIONS.title": "Calm Emotions",
+  "BARD_CARD_CALM_EMOTIONS.description": "Remove all [gold]negative effects[/gold] from a target.",
+
+  "BARD_CARD_MANA_SURGE.title": "Mana Surge",
+  "BARD_CARD_MANA_SURGE.description": "The first time you cast a [gold]Magic[/gold] card each turn, draw {Cards:diff()} cards.",
+
+  "BARD_CARD_MAGIC_WEAPON.title": "Magic Weapon",
+  "BARD_CARD_MAGIC_WEAPON.description": "Gain {StrengthPower:diff()} [gold]Strength[/gold].\nYour non-[gold]Magic[/gold] [gold]Attack[/gold] cards gain [gold]Magic[/gold].",
+
+  "BARD_CARD_THUNDERCLAP_BLADE.title": "Thunderclap Blade",
+  "BARD_CARD_THUNDERCLAP_BLADE.description": "Deal {Damage:diff()} damage.\nWhenever the target receives a debuff this turn, take {thunderclap:diff()} damage.",
+
+  "BARD_CARD_MIRROR_IMAGE.title": "Mirror Image",
+  "BARD_CARD_MIRROR_IMAGE.description": "Gain {mirror:diff()} [gold]Mirror[/gold].\nWhen attacked, reduce damage by 4 per stack, then lose 1 stack.",
+
+  "BARD_CARD_BOOST_MORALE.title": "Boost Morale",
+  "BARD_CARD_BOOST_MORALE.description": "ALL allies gain {Block:diff()} [gold]Block[/gold].\nConsume all [gold]Vigor[/gold], gain 1 Block per Vigor spent.",
+
+  "BARD_CARD_GUARDIAN_RUNE.title": "Guardian Rune",
+  "BARD_CARD_GUARDIAN_RUNE.description": "Gain {Block:diff()} [gold]Block[/gold].\nWhenever you lose [gold]Block[/gold], deal equal damage to ALL enemies.",
+
+  "BARD_CARD_MASS_POLYMORPH.title": "Mass Polymorph",
+  "BARD_CARD_MASS_POLYMORPH.description": "Choose any number of cards in hand. Transform them into random [gold]Magic[/gold] cards. {IfUpgraded:show:Upgrade the transformed cards.|}",
+
+  "BARD_CARD_EAR_PIERCING_SHRIEK.title": "Ear-Piercing Shriek",
+  "BARD_CARD_EAR_PIERCING_SHRIEK.description": "Deal {Damage:diff()} damage to ALL enemies.\nApply {WeakPower:diff()} [gold]Weak[/gold].",
+
+  "BARD_CARD_RHAPSODY.title": "Rhapsody",
+  "BARD_CARD_RHAPSODY.description": "Draw {Cards:diff()} cards.\nEach [gold]Magic[/gold] card drawn refunds {Energy:energyIcons(1)}.",
+
+  "BARD_CARD_INSPIRATION_RESONANCE.title": "Inspiration Resonance",
+  "BARD_CARD_INSPIRATION_RESONANCE.description": "[red]Ethereal[/red]. Exhaust. This turn, each [gold]Song[/gold] card played refunds {Energy:energyIcons(1)}. {IfUpgraded:show:Lose Ethereal.|}",
+
+  "BARD_CARD_SEE_YOU_AGAIN.title": "See You Again",
+  "BARD_CARD_SEE_YOU_AGAIN.description": "Recover {Cards:diff()} cards from your [gold]Discard Pile[/gold], then discard 1 card.",
+  "BARD_CARD_SEE_YOU_AGAIN.selectionScreenPrompt": "Choose up to {Cards:diff()} cards to return to your hand.",
+
+  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.title": "Never Gonna Give You Up",
+  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.description": "Recover {Cards:diff()} cards from your [gold]Exhaust Pile[/gold].",
+  "BARD_CARD_NEVER_GONNA_GIVE_YOU_UP.selectionScreenPrompt": "Choose up to {Cards:diff()} cards to return to your hand.",
+
+  "BARD_CARD_FLIGHT_OF_THE_BUMBLEBEE.title": "Flight of the Bumblebee",
+  "BARD_CARD_FLIGHT_OF_THE_BUMBLEBEE.description": "Deal {Damage:diff()} damage to a random enemy {Repeat:diff()} times.",
+
+  "BARD_CARD_RAGING_FLURRY.title": "Raging Flurry",
+  "BARD_CARD_RAGING_FLURRY.description": "Deal {Damage:diff()} damage {Repeat:diff()} times.",
+
+  "BARD_CARD_EXPLOSIVE_POWER.title": "Explosive Power",
+  "BARD_CARD_EXPLOSIVE_POWER.description": "Consume {VigorPower:diff()} [gold]Vigor[/gold].\nDraw 1 [gold]Attack[/gold], 1 [gold]Skill[/gold], and 1 [gold]Power[/gold] from your draw pile.",
+  "BARD_CARD_EXPLOSIVE_POWER.selectionScreenPrompt": "Choose cards to add to your hand.",
+
+  "BARD_CARD_PEERLESS_DANCE.title": "Peerless Dance",
+  "BARD_CARD_PEERLESS_DANCE.description": "Choose an [gold]Attack[/gold] card in hand. It gains Recur 1.",
+  "BARD_CARD_PEERLESS_DANCE.selectionScreenPrompt": "Choose an Attack card to gain Recur.",
+
+  "BARD_CARD_HONEYED_TONGUE.title": "Honeyed Tongue",
+  "BARD_CARD_HONEYED_TONGUE.description": "Gain {Block:diff()} [gold]Block[/gold]. Apply {VulnerablePower:diff()} [gold]Vulnerable[/gold] to ALL enemies. If the last card was a [gold]Skill[/gold], apply {WeakPower:diff()} [gold]Weak[/gold] instead.",
+
+  "BARD_CARD_ENCORE.title": "Encore",
+  "BARD_CARD_ENCORE.description": "Deal {Damage:diff()} damage. Deal damage once for each [gold]Song[/gold] played this combat.{InCombat:\n({CalculatedHits:diff()} Songs)|}",
+
+  "BARD_CARD_STREET_PERFORMANCE.title": "Street Performance",
+  "BARD_CARD_STREET_PERFORMANCE.description": "If you played a [gold]Song[/gold] this turn, gain {Gold:diff()} Gold.",
+
+  "BARD_CARD_ECHOING_MELODY.title": "Echoing Melody",
+  "BARD_CARD_ECHOING_MELODY.description": "Apply {WeakPower:diff()} [gold]Weak[/gold] to yourself. At turn start, play an Exhausting copy of the last [gold]Song[/gold] played last turn.",
+
+  "BARD_CARD_FIRE_BALL.title": "Fireball",
+  "BARD_CARD_FIRE_BALL.description": "Deal {Damage:diff()} damage to ALL enemies.",
+
+  "BARD_CARD_MAGICAL_ARMOR.title": "Magical Armor",
+  "BARD_CARD_MAGICAL_ARMOR.description": "Gain {plating:diff()} [gold]Plated Armor[/gold].",
+
+  "BARD_CARD_NEVER_GIVE_UP.title": "Never Give Up",
+  "BARD_CARD_NEVER_GIVE_UP.description": "Whenever you would die, heal {healAmount:diff()} HP instead.\nCosts 1 less for each [gold]Song[/gold] played this turn.",
+
+  "BARD_CARD_PHANTASMAL_KILLER.title": "Phantasmal Killer",
+  "BARD_CARD_PHANTASMAL_KILLER.description": "Deal {Damage:diff()} damage. Apply {WeakPower:diff()} [gold]Weak[/gold]. After playing, return to your hand at the start of next turn.",
+
+  "BARD_CARD_RHYTHM_STORM.title": "Rhythm Storm",
+  "BARD_CARD_RHYTHM_STORM.description": "When you play a [gold]Song[/gold] or cast a [gold]Magic[/gold] card, gain 2 [gold]Vigor[/gold]. When you gain Vigor, deal 3 damage to ALL enemies.",
+
+  "BARD_CARD_BANSHEE_WAIL.title": "Banshee Wail",
+  "BARD_CARD_BANSHEE_WAIL.description": "[gold]Chant[/gold]. Next turn, ALL enemies gain {WeakPower:diff()} [gold]Weak[/gold] and {VulnerablePower:diff()} [gold]Vulnerable[/gold]. Exhaust.",
+
+  "BARD_CARD_WEAKNESS_SHRIEK.title": "Weakness Shriek",
+  "BARD_CARD_WEAKNESS_SHRIEK.description": "ALL enemies lose {strReduction:diff()} [gold]Strength[/gold] and {dexReduction:diff()} [gold]Dexterity[/gold] this turn. Exhaust.",
+
+  "BARD_CARD_INSPIRING_MELODY.title": "Inspiring Melody",
+  "BARD_CARD_INSPIRING_MELODY.description": "[gold]Chant[/gold]. Next turn, ALL allies gain {StrengthPower:diff()} [gold]Strength[/gold] and {DexterityPower:diff()} [gold]Dexterity[/gold].",
+
+  "BARD_CARD_DARK_CACOPHONY.title": "Dark Cacophony",
+  "BARD_CARD_DARK_CACOPHONY.description": "Power. At turn start, ALL enemies lose {Damage:diff()} HP.",
+
+  "BARD_CARD_CLEAR_CHANT.title": "Clear Chant",
+  "BARD_CARD_CLEAR_CHANT.description": "[gold]Chant[/gold]. Next turn, search your draw pile for {Cards:diff()} [gold]Magic[/gold] cards and add them to your hand. Gain {VulnerablePower:diff()} [gold]Vulnerable[/gold].",
+
+  "BARD_CARD_SERENE_SONG.title": "Serene Song",
+  "BARD_CARD_SERENE_SONG.description": "[gold]Chant[/gold]. Next turn, ALL allies heal {Heal:diff()} HP.",
+
+  "BARD_CARD_ARCANE_ECHO.title": "Arcane Echo",
+  "BARD_CARD_ARCANE_ECHO.description": "Power. Whenever [gold]Harmony[/gold] reaches {threshold:diff()} stacks, recover a random [gold]Magic[/gold] card from your [gold]Exhaust Pile[/gold]."
+}

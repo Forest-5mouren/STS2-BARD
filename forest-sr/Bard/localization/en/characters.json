@@ -1,0 +1,17 @@
+{
+  "BARD_CHARACTER_BARD.aromaPrinciple": "[sine][green]Let\u2019s see what new stories or\u2026 songs I can gather here?[/green][/sine]",
+  "BARD_CHARACTER_BARD.banter.alive.endTurnPing": "Hey friend, I\u2019m in a hurry for a drink.",
+  "BARD_CHARACTER_BARD.banter.dead.endTurnPing": "\u2026\u2026",
+  "BARD_CHARACTER_BARD.cardsModifierDescription": "Bard cards now appear in rewards and shops.",
+  "BARD_CHARACTER_BARD.cardsModifiertitle": "Bard Cards",
+  "BARD_CHARACTER_BARD.description": "A wandering bard from beyond the Spire.\nAlways ready for a song, a tale, and a drink.\nKnows a bit of magic through their instrument.",
+  "BARD_CHARACTER_BARD.eventDeathPrevention": "No\u2014my story shall not end here\u2026\u2026",
+  "BARD_CHARACTER_BARD.goldMonologue": "[sine]Oh yeah, looks like we can grab another round![/sine]",
+  "BARD_CHARACTER_BARD.possessiveAdjective": "his",
+  "BARD_CHARACTER_BARD.pronounObject": "him",
+  "BARD_CHARACTER_BARD.pronounPossessive": "his",
+  "BARD_CHARACTER_BARD.pronounSubject": "he",
+  "BARD_CHARACTER_BARD.title": "The Bard",
+  "BARD_CHARACTER_BARD.titleObject": "the Bard",
+  "BARD_CHARACTER_BARD.unlockText": "Play a game to unlock this character."
+}

@@ -1,0 +1,17 @@
+{
+  "BARD_RELIC_BARDIC_INSPIRATION.title": "Bardic Inspiration",
+  "BARD_RELIC_BARDIC_INSPIRATION.description": "Whenever you play a [gold]Magic[/gold] or [gold]Song[/gold] card, gain 1 [gold]Harmony[/gold].\nAt turn start, ALL allies gain [gold]Vigor[/gold] equal to Harmony, then Harmony resets.",
+  "BARD_RELIC_BARDIC_INSPIRATION.flavor": "A lute that has accompanied the bard for many years",
+
+  "BARD_RELIC_BETTER_INSPIRATION.title": "Bardic Inspiration+",
+  "BARD_RELIC_BETTER_INSPIRATION.description": "Whenever you play a [gold]Magic[/gold] or [gold]Song[/gold] card, Harmony +1.\nAt turn start, ALL allies gain [gold]Vigor[/gold] equal to Harmony, then Harmony is set to 2.",
+  "BARD_RELIC_BETTER_INSPIRATION.flavor": "A lute that has accompanied the bard for many years, now magically maintained",
+
+  "BARD_RELIC_SNAKE_CHARMER_FLUTE.title": "Snake Charmer Flute",
+  "BARD_RELIC_SNAKE_CHARMER_FLUTE.description": "On turn 1, add Snake Bite+ to your hand. It gains [gold]Song[/gold].",
+  "BARD_RELIC_SNAKE_CHARMER_FLUTE.flavor": "A flute obtained from a silent figure, whose tones can charm serpents",
+
+  "BARD_RELIC_VIRTUOSA_VIOLIN.title": "Arti's Violin",
+  "BARD_RELIC_VIRTUOSA_VIOLIN.description": "When you play a [gold]Song[/gold] card, apply 2 [gold]Calamity[/gold] to ALL enemies.",
+  "BARD_RELIC_VIRTUOSA_VIOLIN.flavor": "A violin taken from a wicked woman. Playing it leaves an inexplicable unease..."
+}

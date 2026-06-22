@@ -1,0 +1,10 @@
+{
+  "BARD_KEYWORD_MAGIC.title": "Magic",
+  "BARD_KEYWORD_MAGIC.description": "The bard plays melodies to channel magical power",
+
+  "BARD_KEYWORD_SONG.title": "Song",
+  "BARD_KEYWORD_SONG.description": "Simple tunes composed by the bard, needing no magic\u2014just the power of sound",
+
+  "BARD_KEYWORD_CHANT.title": "Chant",
+  "BARD_KEYWORD_CHANT.description": "Chant cards do not trigger immediately. Instead, they activate automatically at the start of your next turn. Cannot be interrupted by taking damage."
+}
