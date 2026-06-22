@@ -4,5 +4,5 @@
 .vs/
 bin/
 obj/
-
-Bard.pck
+.dll
+.pck
