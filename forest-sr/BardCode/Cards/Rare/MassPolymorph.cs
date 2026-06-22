@@ -7,10 +7,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Cards.Rare;
 /// <summary>
 /// 群体变形术｜MassPolymorph
@@ -18,7 +14,8 @@ namespace Forest_Sr.BardCode.Cards.Rare;
 /// 升级：变形得到的卡牌自动升级
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class MassPolymorph : BardCard{
+public sealed class MassPolymorph : BardCard
+{
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic, CardKeyword.Exhaust];

@@ -1,12 +1,9 @@
-using MegaCrit.Sts2.Core.Combat;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode;
 using STS2RitsuLib.Keywords;
-using Forest_Sr.BardCode.Cards.KeyWord;
 
 namespace Forest_Sr.BardCode.Powers;
 

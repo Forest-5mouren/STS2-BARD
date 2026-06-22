@@ -1,14 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -20,7 +15,7 @@ namespace Forest_Sr.BardCode.Cards.Common;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class ManaSurge : BardCard
 {
-    
+
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -39,10 +34,10 @@ public sealed class ManaSurge : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        
+
 
         // 施加法力充沛能力Power
-        await PowerCmd.Apply<ManaSurgePower>(choiceContext, 
+        await PowerCmd.Apply<ManaSurgePower>(choiceContext,
             Owner.Creature,
             DynamicVars.Cards.IntValue,
             Owner.Creature,

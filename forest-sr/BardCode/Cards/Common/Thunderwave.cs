@@ -1,6 +1,4 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using Forest_Sr.BardCode.Powers;
-using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -13,10 +11,6 @@ using MegaCrit.Sts2.Core.Nodes.Vfx.Cards;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -67,7 +61,7 @@ public sealed class Thunderwave : BardCard
         .Execute(choiceContext);
 
         // 施加 CrushUnderPower 能力
-        await PowerCmd.Apply<CrushUnderPower>(choiceContext, 
+        await PowerCmd.Apply<CrushUnderPower>(choiceContext,
             enemies,
             strengthLoss,
             Owner.Creature,

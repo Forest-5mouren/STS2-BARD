@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -69,7 +63,7 @@ public sealed class DissonantWhispers : BardCard
             this);
 
         // 施加虚弱
-        await PowerCmd.Apply<WeakPower>(choiceContext, 
+        await PowerCmd.Apply<WeakPower>(choiceContext,
             cardPlay.Target,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,

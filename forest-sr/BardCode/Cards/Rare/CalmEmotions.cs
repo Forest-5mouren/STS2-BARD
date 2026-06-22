@@ -2,17 +2,10 @@ using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Cards.Rare;
 /// <summary>
 /// 安定心神｜CalmEmotions
@@ -20,7 +13,8 @@ namespace Forest_Sr.BardCode.Cards.Rare;
 /// 升级：费用 3 → 2
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class CalmEmotions : BardCard{
+public sealed class CalmEmotions : BardCard
+{
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic, CardKeyword.Exhaust];

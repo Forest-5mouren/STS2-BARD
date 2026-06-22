@@ -1,13 +1,6 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 绝不认输能力
@@ -23,7 +16,7 @@ public sealed class NeverGiveUpPower : BardPower
     private bool _wasTriggered;
     public NeverGiveUpPower()
     {
-        
+
     }
     /// <summary>
     /// 判断是否应该死亡（参考 LizardTail）

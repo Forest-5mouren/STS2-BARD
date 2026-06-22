@@ -8,9 +8,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 

@@ -1,18 +1,12 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 克敌机先｜TrueStrike
@@ -20,7 +14,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：伤害 6→9，额外伤害 6→9
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class TrueStrike : BardCard{
+public sealed class TrueStrike : BardCard
+{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(6, ValueProp.Move),
         new DynamicVar("bonusDamage", 6),

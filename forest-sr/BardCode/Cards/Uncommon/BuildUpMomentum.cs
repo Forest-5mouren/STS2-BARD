@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -8,7 +5,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -48,8 +44,8 @@ public sealed class BuildUpMomentum : BardCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 1. 获得活力
-         
-        await PowerCmd.Apply<VigorPower>(choiceContext, 
+
+        await PowerCmd.Apply<VigorPower>(choiceContext,
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,
@@ -58,7 +54,7 @@ public sealed class BuildUpMomentum : BardCard
 
         // 2. 本回合保留手牌
         int retainAmount = DynamicVars[_retainKey].IntValue;
-        await PowerCmd.Apply<RetainHandPower>(choiceContext, 
+        await PowerCmd.Apply<RetainHandPower>(choiceContext,
             Owner.Creature,
             retainAmount,
             Owner.Creature,

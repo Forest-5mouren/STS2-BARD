@@ -2,8 +2,6 @@ using Forest_Sr.BardCode.Relics;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Forest_Sr.BardCode.Patches;
 

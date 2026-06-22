@@ -1,18 +1,12 @@
-using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -52,7 +46,7 @@ public sealed class Polymorph : BardCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 获得格挡
-        
+
         await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.IntValue, ValueProp.Move), null);
 
         int transformCount = DynamicVars[_transformCountKey].IntValue;

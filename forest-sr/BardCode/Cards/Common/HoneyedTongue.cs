@@ -1,19 +1,12 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -70,7 +63,7 @@ public sealed class HoneyedTongue : BardCard
         if (WasLastCardPlayedSkill)
         {
             // 改为给予所有敌人虚弱
-            await PowerCmd.Apply<WeakPower>(choiceContext, 
+            await PowerCmd.Apply<WeakPower>(choiceContext,
                 CombatState.HittableEnemies,
                 DynamicVars.Weak.BaseValue,
                 Owner.Creature,
@@ -79,7 +72,7 @@ public sealed class HoneyedTongue : BardCard
         else
         {
             // 基础效果：给予所有敌人易伤
-            await PowerCmd.Apply<VulnerablePower>(choiceContext, 
+            await PowerCmd.Apply<VulnerablePower>(choiceContext,
                 CombatState.HittableEnemies,
                 DynamicVars.Vulnerable.BaseValue,
                 Owner.Creature,

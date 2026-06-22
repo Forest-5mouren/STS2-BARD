@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using Forest_Sr.BardCode.Powers;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -24,7 +21,7 @@ public sealed class Improvise : BardCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar(_cardsKey, 1)   // 每回合获得1张牌
     ];
-    
+
 
     public Improvise() : base(1, CardType.Power, CardRarity.Rare, TargetType.Self)
     {
@@ -35,8 +32,8 @@ public sealed class Improvise : BardCard
         int amount = DynamicVars[_cardsKey].IntValue;
 
         // 施加 ImprovisePower，每回合随机获得一首乐曲
-        await PowerCmd.Apply<ImprovisePower>(choiceContext, 
-            
+        await PowerCmd.Apply<ImprovisePower>(choiceContext,
+
             Owner.Creature,
             amount,  // 获得数量（默认1）
             Owner.Creature,

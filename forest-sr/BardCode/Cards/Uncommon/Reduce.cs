@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,8 +9,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using Forest_Sr.BardCode.Cards.KeyWord;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -61,7 +58,7 @@ public sealed class Reduce : BardCard
 
         // 施加缩小能力
         int duration = DynamicVars[_durationKey].IntValue;
-        await PowerCmd.Apply<ShrinkPower>(choiceContext, 
+        await PowerCmd.Apply<ShrinkPower>(choiceContext,
             target,
             duration,
             Owner.Creature,

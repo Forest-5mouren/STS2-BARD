@@ -1,13 +1,10 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 刺耳尖叫｜EarPiercingShriek
@@ -15,7 +12,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：降低值 3→5
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class EarPiercingShriek : BardCard{
+public sealed class EarPiercingShriek : BardCard
+{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("strReduction", 3),
         new DynamicVar("dexReduction", 3)

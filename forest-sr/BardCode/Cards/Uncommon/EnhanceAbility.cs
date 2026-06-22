@@ -11,10 +11,6 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using static MegaCrit.Sts2.Core.Models.Monsters.KnowledgeDemon;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -29,9 +25,9 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class EnhanceAbility : BardCard
 {
-    
-    
-    
+
+
+
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -93,7 +89,7 @@ public sealed class EnhanceAbility : BardCard
         {
             if (selected.Id == ModelDb.Card<BullStrength>().Id)
             {
-                await PowerCmd.Apply<StrengthPower>(choiceContext, 
+                await PowerCmd.Apply<StrengthPower>(choiceContext,
                     Owner.Creature,
                     DynamicVars["StrengthPower"].IntValue,
                     Owner.Creature,
@@ -101,7 +97,7 @@ public sealed class EnhanceAbility : BardCard
             }
             else if (selected.Id == ModelDb.Card<CatGrace>().Id)
             {
-                await PowerCmd.Apply<DexterityPower>(choiceContext, 
+                await PowerCmd.Apply<DexterityPower>(choiceContext,
                     Owner.Creature,
                     DynamicVars["DexterityPower"].IntValue,
                     Owner.Creature,
@@ -110,7 +106,7 @@ public sealed class EnhanceAbility : BardCard
             else if (selected.Id == ModelDb.Card<FoxCunning>().Id)
             {
                 await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.IntValue, Owner);
-                await PowerCmd.Apply<NextSpellCostReductionPower>(choiceContext, 
+                await PowerCmd.Apply<NextSpellCostReductionPower>(choiceContext,
                     Owner.Creature,
                     1m,
                     Owner.Creature,

@@ -1,4 +1,3 @@
-using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -6,9 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -43,10 +39,10 @@ public sealed class MelodicWard : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        
+
 
         // 施放旋律护身能力
-        await PowerCmd.Apply<MelodicWardPower>(choiceContext, 
+        await PowerCmd.Apply<MelodicWardPower>(choiceContext,
             Owner.Creature,
             DynamicVars.Block.IntValue,
             Owner.Creature,

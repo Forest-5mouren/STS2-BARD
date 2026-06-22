@@ -5,9 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -19,7 +16,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class FireBall : BardCard
 {
-    
+
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -41,7 +38,7 @@ public sealed class FireBall : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        
+
 
         await DamageCmd.Attack(DynamicVars.Damage.IntValue)
             .FromCard(this)

@@ -1,9 +1,7 @@
+using Forest_Sr.Bard;
 using Godot;
-using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using Forest_Sr.BardCode.Extensions;
-using Forest_Sr.Bard;
 
 namespace Forest_Sr.BardCode.Powers;
 

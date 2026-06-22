@@ -1,14 +1,11 @@
 using Forest_Sr.BardCode.Cards.Ancient;
 using Forest_Sr.BardCode.Cards.Basic;
-using Forest_Sr.BardCode.Character;
 using Forest_Sr.BardCode.Relics;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
-using MegaCrit.Sts2.Core.Models.Characters;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
-using STS2RitsuLib.Scaffolding.Content;
 using System.Reflection;
 
 namespace Forest_Sr.Bard;

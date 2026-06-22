@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Keywords;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
 

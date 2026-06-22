@@ -1,8 +1,6 @@
-using Godot;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Interop.AutoRegistration;
-using Forest_Sr.BardCode.Extensions;
+using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards;
 
@@ -17,15 +15,15 @@ public abstract class BardCard : ModCardTemplate
     public override CardAssetProfile AssetProfile => new(
         PortraitPath: $"res://Bard/Images/Cards/{GetType().Name}.png"
 
-        // 根据不同类型设置不同卡框
-        //FramePath: type switch
-        //{
-        //    CardType.Attack => "res://RitsuTest/images/card_frame_attack.png",
-        //    CardType.Skill => "res://RitsuTest/images/card_frame_skill.png",
-        //    CardType.Power => "res://RitsuTest/images/card_frame_power.png",
-        //    _ => ""
-        //}
-        // PortraitBorderPath: "",
-        // BannerTexturePath: ""
+    // 根据不同类型设置不同卡框
+    //FramePath: type switch
+    //{
+    //    CardType.Attack => "res://RitsuTest/images/card_frame_attack.png",
+    //    CardType.Skill => "res://RitsuTest/images/card_frame_skill.png",
+    //    CardType.Power => "res://RitsuTest/images/card_frame_power.png",
+    //    _ => ""
+    //}
+    // PortraitBorderPath: "",
+    // BannerTexturePath: ""
     );
 }

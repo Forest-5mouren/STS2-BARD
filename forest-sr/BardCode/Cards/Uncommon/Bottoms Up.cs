@@ -9,9 +9,6 @@ using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -60,7 +57,7 @@ public sealed class BottomsUp : BardCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // 获得力量
-        await PowerCmd.Apply<StrengthPower>(choiceContext, 
+        await PowerCmd.Apply<StrengthPower>(choiceContext,
             Owner.Creature,
             DynamicVars["StrengthPower"].IntValue,
             Owner.Creature,
@@ -68,7 +65,7 @@ public sealed class BottomsUp : BardCard
         );
 
         // 获得活力
-        await PowerCmd.Apply<VigorPower>(choiceContext, 
+        await PowerCmd.Apply<VigorPower>(choiceContext,
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,

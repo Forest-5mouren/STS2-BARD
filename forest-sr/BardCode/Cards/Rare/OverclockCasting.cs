@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -45,7 +42,7 @@ public sealed class OverclockCasting : BardCard
         int markerAmount = DynamicVars[_markerKey].IntValue;
 
         // 施加超频施法能力Power
-        await PowerCmd.Apply<OverclockCastingPower>(choiceContext, 
+        await PowerCmd.Apply<OverclockCastingPower>(choiceContext,
             Owner.Creature,
             markerAmount,
             Owner.Creature,

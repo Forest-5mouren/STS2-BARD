@@ -1,17 +1,12 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -23,8 +18,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class LongStrider : BardCard
 {
-    
-    
+
+
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -56,7 +51,7 @@ public sealed class LongStrider : BardCard
 
         // 施加敏捷
         int dexterityAmount = DynamicVars.Dexterity.IntValue;
-        await PowerCmd.Apply<DexterityPower>(choiceContext, 
+        await PowerCmd.Apply<DexterityPower>(choiceContext,
             target,
             dexterityAmount,
             Owner.Creature,

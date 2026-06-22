@@ -5,7 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
 
@@ -39,7 +38,7 @@ public sealed class ValiantPresencePower : BardPower
 
         // 获得格挡 = 消耗层数 × 当前 Power 层数（或固定倍数）
         int block = (int)(base.Amount * reducedAmount);
-        await CreatureCmd.GainBlock(base.Owner,block, ValueProp.Unpowered, null);
+        await CreatureCmd.GainBlock(base.Owner, block, ValueProp.Unpowered, null);
     }
 }
 

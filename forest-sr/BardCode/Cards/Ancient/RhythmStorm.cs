@@ -7,9 +7,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Ancient;
 
@@ -22,7 +19,7 @@ namespace Forest_Sr.BardCode.Cards.Ancient;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class RhythmStorm : BardCard
 {
-    
+
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -47,7 +44,7 @@ public sealed class RhythmStorm : BardCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // 施加能力（层数为1作为标记）
-        await PowerCmd.Apply<RhythmStormPower>(choiceContext, 
+        await PowerCmd.Apply<RhythmStormPower>(choiceContext,
             Owner.Creature,
             1,
             Owner.Creature,

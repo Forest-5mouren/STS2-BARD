@@ -6,10 +6,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -21,8 +17,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class Rhapsody : BardCard
 {
-    
-    
+
+
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -47,8 +43,8 @@ public sealed class Rhapsody : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        
-        
+
+
 
         // 获取手牌列表
         var handCards = Owner.PlayerCombatState?.Hand?.Cards;

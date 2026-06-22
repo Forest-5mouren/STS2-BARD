@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.MonsterMoves.Intents;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -59,7 +54,7 @@ public sealed class Eyebite : BardCard
 
         // 2. 给予虚弱
         int weakAmount = DynamicVars.Weak.IntValue;
-        await PowerCmd.Apply<WeakPower>(choiceContext, 
+        await PowerCmd.Apply<WeakPower>(choiceContext,
             cardPlay.Target,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,
@@ -68,7 +63,7 @@ public sealed class Eyebite : BardCard
 
         // 3. 减少力量（给予负数的力量Power）
         int strengthAmount = DynamicVars["StrengthPower"].IntValue;
-        await PowerCmd.Apply<StrengthPower>(choiceContext, 
+        await PowerCmd.Apply<StrengthPower>(choiceContext,
             cardPlay.Target,
             -strengthAmount,  // 负数表示减少力量
             Owner.Creature,

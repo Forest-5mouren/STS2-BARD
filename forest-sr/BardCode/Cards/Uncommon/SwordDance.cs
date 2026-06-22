@@ -2,18 +2,10 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -27,7 +19,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class SwordDance : BardCard
 {
-    
+
     private const string _blockKey = "block";
 
     // 基础数值声明
@@ -90,7 +82,7 @@ public sealed class SwordDance : BardCard
         bool isAttack = WasLastCardPlayedAttack;
         bool isSkill = WasLastCardPlayedSkill;
 
-        
+
 
         // 执行攻击
         if (isAttack)
@@ -116,7 +108,7 @@ public sealed class SwordDance : BardCard
         // 如果上一张是技能牌，获得格挡
         if (isSkill)
         {
-            
+
             await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.IntValue, ValueProp.Move), cardPlay);
         }
     }

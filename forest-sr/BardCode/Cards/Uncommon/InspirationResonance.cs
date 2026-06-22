@@ -4,9 +4,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -29,7 +26,7 @@ public sealed class InspirationResonance : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         // 施加灵感共鸣能力（本回合内打乐曲回复能量）
-        await PowerCmd.Apply<InspirationResonancePower>(ctx, 
+        await PowerCmd.Apply<InspirationResonancePower>(ctx,
             Owner.Creature,
             DynamicVars.Energy.IntValue,
             Owner.Creature,

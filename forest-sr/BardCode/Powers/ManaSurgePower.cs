@@ -1,15 +1,10 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Keywords;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
 
@@ -43,7 +38,7 @@ public sealed class ManaSurgePower : BardPower
         // 抽牌
         Flash();
         await CardPileCmd.Draw(context, base.Amount, base.Owner.Player);
-        
+
     }
 
     /// <summary>

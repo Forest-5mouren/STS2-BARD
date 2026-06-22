@@ -1,19 +1,13 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using Forest_Sr.BardCode.Character;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Basic;
 
@@ -52,7 +46,7 @@ public sealed class BladeWard : BardCard
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
 
         // 3. 施加剑刃防护能力（使用正确的 5 参数重载）
-        await PowerCmd.Apply<BladeWardPower>(choiceContext, 
+        await PowerCmd.Apply<BladeWardPower>(choiceContext,
             Owner.Creature,                          // 目标
             DynamicVars[_powerVarName].BaseValue,    // 层数
             Owner.Creature,                          // 来源

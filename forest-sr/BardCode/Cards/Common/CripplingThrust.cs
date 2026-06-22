@@ -1,18 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -55,13 +48,13 @@ public sealed class CripplingThrust : BardCard
             .Execute(choiceContext);
 
         // 2. 给予虚弱
-        await PowerCmd.Apply<WeakPower>(choiceContext, 
+        await PowerCmd.Apply<WeakPower>(choiceContext,
             cardPlay.Target,
             DynamicVars.Weak.IntValue,
             Owner.Creature,
             this);
         // 2. 给予易伤
-        await PowerCmd.Apply<VulnerablePower>(choiceContext, 
+        await PowerCmd.Apply<VulnerablePower>(choiceContext,
             cardPlay.Target,
             DynamicVars.Vulnerable.IntValue,
             Owner.Creature,

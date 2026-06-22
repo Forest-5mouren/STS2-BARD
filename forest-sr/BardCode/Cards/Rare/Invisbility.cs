@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -6,10 +7,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 namespace Forest_Sr.BardCode.Cards.Rare;
 /// <summary>
 /// 隐身｜Invisibility
@@ -17,8 +14,9 @@ namespace Forest_Sr.BardCode.Cards.Rare;
 /// 升级：无实体 1 → 2
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class Invisbility : BardCard{
- const string _intangibleKey = "intangible";
+public sealed class Invisbility : BardCard
+{
+    const string _intangibleKey = "intangible";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar(_intangibleKey, 1)

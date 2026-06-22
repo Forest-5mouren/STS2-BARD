@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -37,7 +31,7 @@ public sealed class DancingYouth : BardCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         // 施加能力Power，在每回合结束时触发
-        await PowerCmd.Apply<DancingYouthPower>(choiceContext, 
+        await PowerCmd.Apply<DancingYouthPower>(choiceContext,
             Owner.Creature,
             1,  // 层数（用于标记）
             Owner.Creature,

@@ -4,12 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 疗伤术｜CureWounds
@@ -17,7 +12,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：回复 7 → 10
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class CureWounds : BardCard{
+public sealed class CureWounds : BardCard
+{
     private const string _healKey = "heal";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [

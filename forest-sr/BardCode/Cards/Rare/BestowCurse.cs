@@ -1,7 +1,7 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Godot;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -9,11 +9,6 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -25,7 +20,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class BestowCurse : BardCard
 {
-    
+
     private const string _strengthLossKey = "strengthLoss";
 
     // 基础数值声明
@@ -71,7 +66,7 @@ public sealed class BestowCurse : BardCard
         if (xValue <= 0) return;
 
         // 计算伤害和层数
-        
+
         int weakAmount = DynamicVars.Weak.IntValue * xValue;
         int strengthLoss = DynamicVars[_strengthLossKey].IntValue * xValue;
 
@@ -90,7 +85,7 @@ public sealed class BestowCurse : BardCard
             .Execute(choiceContext);
 
         // 施加虚弱
-        await PowerCmd.Apply<WeakPower>(choiceContext, 
+        await PowerCmd.Apply<WeakPower>(choiceContext,
             cardPlay.Target,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,
@@ -98,7 +93,7 @@ public sealed class BestowCurse : BardCard
         );
 
         // 减少临时力量
-        await PowerCmd.Apply<CrushUnderPower>(choiceContext, 
+        await PowerCmd.Apply<CrushUnderPower>(choiceContext,
             cardPlay.Target,
             strengthLoss,
             Owner.Creature,

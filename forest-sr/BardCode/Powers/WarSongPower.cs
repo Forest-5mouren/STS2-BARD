@@ -3,10 +3,8 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Keywords;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Powers;
 
@@ -30,7 +28,7 @@ public sealed class WarSongPower : BardPower
         if (!cardPlay.Card.HasModKeyword(BardKeywords.Song)) return;
 
         // 获得活力
-        await PowerCmd.Apply<VigorPower>(context, 
+        await PowerCmd.Apply<VigorPower>(context,
             base.Owner,
             base.Amount,  // 活力层数（3）
             base.Owner,

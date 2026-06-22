@@ -1,8 +1,5 @@
-using Forest_Sr.BardCode.Extensions;
 using Godot;
-using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;
-using System;
 
 namespace Forest_Sr.BardCode.Relics;
 

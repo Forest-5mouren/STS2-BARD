@@ -1,19 +1,12 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using Forest_Sr.BardCode.Character;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Basic;
 
@@ -59,7 +52,7 @@ public sealed class ViciousMockery : BardCard
         );
 
         // 施加虚弱（使用正确的 5 参数重载）
-        await PowerCmd.Apply<WeakPower>(choiceContext, 
+        await PowerCmd.Apply<WeakPower>(choiceContext,
             cardPlay.Target,                  // 目标
             DynamicVars.Weak.BaseValue,       // 层数
             Owner.Creature,                   // 来源

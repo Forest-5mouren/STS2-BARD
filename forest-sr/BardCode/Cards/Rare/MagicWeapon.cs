@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -10,7 +7,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -54,7 +50,7 @@ public sealed class MagicWeapon : BardCard
         int strengthAmount = DynamicVars["StrengthPower"].IntValue;
 
         // 1. 获得力量
-        await PowerCmd.Apply<StrengthPower>(choiceContext, 
+        await PowerCmd.Apply<StrengthPower>(choiceContext,
             Owner.Creature,
             strengthAmount,
             Owner.Creature,
@@ -63,7 +59,7 @@ public sealed class MagicWeapon : BardCard
 
         // 2. 施加魔法武器能力Power
         int markerAmount = DynamicVars[_markerKey].IntValue;
-        await PowerCmd.Apply<MagicWeaponPower>(choiceContext, 
+        await PowerCmd.Apply<MagicWeaponPower>(choiceContext,
             Owner.Creature,
             markerAmount,
             Owner.Creature,

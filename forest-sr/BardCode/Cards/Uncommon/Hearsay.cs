@@ -3,14 +3,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -90,7 +85,7 @@ public sealed class Hearsay : BardCard
     // 如果需要运行时移除，可以保留此方法但通常不需要
     protected override void OnUpgrade()
     {
-       RemoveKeyword(CardKeyword.Exhaust);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }
 

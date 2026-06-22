@@ -1,10 +1,7 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
-using Forest_Sr.BardCode.Powers;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -12,9 +9,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Relics;
 
@@ -49,7 +43,7 @@ public sealed class VirtuosaViolin : BardRelics
             // 对所有敌人施加末日
             foreach (Creature enemy in Owner.Creature.CombatState.HittableEnemies)
             {
-                await PowerCmd.Apply<DoomPower>(context, 
+                await PowerCmd.Apply<DoomPower>(context,
                     enemy,
                     doomAmount,
                     Owner.Creature,

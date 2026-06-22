@@ -2,11 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Models.Powers;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Other
 {
@@ -28,7 +24,7 @@ namespace Forest_Sr.BardCode.Cards.Other
 
         public async Task OnChosen(PlayerChoiceContext choiceContext)
         {
-            await PowerCmd.Apply<DexterityPower>(choiceContext, 
+            await PowerCmd.Apply<DexterityPower>(choiceContext,
                 base.Owner.Creature,
                 base.DynamicVars["DexterityPower"].IntValue,
                 base.Owner.Creature,

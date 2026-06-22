@@ -1,6 +1,5 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -11,13 +10,13 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Keywords;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Powers;
 /// <summary>
 /// 韵律风暴能力：获得活力时造成AOE伤害，使用法术/乐曲牌时获得活力
 /// </summary>
 [RegisterPower]
-public sealed class RhythmStormPower : BardPower{
+public sealed class RhythmStormPower : BardPower
+{
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
 

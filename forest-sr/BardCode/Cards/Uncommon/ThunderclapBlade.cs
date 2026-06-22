@@ -5,11 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 鸣雷剑｜ThunderclapBlade
@@ -17,7 +13,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：伤害 12→16
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class ThunderclapBlade : BardCard{
+public sealed class ThunderclapBlade : BardCard
+{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(12, ValueProp.Move),
         new PowerVar<VulnerablePower>(2)

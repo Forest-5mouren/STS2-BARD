@@ -1,5 +1,3 @@
-using Godot;
-using MegaCrit.Sts2.Core.Models.RelicPools;
 using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Relics;

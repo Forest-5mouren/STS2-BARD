@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -9,7 +6,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -47,7 +43,7 @@ public sealed class EchoingMelody : BardCard
         int weakAmount = DynamicVars.Weak.IntValue;
 
         // 1. 给予自己虚弱
-        await PowerCmd.Apply<WeakPower>(choiceContext, 
+        await PowerCmd.Apply<WeakPower>(choiceContext,
             Owner.Creature,
             DynamicVars.Weak.BaseValue,
             Owner.Creature,
@@ -55,7 +51,7 @@ public sealed class EchoingMelody : BardCard
         );
 
         // 2. 施加能力Power
-        await PowerCmd.Apply<EchoingMelodyPower>(choiceContext, 
+        await PowerCmd.Apply<EchoingMelodyPower>(choiceContext,
             Owner.Creature,
             1,
             Owner.Creature,

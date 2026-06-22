@@ -1,4 +1,3 @@
-using MegaCrit.Sts2.Core.Models;
 using Forest_Sr.BardCode.Cards.Uncommon;
 
 namespace MegaCrit.Sts2.Core.Models.Powers;

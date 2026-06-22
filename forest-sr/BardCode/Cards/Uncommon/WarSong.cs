@@ -1,4 +1,3 @@
-using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -7,9 +6,6 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -44,10 +40,10 @@ public sealed class WarSong : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-         
+
 
         // 施加战歌能力Power
-        await PowerCmd.Apply<WarSongPower>(choiceContext, 
+        await PowerCmd.Apply<WarSongPower>(choiceContext,
             Owner.Creature,
             DynamicVars["VigorPower"].IntValue,
             Owner.Creature,

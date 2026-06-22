@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -10,7 +7,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 //轻快节拍
@@ -50,7 +46,7 @@ public sealed class BriskBeat : BardCard
         foreach (Creature ally in allies)
         {
 
-            await PowerCmd.Apply<BriskBeatPower>(choiceContext, 
+            await PowerCmd.Apply<BriskBeatPower>(choiceContext,
                 ally,               // 目标
                 duration,           // 层数 = 持续回合数
                 Owner.Creature,     // 来源

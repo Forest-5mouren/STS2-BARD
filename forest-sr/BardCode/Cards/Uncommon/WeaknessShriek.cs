@@ -5,9 +5,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 虚弱尖叫｜WeaknessShriek
@@ -15,7 +12,8 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// 升级：降低值 3→5
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
-public sealed class WeaknessShriek : BardCard{
+public sealed class WeaknessShriek : BardCard
+{
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("strReduction", 3),
         new DynamicVar("dexReduction", 3)

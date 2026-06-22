@@ -6,9 +6,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -56,7 +53,7 @@ public sealed class MirrorImage : BardCard
         int reductionPerLayer = DynamicVars[_reductionKey].IntValue;
 
         // 施加镜像Power
-        var power = await PowerCmd.Apply<MirrorImagePower>(choiceContext, 
+        var power = await PowerCmd.Apply<MirrorImagePower>(choiceContext,
             Owner.Creature,
             mirrorAmount,
             Owner.Creature,

@@ -4,11 +4,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -67,7 +62,7 @@ public sealed class ExplosivePower : BardCard
         {
             // 获取抽牌堆中符合条件的牌（参考 Anointed）
             var cards = PileType.Draw.GetPile(Owner).Cards
-                .Where(c => c.Type == targetType )
+                .Where(c => c.Type == targetType)
                 .ToList();
 
             // 如果有符合条件的牌，抽取第一张

@@ -1,18 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -54,7 +46,7 @@ public sealed class Emergency : BardCard
             this);
 
         // 2. 施加 NextSpellOrSongCostReductionPower（下一张法术或乐曲卡费用-1）
-        await PowerCmd.Apply<NextSpellOrSongCostReductionPower>(choiceContext, 
+        await PowerCmd.Apply<NextSpellOrSongCostReductionPower>(choiceContext,
             Owner.Creature,
             1,
             Owner.Creature,

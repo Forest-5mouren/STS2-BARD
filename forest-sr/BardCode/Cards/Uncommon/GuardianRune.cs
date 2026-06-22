@@ -1,15 +1,11 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -52,11 +48,11 @@ public sealed class GuardianRune : BardCard
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         // 获得格挡
-        
+
         await CreatureCmd.GainBlock(Owner.Creature, new BlockVar(DynamicVars.Block.IntValue, ValueProp.Move), cardPlay);
 
         // 施加守卫刻文能力
-        await PowerCmd.Apply<GuardianRunePower>(choiceContext, 
+        await PowerCmd.Apply<GuardianRunePower>(choiceContext,
             Owner.Creature,
             1,  // 标记层数
             Owner.Creature,

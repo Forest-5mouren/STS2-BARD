@@ -2,9 +2,7 @@ using Forest_Sr.BardCode.Cards.Ancient;
 using Forest_Sr.BardCode.Cards.Basic;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
-using System.Collections.Generic;
 
 namespace Forest_Sr.BardCode.Patch;
 

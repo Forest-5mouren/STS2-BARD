@@ -3,12 +3,8 @@ using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Scaffolding.Content;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -30,7 +26,7 @@ public sealed class ArcaneEcho : BardCard
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<ArcaneEchoPower>(ctx, 
+        await PowerCmd.Apply<ArcaneEchoPower>(ctx,
             Owner.Creature,
             DynamicVars["threshold"].IntValue,  // Amount = threshold
             Owner.Creature,
