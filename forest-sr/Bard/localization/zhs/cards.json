@@ -57,9 +57,7 @@
   "BARD_CARD_FOLLOW_UP_STRIKE.title": "顺势戳击",
   "BARD_CARD_FOLLOW_UP_STRIKE.description": "造成{Damage:diff()}点伤害。\n如果上一张打出的牌是[gold]技能牌[/gold]，此卡回到手牌。",
   "BARD_CARD_BESTOW_CURSE.title": "降咒",
-  "BARD_CARD_BESTOW_CURSE.description": "造成{Damage}点伤害。
-施加{WeakPower}层[gold]虚弱[/gold]。
-减少目标{strengthLoss}层[gold]力量[/gold]。",
+  "BARD_CARD_BESTOW_CURSE.description": "造成{Damage}点伤害。\n施加{WeakPower}层[gold]虚弱[/gold]。\n减少目标{strengthLoss}层[gold]力量[/gold]。",
   "BARD_CARD_PRISMATIC_SPRAY.title": "虹光喷射",
   "BARD_CARD_PRISMATIC_SPRAY.description": "对目标敌人造成{Damage:diff()}点伤害{Repeat:diff()} 次",
   "BARD_CARD_ENHANCE_ABILITY.title": "强化属性",
