@@ -57,7 +57,9 @@
   "BARD_CARD_FOLLOW_UP_STRIKE.title": "顺势戳击",
   "BARD_CARD_FOLLOW_UP_STRIKE.description": "造成{Damage:diff()}点伤害。\n如果上一张打出的牌是[gold]技能牌[/gold]，此卡回到手牌。",
   "BARD_CARD_BESTOW_CURSE.title": "降咒",
-  "BARD_CARD_BESTOW_CURSE.description": "造成 {Damage:diff()}点伤害X次，施加 X 层[gold]虚弱[/gold]，使目标本回合减少 X 层[gold]力量[/gold]。",
+  "BARD_CARD_BESTOW_CURSE.description": "造成{Damage}点伤害。
+施加{WeakPower}层[gold]虚弱[/gold]。
+减少目标{strengthLoss}层[gold]力量[/gold]。",
   "BARD_CARD_PRISMATIC_SPRAY.title": "虹光喷射",
   "BARD_CARD_PRISMATIC_SPRAY.description": "对目标敌人造成{Damage:diff()}点伤害{Repeat:diff()} 次",
   "BARD_CARD_ENHANCE_ABILITY.title": "强化属性",
@@ -113,7 +115,7 @@
   "BARD_CARD_MAGIC_WEAPON.title": "魔法武器",
   "BARD_CARD_MAGIC_WEAPON.description": "获得{StrengthPower:diff()}点[gold]力量[/gold]。\n你的所有非[gold]魔法[/gold][gold]攻击牌[/gold]获得[gold]魔法[/gold]词条。",
   "BARD_CARD_THUNDERCLAP_BLADE.title": "轰雷剑",
-  "BARD_CARD_THUNDERCLAP_BLADE.description": "造成{Damage:diff()}点伤害。\n本回合敌人每获得一个负面状态，受到{ThunderclapPower}点伤害。",
+  "BARD_CARD_THUNDERCLAP_BLADE.description": "造成{Damage:diff()}点伤害。\n本回合敌人每次获得负面状态，受到{ThunderclapPower}点伤害。",
   "BARD_CARD_MIRROR_IMAGE.title": "镜影术",
   "BARD_CARD_MIRROR_IMAGE.description": "获得{mirror:diff()}层[gold]镜像[/gold]。\n每次被攻击时，减少{reductionPerLayer:diff()}*层数的伤害，然后减少1层。",
   "BARD_CARD_BOOST_MORALE.title": "提振士气",
