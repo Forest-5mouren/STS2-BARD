@@ -42,7 +42,7 @@ public sealed class ExplosivePower : BardCard
         // 获取消耗数量
         int vigorCost = DynamicVars["VigorPower"].IntValue;
 
-        // 获取当前的活力层数（参考 Anointed 的查询方式）
+        // 获取当前的活力层数
         var vigorPower = Owner.Creature.GetPower<VigorPower>();
         int currentVigor = vigorPower?.Amount ?? 0;
 
@@ -55,22 +55,20 @@ public sealed class ExplosivePower : BardCard
         // 消耗指定层数的活力
         await PowerCmd.ModifyAmount(choiceContext, vigorPower, -vigorCost, Owner.Creature, this, false);
 
-        // 需要抽取的牌类型（参考 Anointed 使用 Where + ToList）
+        // 需要抽取的牌类型：攻击、技能、能力
         CardType[] targetTypes = { CardType.Attack, CardType.Skill, CardType.Power };
 
         foreach (var targetType in targetTypes)
         {
-            // 获取抽牌堆中符合条件的牌（参考 Anointed）
+            // 获取抽牌堆中符合条件的牌
             var cards = PileType.Draw.GetPile(Owner).Cards
                 .Where(c => c.Type == targetType)
                 .ToList();
 
-            // 如果有符合条件的牌，抽取第一张
+            // 如果有符合条件的牌，抽到手牌
             if (cards.Any())
             {
-                var card = cards.First();
-                await CardPileCmd.RemoveFromCombat(card);
-                await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Random, this);
+                await CardPileCmd.Draw(choiceContext, cards.First(), Owner);
             }
         }
     }

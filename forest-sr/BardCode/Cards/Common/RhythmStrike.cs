@@ -12,7 +12,7 @@ namespace Forest_Sr.BardCode.Cards.Common;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class RhythmStrike : BardCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [];
     protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -44,3 +44,4 @@ public sealed class RhythmStrike : BardCard
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 }
+

@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -22,6 +23,7 @@ public sealed class MagicalArmor : BardCard
         new DynamicVar(_platingKey, 7)
     ];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic];
     public MagicalArmor() : base(2, CardType.Power, CardRarity.Uncommon, TargetType.Self)
     {
     }
@@ -44,3 +46,4 @@ public sealed class MagicalArmor : BardCard
         );
     }
 }
+

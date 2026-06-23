@@ -1,11 +1,11 @@
 {
   "BARD_POWER_BLADE_WARD_POWER.title": "剑刃防护",
   "BARD_POWER_BLADE_WARD_POWER.description": "本回合有虚弱的敌人对你造成伤害减半",
-  "BARD_POWER_BLADE_WARD_POWER.smartDescription": "有{Amount:diff()}层剑刃防护",
+  "BARD_POWER_BLADE_WARD_POWER.smartDescription": "有{Amount}层剑刃防护",
 
   "BARD_POWER_HASTE_POWER.title": "加速术",
   "BARD_POWER_HASTE_POWER.description": "回合开始获得2点能量，回合开始抽2张牌，结束时获得2层易伤2层虚弱",
-  "BARD_POWER_HASTE_POWER.smartDescription": "有{Amount:diff()}层加速术",
+  "BARD_POWER_HASTE_POWER.smartDescription": "有{Amount}层加速术",
 
   "BARD_POWER_HEROISM_POWER.title": "英雄气概",
   "BARD_POWER_HEROISM_POWER.description": "回合开始时，重新获得 {Block} 点[gold]格挡[/gold]",
@@ -20,8 +20,8 @@
   "BARD_POWER_MELODIC_WARD_POWER.smartDescription": "每当你释放[gold]魔法[/gold]时，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]",
 
   "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.title": "魔法共鸣",
-  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.description": "本回合下一张魔法牌费用 -{Amount:diff()}",
-  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.smartDescription": "下一张魔法牌费用减少 {Amount:diff()}",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.description": "本回合下一张魔法牌费用 -{Amount}",
+  "BARD_POWER_NEXT_SPELL_COST_REDUCTION_POWER.smartDescription": "下一张魔法牌费用减少 {Amount}",
 
   "BARD_POWER_VALIANT_PRESENCE_POWER.title": "英勇气势",
   "BARD_POWER_VALIANT_PRESENCE_POWER.description": "每当你失去[gold]活力[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]格挡[/gold]",
@@ -116,8 +116,8 @@
   "BARD_POWER_SERENE_SONG_CHANT.smartDescription": "等待吟唱…",
 
   "BARD_POWER_ARCANE_ECHO_POWER.title": "奥术回响",
-  "BARD_POWER_ARCANE_ECHO_POWER.description": "和声达{Amount:diff()}层时回收魔法牌",
-  "BARD_POWER_ARCANE_ECHO_POWER.smartDescription": "和声（{Amount:diff()}层触发）"
+  "BARD_POWER_ARCANE_ECHO_POWER.description": "和声达{Amount}层时回收魔法牌",
+  "BARD_POWER_ARCANE_ECHO_POWER.smartDescription": "和声（{Amount}层触发）"
 }
 
 

@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers.Counters;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -22,7 +23,7 @@ public sealed class Encore : BardCard
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => new DynamicVar[]
     {
-        new DamageVar(6m, ValueProp.Move),
+        new DamageVar(3m, ValueProp.Move),
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar(_calculatedHitsKey).WithMultiplier((card, _) =>
@@ -32,6 +33,8 @@ public sealed class Encore : BardCard
             return (int?)(power?.Amount) ?? 0;
         })
     };
+
+        public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
 
     public Encore() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
     {
@@ -60,3 +63,6 @@ public sealed class Encore : BardCard
             .Execute(choiceContext);
     }
 }
+
+
+
