@@ -1,4 +1,5 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
+using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -8,16 +9,10 @@ using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
-/// <summary>
-/// 韵律打击｜RhythmStrike
-/// 效果：造成 {damage} 点伤害。如果和声大于3，获得 1 点能量，抽 {Cards:diff()} 张牌。
-/// 升级：伤害 8→9，抽牌 1→2
-/// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class RhythmStrike : BardCard
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song];
-
     protected override HashSet<CardTag> CanonicalTags => new() { CardTag.Strike };
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
@@ -35,7 +30,8 @@ public sealed class RhythmStrike : BardCard
             .Targeting(cardPlay.Target!)
             .Execute(ctx);
 
-        if (HarmonyTracker.Count > 3)
+        var harmony = Owner.Creature?.GetPower<HarmonyPower>();
+        if (harmony != null && harmony.Amount > 3)
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
             await CardPileCmd.Draw(ctx, DynamicVars.Cards.IntValue, Owner);

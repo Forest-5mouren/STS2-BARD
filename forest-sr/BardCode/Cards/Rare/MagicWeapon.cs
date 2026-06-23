@@ -38,7 +38,7 @@ public sealed class MagicWeapon : BardCard
     // 升级：力量 1 → 2
     protected override void OnUpgrade()
     {
-        DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        DynamicVars.Strength.UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -47,7 +47,7 @@ public sealed class MagicWeapon : BardCard
         NPowerUpVfx.CreateNormal(Owner.Creature);
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        int strengthAmount = DynamicVars["StrengthPower"].IntValue;
+        int strengthAmount = DynamicVars.Strength.IntValue;
 
         // 1. 获得力量
         await PowerCmd.Apply<StrengthPower>(choiceContext,

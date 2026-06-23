@@ -31,7 +31,7 @@ public sealed class FaerieFire : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        int vulnerableAmount = DynamicVars["VulnerablePower"].IntValue;
+        int vulnerableAmount = DynamicVars.Vulnerable.IntValue;
         foreach (Creature enemy in CombatState.HittableEnemies)
         {
             await PowerCmd.Apply<VulnerablePower>(ctx, enemy, vulnerableAmount, Owner.Creature, this);
@@ -40,6 +40,6 @@ public sealed class FaerieFire : BardCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars["VulnerablePower"].UpgradeValueBy(1);
+        DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 }

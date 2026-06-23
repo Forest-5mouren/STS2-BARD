@@ -1,5 +1,4 @@
-using Forest_Sr.BardCode.Cards.KeyWord;
-using MegaCrit.Sts2.Core.Combat;
+using Forest_Sr.BardCode.Powers.Counters;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -7,7 +6,6 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
-using STS2RitsuLib.Keywords;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -28,10 +26,11 @@ public sealed class Encore : BardCard
         new CalculationBaseVar(0m),
         new CalculationExtraVar(1m),
         new CalculatedVar(_calculatedHitsKey).WithMultiplier((card, _) =>
-            CombatManager.Instance.History.CardPlaysStarted
-                .Count(e => e.CardPlay.Card.Owner == card.Owner
-                            && e.CardPlay.Card.HasModKeyword(BardKeywords.Song))  // ✅ 修正：使用 HasModKeyword
-        )
+        {
+            // 从隐藏计数器读取已打出的乐曲牌数量
+            var power = card.Owner.Creature?.GetPower<SongsPlayedCounter>();
+            return (int?)(power?.Amount) ?? 0;
+        })
     };
 
     public Encore() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
@@ -48,7 +47,9 @@ public sealed class Encore : BardCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
-        int hitCount = (int)((CalculatedVar)DynamicVars[_calculatedHitsKey]).Calculate(cardPlay.Target);
+        // 从隐藏计数器读取
+        var power = Owner.Creature.GetPower<SongsPlayedCounter>();
+        int hitCount = (int?)(power?.Amount) ?? 0;
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(hitCount)

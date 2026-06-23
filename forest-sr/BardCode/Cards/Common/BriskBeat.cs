@@ -37,7 +37,7 @@ public sealed class BriskBeat : BardCard
         int duration = DynamicVars["Duration"].IntValue;
 
         // 获取全体友方（存活且是玩家的生物）
-        IEnumerable<Creature> allies = from c in CombatState.GetTeammatesOf(Owner.Creature)
+        IEnumerable<Creature> allies = from c in CombatState!.GetTeammatesOf(Owner.Creature)
                                        where c != null && c.IsAlive && c.IsPlayer
                                        select c;
         // 抽1

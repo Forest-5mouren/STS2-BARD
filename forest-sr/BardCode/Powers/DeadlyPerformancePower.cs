@@ -32,7 +32,7 @@ public sealed class DeadlyPerformancePower : BardPower
         await Cmd.CustomScaledWait(0.1f, 0.2f);
 
         // 随机选择一个敌人
-        Creature target = Owner.Player.RunState.Rng.CombatTargets.NextItem(Owner.CombatState.HittableEnemies);
+        Creature target = Owner.Player!.RunState.Rng.CombatTargets.NextItem(Owner.CombatState!.HittableEnemies)!;
 
         if (target != null)
         {

@@ -29,13 +29,13 @@ public sealed class CourageSong : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         var chant = await PowerCmd.Apply<CourageSongChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
-        chant.StrengthAmount = DynamicVars["StrengthPower"].IntValue;
+        chant.StrengthAmount = DynamicVars.Strength.IntValue;
         chant.VigorAmount = DynamicVars["VigorPower"].IntValue;
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        DynamicVars.Strength.UpgradeValueBy(1);
         DynamicVars["VigorPower"].UpgradeValueBy(1);
     }
 }

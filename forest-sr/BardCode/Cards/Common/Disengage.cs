@@ -46,7 +46,7 @@ public sealed class Disengage : BardCard
     }
 
     // 判断上一张打出的牌是否是技能牌
-    private bool WasLastCardPlayedSkill
+    private bool WasLastCardPlayedSkill 
     {
         get
         {

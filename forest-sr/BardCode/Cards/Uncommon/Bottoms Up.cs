@@ -20,8 +20,6 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class BottomsUp : BardCard
 {
-    private const string _strengthKey = "strength";
-    private const string _vigorKey = "vigor";
     private const string _dizzyCountKey = "dizzyCount";
 
     // 基础数值声明
@@ -59,7 +57,7 @@ public sealed class BottomsUp : BardCard
         // 获得力量
         await PowerCmd.Apply<StrengthPower>(choiceContext,
             Owner.Creature,
-            DynamicVars["StrengthPower"].IntValue,
+            DynamicVars.Strength.IntValue,
             Owner.Creature,
             this
         );

@@ -46,7 +46,7 @@ public sealed class BardAttack : BardCard
         {
             await PowerCmd.Apply<VulnerablePower>(ctx,
                 cardPlay.Target,
-                DynamicVars["VulnerablePower"].IntValue,
+                DynamicVars.Vulnerable.IntValue,
                 Owner.Creature,
                 this);
         }

@@ -20,7 +20,7 @@ public sealed class StreetPerformance : BardCard
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new GoldVar( 15)   // 额外金币
+        new GoldVar(20)   // 额外金币
     ];
 
     // 关键词：消耗

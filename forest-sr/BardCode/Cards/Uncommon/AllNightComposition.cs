@@ -50,7 +50,7 @@ public sealed class AllNightComposition : BardCard
         await PlayerCmd.GainEnergy(energyToGain, Owner);
 
         // 塞眩晕
-        CardModel card = CombatState.CreateCard<Dazed>(Owner);
+        CardModel card = CombatState!.CreateCard<Dazed>(Owner);
         CardCmd.PreviewCardPileAdd(
             await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Draw, Owner, CardPilePosition.Random)
         );

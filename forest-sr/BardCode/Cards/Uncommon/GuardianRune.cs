@@ -21,7 +21,7 @@ public sealed class GuardianRune : BardCard
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar( 18,ValueProp.Move)
+        new BlockVar( 15,ValueProp.Move)
     ];
 
     // 关键词：魔法

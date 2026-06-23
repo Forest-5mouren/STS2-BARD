@@ -1,7 +1,9 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -15,7 +17,6 @@ namespace Forest_Sr.BardCode.Cards.Ancient;
 /// 幻影杀手｜Phantasmal Killer
 /// 效果：造成 {damage} 点无法格挡、无法被能力影响的伤害，并施加 {weak} 层虚弱。
 /// 升级：伤害 22 → 28
-/// 打出后，下一个回合开始时回到你的手牌（通过能力实现）
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class PhantasmalKiller : BardCard
@@ -31,7 +32,7 @@ public sealed class PhantasmalKiller : BardCard
         HoverTipFactory.FromPower<WeakPower>()
     ];
 
-    public PhantasmalKiller() : base(0, CardType.Skill, CardRarity.Ancient, TargetType.AnyEnemy) { }
+    public PhantasmalKiller() : base(1, CardType.Skill, CardRarity.Ancient, TargetType.AnyEnemy) { }
 
     protected override void OnUpgrade()
     {
@@ -59,14 +60,18 @@ public sealed class PhantasmalKiller : BardCard
             Owner.Creature,
             this
         );
-
-        // 施加"下回合返回手牌"效果
-        await PowerCmd.Apply<PhantasmalKillerReturnPower>(ctx,
-            Owner.Creature,
-            1,
-            Owner.Creature,
-            this
-        );
+    }
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
+    {
+        // 如果上一回合打出了此卡，且此卡不在手牌中，则将其加入手牌
+        if (player == Owner && (Pile == null || Pile.Type != PileType.Hand))
+        {
+            bool wasPlayedInCombat = CombatManager.Instance.History.CardPlaysFinished.Any(e => e.CardPlay.Card == this);
+            if (wasPlayedInCombat)
+            {
+                await CardPileCmd.Add(this, PileType.Hand);
+            }
+        }
     }
 }
 

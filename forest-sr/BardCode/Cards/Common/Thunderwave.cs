@@ -1,4 +1,5 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
+using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -16,8 +17,8 @@ namespace Forest_Sr.BardCode.Cards.Common;
 
 /// <summary>
 /// 鸣雷波｜Thunderwave
-/// 效果：对所有敌人造成 4 点伤害，施加 1 层 CrushUnderPower。
-/// 升级：伤害 +1（4 → 5），CrushUnderPower +1（1 → 2）
+/// 效果：对所有敌人造成 4 点伤害，使所有敌人本回合降低1力。
+/// 升级：伤害 +1（4 → 5），降低2力
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class Thunderwave : BardCard
@@ -45,7 +46,7 @@ public sealed class Thunderwave : BardCard
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         int strengthLoss = DynamicVars["strengthLoss"].IntValue;
-        IReadOnlyList<Creature> enemies = CombatState.HittableEnemies;
+        IReadOnlyList<Creature> enemies = CombatState!.HittableEnemies;
 
         // 播放闪电溅射特效
         foreach (Creature item in enemies)
@@ -60,8 +61,7 @@ public sealed class Thunderwave : BardCard
         .TargetingAllOpponents(CombatState)
         .Execute(choiceContext);
 
-        // 施加 CrushUnderPower 能力
-        await PowerCmd.Apply<CrushUnderPower>(choiceContext,
+        await PowerCmd.Apply<ThunderwavePower>(choiceContext,
             enemies,
             strengthLoss,
             Owner.Creature,

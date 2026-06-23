@@ -26,7 +26,7 @@ namespace Forest_Sr.BardCode.Cards.Other
         {
             await PowerCmd.Apply<StrengthPower>(choiceContext,
                 base.Owner.Creature,
-                base.DynamicVars["StrengthPower"].IntValue,
+                base.DynamicVars.Strength.IntValue,
                 base.Owner.Creature,
                 this
             );

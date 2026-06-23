@@ -27,7 +27,7 @@ public sealed class EarPiercingShriek : BardCard
     {
         int strReduction = DynamicVars["strReduction"].IntValue;
         int dexReduction = DynamicVars["dexReduction"].IntValue;
-        foreach (var enemy in CombatState.HittableEnemies)
+        foreach (var enemy in CombatState!.HittableEnemies)
         {
             await PowerCmd.Apply<TemporaryStrengthPower>(ctx, enemy, -strReduction, Owner.Creature, this);
             await PowerCmd.Apply<TemporaryDexterityPower>(ctx, enemy, -dexReduction, Owner.Creature, this);

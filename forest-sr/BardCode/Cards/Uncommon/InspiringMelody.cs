@@ -29,14 +29,14 @@ public sealed class InspiringMelody : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         var chant = await PowerCmd.Apply<InspiringMelodyChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
-        chant.StrengthAmount = DynamicVars["StrengthPower"].IntValue;
-        chant.DexterityAmount = DynamicVars["DexterityPower"].IntValue;
+        chant.StrengthAmount = DynamicVars.Strength.IntValue;
+        chant.DexterityAmount = DynamicVars.Dexterity.IntValue;
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["StrengthPower"].UpgradeValueBy(1);
-        DynamicVars["DexterityPower"].UpgradeValueBy(1);
+        DynamicVars.Strength.UpgradeValueBy(1);
+        DynamicVars.Dexterity.UpgradeValueBy(1);
     }
 }
 

@@ -55,8 +55,8 @@ public sealed class EnhanceAbility : BardCard
     // 升级：力量 2→3，敏捷 2→3，抽牌 1→2
     protected override void OnUpgrade()
     {
-        DynamicVars["StrengthPower"].UpgradeValueBy(1);
-        DynamicVars["DexterityPower"].UpgradeValueBy(1);
+        DynamicVars.Strength.UpgradeValueBy(1);
+        DynamicVars.Dexterity.UpgradeValueBy(1);
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 
@@ -91,7 +91,7 @@ public sealed class EnhanceAbility : BardCard
             {
                 await PowerCmd.Apply<StrengthPower>(choiceContext,
                     Owner.Creature,
-                    DynamicVars["StrengthPower"].IntValue,
+                    DynamicVars.Strength.IntValue,
                     Owner.Creature,
                     this);
             }
@@ -99,7 +99,7 @@ public sealed class EnhanceAbility : BardCard
             {
                 await PowerCmd.Apply<DexterityPower>(choiceContext,
                     Owner.Creature,
-                    DynamicVars["DexterityPower"].IntValue,
+                    DynamicVars.Dexterity.IntValue,
                     Owner.Creature,
                     this);
             }

@@ -1,4 +1,4 @@
-using MegaCrit.Sts2.Core.Combat;
+using Forest_Sr.BardCode.Powers.Counters;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -25,13 +25,15 @@ public sealed class CurtainCall : BardCard
         new CalculationBaseVar(0m),                  // 计算基数
         new CalculationExtraVar(1m),                 // 额外乘数
         new CalculatedVar(_calculatedKey).WithMultiplier((card, _) =>
-            // 计算使用过的卡牌类型数量
-            CombatManager.Instance.History.CardPlaysStarted
-                .Where(e => e.CardPlay.Card.Owner == card.Owner)
-                .Select(e => e.CardPlay.Card.Type)
-                .Distinct()
-                .Count()
-        )
+        {
+            // 从隐藏计数器读取已使用的卡牌类型数
+            var power = card.Owner.Creature?.GetPower<CardTypesUsedCounter>();
+            if (power == null) return 1; // 至少当前这张牌自身
+            // 如果当前卡牌的类型尚未被记录，需要 +1
+            return power.RecordedTypes.Contains(card.Type)
+                ? (int)power.Amount
+                : (int)power.Amount + 1;
+        })
     };
 
     public CurtainCall() : base(2, CardType.Attack, CardRarity.Rare, TargetType.AnyEnemy)
@@ -41,7 +43,6 @@ public sealed class CurtainCall : BardCard
     // 升级：伤害 6 → 8
     protected override void OnUpgrade()
     {
-        // 使用动态变量的 Damage 属性
         DynamicVars.Damage.UpgradeValueBy(2m);
     }
 
@@ -49,7 +50,15 @@ public sealed class CurtainCall : BardCard
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target, "cardPlay.Target");
 
-        int hitCount = (int)((CalculatedVar)DynamicVars[_calculatedKey]).Calculate(cardPlay.Target);
+        // 从隐藏计数器读取，包含当前卡牌自身
+        var power = Owner.Creature.GetPower<CardTypesUsedCounter>();
+        int hitCount = 1; // 至少当前这张牌
+        if (power != null)
+        {
+            hitCount = power.RecordedTypes.Contains(cardPlay.Card.Type)
+                ? (int)power.Amount
+                : (int)power.Amount + 1;
+        }
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .WithHitCount(hitCount)

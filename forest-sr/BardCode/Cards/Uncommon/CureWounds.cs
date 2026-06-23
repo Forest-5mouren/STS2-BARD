@@ -14,10 +14,9 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 [RegisterCard(typeof(BardCardPool))]
 public sealed class CureWounds : BardCard
 {
-    private const string _healKey = "heal";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar(_healKey, 7)
+        new HealVar(6)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Magic, CardKeyword.Exhaust];
@@ -27,12 +26,12 @@ public sealed class CureWounds : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         Creature target = cardPlay.Target ?? Owner.Creature;
-        int healAmount = DynamicVars[_healKey].IntValue;
+        int healAmount = DynamicVars.Heal.IntValue;
         await CreatureCmd.Heal(target, healAmount, playAnim: true);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars[_healKey].UpgradeValueBy(3);
+        DynamicVars.Heal.UpgradeValueBy(3);
     }
 }

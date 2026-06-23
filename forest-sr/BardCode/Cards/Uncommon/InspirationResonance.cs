@@ -10,7 +10,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 灵感共鸣｜InspirationResonance
 /// 效果：虚无。消耗。本回合内，每打出一张乐曲牌，回复 {energy} 点能量。
-/// 升级：回复能量 1→2，失去虚无。
+/// 升级：回复能量 1，失去虚无。
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class InspirationResonance : BardCard
@@ -35,7 +35,6 @@ public sealed class InspirationResonance : BardCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Energy.UpgradeValueBy(1);
         RemoveKeyword(CardKeyword.Ethereal);
     }
 }

@@ -30,11 +30,11 @@ public sealed class Bane : BardCard
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
-        foreach (Creature enemy in CombatState.HittableEnemies)
+        foreach (Creature enemy in CombatState!.HittableEnemies)
         {
             await PowerCmd.Apply<WeakPower>(choiceContext,
                 enemy,
-                DynamicVars["WeakPower"].IntValue,
+                DynamicVars.Weak.IntValue,
                 Owner.Creature,
                 this);
         }
@@ -42,6 +42,6 @@ public sealed class Bane : BardCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars["WeakPower"].UpgradeValueBy(2);
+        DynamicVars.Weak.UpgradeValueBy(2);
     }
 }

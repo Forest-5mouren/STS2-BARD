@@ -13,7 +13,6 @@ public sealed class NeverGiveUpPower : BardPower
     public override PowerStackType StackType => PowerStackType.Single;
     // 不允许负层数
     public override bool AllowNegative => false;
-    private bool _wasTriggered;
     public NeverGiveUpPower()
     {
 

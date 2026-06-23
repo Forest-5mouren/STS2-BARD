@@ -42,7 +42,7 @@ public sealed class Eyebite : BardCard
     protected override void OnUpgrade()
     {
         DynamicVars.Weak.UpgradeValueBy(1);
-        DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        DynamicVars.Strength.UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -62,7 +62,7 @@ public sealed class Eyebite : BardCard
         );
 
         // 3. 减少力量（给予负数的力量Power）
-        int strengthAmount = DynamicVars["StrengthPower"].IntValue;
+        int strengthAmount = DynamicVars.Strength.IntValue;
         await PowerCmd.Apply<StrengthPower>(choiceContext,
             cardPlay.Target,
             -strengthAmount,  // 负数表示减少力量

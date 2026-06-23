@@ -27,7 +27,7 @@ public sealed class SereneSong : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         var chant = await PowerCmd.Apply<SereneSongChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
-        chant.HealAmount = DynamicVars.Heal.IntValue;
+        chant!.HealAmount = DynamicVars.Heal.IntValue;
     }
 
     protected override void OnUpgrade()

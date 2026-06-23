@@ -26,7 +26,7 @@ namespace Forest_Sr.BardCode.Cards.Other
         {
             await PowerCmd.Apply<DexterityPower>(choiceContext,
                 base.Owner.Creature,
-                base.DynamicVars["DexterityPower"].IntValue,
+                base.DynamicVars.Dexterity.IntValue,
                 base.Owner.Creature,
                 this
             );
