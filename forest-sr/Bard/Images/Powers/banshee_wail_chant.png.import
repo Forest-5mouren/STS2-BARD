@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgvnfc0kmvtye"
-valid=false
+uid="uid://btl7l65j076mg"
+path="res://.godot/imported/banshee_wail_chant.png-82b1449efbe8a3ba2db943ae9310a6f7.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/banshee_wail_chant.png"
+dest_files=["res://.godot/imported/banshee_wail_chant.png-82b1449efbe8a3ba2db943ae9310a6f7.ctex"]
 
 [params]
 

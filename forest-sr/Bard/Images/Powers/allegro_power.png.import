@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd5ubao6mhcfw"
-valid=false
+uid="uid://crcsm6hr07pdp"
+path="res://.godot/imported/allegro_power.png-ca09c5ee5b4bb8893e5b4b8b436c8853.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/allegro_power.png"
+dest_files=["res://.godot/imported/allegro_power.png-ca09c5ee5b4bb8893e5b4b8b436c8853.ctex"]
 
 [params]
 

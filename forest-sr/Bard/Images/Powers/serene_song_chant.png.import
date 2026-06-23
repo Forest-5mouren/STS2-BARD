@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://11t3lcml7n8f"
-valid=false
+uid="uid://dj88yxkap5xbs"
+path="res://.godot/imported/serene_song_chant.png-8d9645190a780a383343b45e1262d6f1.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/serene_song_chant.png"
+dest_files=["res://.godot/imported/serene_song_chant.png-8d9645190a780a383343b45e1262d6f1.ctex"]
 
 [params]
 

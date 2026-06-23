@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfdl8iarll8gh"
-valid=false
+uid="uid://7akg4i5ic470"
+path="res://.godot/imported/dark_cacophony_power.png-22de2090bc826081f402b2247c6c3bd6.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/dark_cacophony_power.png"
+dest_files=["res://.godot/imported/dark_cacophony_power.png-22de2090bc826081f402b2247c6c3bd6.ctex"]
 
 [params]
 

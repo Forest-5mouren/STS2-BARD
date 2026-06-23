@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b03kqxjws71l8"
-path="res://.godot/imported/战歌.png-3452868cfa58b4eb97e86f0fb984b663.ctex"
+uid="uid://brmnd04fhb2dg"
+path="res://.godot/imported/war_song_power.png-908df039a30c825f44cc73bc2f57d38c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bard/Images/Powers/战歌.png"
-dest_files=["res://.godot/imported/战歌.png-3452868cfa58b4eb97e86f0fb984b663.ctex"]
+source_file="res://Bard/Images/Powers/big/war_song_power.png"
+dest_files=["res://.godot/imported/war_song_power.png-908df039a30c825f44cc73bc2f57d38c.ctex"]
 
 [params]
 

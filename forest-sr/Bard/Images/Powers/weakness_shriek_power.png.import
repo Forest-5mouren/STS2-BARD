@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4psrevqsvadc"
-valid=false
+uid="uid://qnwwe2d8loo7"
+path="res://.godot/imported/weakness_shriek_power.png-6154ca88694bffeee5166ba35a6013e1.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/weakness_shriek_power.png"
+dest_files=["res://.godot/imported/weakness_shriek_power.png-6154ca88694bffeee5166ba35a6013e1.ctex"]
 
 [params]
 

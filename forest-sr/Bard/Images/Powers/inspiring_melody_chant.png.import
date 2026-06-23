@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4qks282qc3os"
-valid=false
+uid="uid://db68wpxas773"
+path="res://.godot/imported/inspiring_melody_chant.png-5cc82b20e7321929249c715fcbdd17c1.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/inspiring_melody_chant.png"
+dest_files=["res://.godot/imported/inspiring_melody_chant.png-5cc82b20e7321929249c715fcbdd17c1.ctex"]
 
 [params]
 

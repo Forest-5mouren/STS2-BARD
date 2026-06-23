@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgn6f7gw0y4ug"
-valid=false
+uid="uid://vb8pr4wuekbb"
+path="res://.godot/imported/courage_song_chant.png-d2af0c9d037e78aa5390b7fdfb032205.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/courage_song_chant.png"
+dest_files=["res://.godot/imported/courage_song_chant.png-d2af0c9d037e78aa5390b7fdfb032205.ctex"]
 
 [params]
 

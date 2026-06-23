@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0ps4focqsgig"
-valid=false
+uid="uid://bxegw1si8g4f5"
+path="res://.godot/imported/clear_chant_chant.png-7223909698066f288f3812b24447151f.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/clear_chant_chant.png"
+dest_files=["res://.godot/imported/clear_chant_chant.png-7223909698066f288f3812b24447151f.ctex"]
 
 [params]
 

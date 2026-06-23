@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://05e88am2olyi"
-valid=false
+uid="uid://cuyu3e7nu8qxk"
+path="res://.godot/imported/brisk_beat_power.png-75a42d7f984cd8df9b40d0f34bbac09e.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Bard/Images/Powers/brisk_beat_power.png"
+dest_files=["res://.godot/imported/brisk_beat_power.png-75a42d7f984cd8df9b40d0f34bbac09e.ctex"]
 
 [params]
 
