@@ -44,10 +44,10 @@ public sealed class Bard : ModCharacterTemplate<BardCardPool, BardRelicPool, Sha
                 RestSiteAnimPath: "res://Bard/Scenes/bard_rest_site.tscn"
             ),
             Ui: new(
-                // 游戏左上角头像、角色统计页头像、每日挑战角色头像。这个是场景而不是图片。参考下方附赠资源搭建。
-                IconPath: "res://Bard/Images/Charui/character_icon_bard.tscn",
-                // 人物头像路径
-                IconTexturePath: "res://Bard/Images/Charui/character_icon_bard.tscn",
+                // 游戏左上角头像、角色统计页头像、每日挑战角色头像。这个是场景而不是图片。
+                IconPath: "res://Bard/Scenes/bard_icon.tscn",
+                // 人物头像路径  svg
+                IconTexturePath: "res://Bard/Images/Charui/character_icon_bard.png",
                 // 人物选择背景
                 CharacterSelectBgPath: "res://Bard/Scenes/char_select_bg_bard.tscn",
                 // 人物选择图标
