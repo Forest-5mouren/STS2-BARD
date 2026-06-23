@@ -31,7 +31,7 @@ public sealed class ExplosivePower : BardCard
     {
     }
 
-    // 升级：添加保留关键词（参考 Anointed）
+    // 升级：添加保留关键词
     protected override void OnUpgrade()
     {
         AddKeyword(CardKeyword.Retain);
@@ -65,10 +65,11 @@ public sealed class ExplosivePower : BardCard
                 .Where(c => c.Type == targetType)
                 .ToList();
 
-            // 如果有符合条件的牌，抽到手牌
+            // 如果有符合条件的牌，取第一张移到手牌
             if (cards.Any())
             {
-                await CardPileCmd.Draw(choiceContext, cards.First(), Owner);
+                var card = cards.First();
+                await CardPileCmd.Add(card, PileType.Hand, CardPilePosition.Random, this);
             }
         }
     }
