@@ -44,8 +44,10 @@ public sealed class Bard : ModCharacterTemplate<BardCardPool, BardRelicPool, Sha
                 RestSiteAnimPath: "res://Bard/Scenes/bard_rest_site.tscn"
             ),
             Ui: new(
+                // 游戏左上角头像、角色统计页头像、每日挑战角色头像。这个是场景而不是图片。参考下方附赠资源搭建。
+                IconPath: "res://Bard/Images/Charui/character_icon_bard.tscn",
                 // 人物头像路径
-                IconTexturePath: "res://Bard/Images/Charui/character_icon_bard.png",
+                IconTexturePath: "res://Bard/Images/Charui/character_icon_bard.tscn",
                 // 人物选择背景
                 CharacterSelectBgPath: "res://Bard/Scenes/char_select_bg_bard.tscn",
                 // 人物选择图标
@@ -81,6 +83,16 @@ public sealed class Bard : ModCharacterTemplate<BardCardPool, BardRelicPool, Sha
             // 多人模式剪刀石头布-剪刀
             ArmScissorsTexturePath: "res://Bard/Images/Charui/mp_scissors.png"
             )
+        // 其余如果有需要自行取消注释使用
+        // Spine: null,
+        // VisualCues: null, // 帧动画静态图人物使用，查看角色动画一章
+        // WorldProceduralVisuals: null,
+        // 以下为让遗物根据你的人物展现不同的图像资源，在列表里添加即可
+        // VanillaCardVisualOverrides: [],
+        // VanillaRelicVisualOverrides: [
+        //     new (CharacterOwnedVanillaRelicModelId.YummyCookie, new("res://icon.svg")) // 美味饼干覆盖
+        // ],
+        // VanillaPotionVisualOverrides: []
         )
     );
 

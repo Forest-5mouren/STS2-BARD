@@ -10,7 +10,9 @@ using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace Forest_Sr.BardCode.Cards.Basic;
-
+/// <summary>
+/// 剑刃防护
+/// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class BladeWard : BardCard
 {

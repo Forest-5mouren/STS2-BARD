@@ -9,7 +9,9 @@ using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
 
 namespace Forest_Sr.BardCode.Cards.Basic;
-
+/// <summary>
+/// 恶言相加
+/// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class ViciousMockery : BardCard
 {
