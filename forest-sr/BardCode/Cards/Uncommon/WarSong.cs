@@ -12,7 +12,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 战歌｜WarSong
 /// 效果：能力。每当使用乐曲卡时，获得 {vigor} 点活力。
-/// 升级：费用 1 → 0
+/// 升级：活力 1 → 2
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class WarSong : BardCard
@@ -20,7 +20,7 @@ public sealed class WarSong : BardCard
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<VigorPower>( 3)   // 活力层数
+        new PowerVar<VigorPower>(1)   // 活力层数
     ];
 
     // 额外悬停提示
@@ -32,10 +32,10 @@ public sealed class WarSong : BardCard
     {
     }
 
-    // 升级：费用 1 → 0
+    // 升级：活力 1 → 2
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        DynamicVars["VigorPower"].UpgradeValueBy(1);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

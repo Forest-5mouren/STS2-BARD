@@ -72,7 +72,7 @@ public sealed class ParryRiposte : BardCard
             await DamageCmd.Attack(DynamicVars.Damage.IntValue)
                 .FromCard(this)
                 .Targeting(cardPlay.Target)
-                .WithHitFx("vfx/vfx_attack_slash", null, "sword_riposte.mp3")
+                .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);
         }
 

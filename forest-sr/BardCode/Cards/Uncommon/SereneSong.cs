@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -22,18 +23,21 @@ public sealed class SereneSong : BardCard
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, BardKeywords.Chant];
 
-    public SereneSong() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
+    public SereneSong() : base(3, CardType.Skill, CardRarity.Uncommon, TargetType.Self) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         var chant = await PowerCmd.Apply<SereneSongChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant!.HealAmount = DynamicVars.Heal.IntValue;
+                SfxCmd.Play("event:/Bard/sfx/SereneSong");
     }
 
-    protected override void OnUpgrade()
+ protected override void OnUpgrade()
     {
         DynamicVars.Heal.UpgradeValueBy(3);
     }
 }
+
+
 
 

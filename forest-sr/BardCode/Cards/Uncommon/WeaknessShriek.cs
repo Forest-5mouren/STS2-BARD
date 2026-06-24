@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 虚弱尖叫｜WeaknessShriek
@@ -21,7 +22,7 @@ public sealed class WeaknessShriek : BardCard
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [BardKeywords.Song, CardKeyword.Exhaust];
 
-    public WeaknessShriek() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies) { }
+    public WeaknessShriek() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies) { }
 
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
@@ -32,11 +33,15 @@ public sealed class WeaknessShriek : BardCard
             await PowerCmd.Apply<WeaknessShriekStrengthPower>(ctx, enemy, -strReduction, Owner.Creature, this);
             await PowerCmd.Apply<WeaknessShriekDexterityPower>(ctx, enemy, -dexReduction, Owner.Creature, this);
         }
+                SfxCmd.Play("event:/Bard/sfx/WeaknessShriek");
     }
 
-    protected override void OnUpgrade()
+ protected override void OnUpgrade()
     {
         DynamicVars["strReduction"].UpgradeValueBy(2);
         DynamicVars["dexReduction"].UpgradeValueBy(2);
     }
 }
+
+
+

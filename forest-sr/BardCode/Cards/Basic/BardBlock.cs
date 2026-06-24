@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Basic;
 
@@ -44,14 +45,19 @@ public sealed class BardBlock : BardCard
             DynamicVars["tempDexterity"].IntValue,
             Owner.Creature,
             this);
+                SfxCmd.Play("event:/Bard/sfx/BardBlock");
     }
 
     // 升级：格挡 5→7，临时敏捷 1→2
+
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(2);
         DynamicVars["tempDexterity"].UpgradeValueBy(1);
     }
 }
+
+
+
 
 

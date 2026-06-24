@@ -12,7 +12,7 @@ namespace Forest_Sr.BardCode.Cards.Uncommon;
 /// <summary>
 /// 守卫刻文｜GuardianRune
 /// 效果：获得 {block} 点格挡。每当你失去格挡时，对所有敌人造成等量伤害。
-/// 升级：格挡 18 → 22
+/// 升级：格挡 13 → 16
 /// </summary>
 [RegisterCard(typeof(BardCardPool))]
 public sealed class GuardianRune : BardCard
@@ -21,7 +21,7 @@ public sealed class GuardianRune : BardCard
 
     // 基础数值声明
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar( 15,ValueProp.Move)
+        new BlockVar(13,ValueProp.Move)
     ];
 
     // 关键词：魔法
@@ -36,10 +36,10 @@ public sealed class GuardianRune : BardCard
     {
     }
 
-    // 升级：格挡 18 → 22
+    // 升级：格挡 13 → 16
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)

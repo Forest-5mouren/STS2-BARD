@@ -1,12 +1,14 @@
 using Forest_Sr.BardCode.Cards.Ancient;
 using Forest_Sr.BardCode.Cards.Basic;
 using Forest_Sr.BardCode.Relics;
+using Forest_Sr.BardCode.Audio;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using STS2RitsuLib;
 using STS2RitsuLib.Interop;
 using System.Reflection;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.Bard;
 
@@ -44,6 +46,14 @@ public class MainFile
         var harmony = new Harmony(ModId);
         harmony.PatchAll(Assembly.GetExecutingAssembly());
 
+        // 注册 FMOD bank（角色选择音效）
+        FmodStudioDeferredBankRegistration.RegisterBank("res://Bard/Audio/Bard.bank");
+        FmodStudioDeferredBankRegistration.RegisterStudioGuidMappings("res://Bard/Audio/GUIDs.txt");
+
+        // 预加载全部音频文件（避免首次播放卡顿）
+        BardAudio.PreloadAll();
+
         Logger.Info("Bard mod initialized with RitsuLib!");
     }
 }
+

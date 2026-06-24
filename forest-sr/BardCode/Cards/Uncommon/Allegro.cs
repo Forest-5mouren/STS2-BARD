@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 
@@ -54,10 +55,14 @@ public sealed class Allegro : BardCard
                 Owner.Creature,
                 this);
         }
+                SfxCmd.Play("event:/Bard/sfx/Allegro");
     }
 
-    protected override void OnUpgrade()
+ protected override void OnUpgrade()
     {
         DynamicVars["duration"].UpgradeValueBy(1);  // 3 → 4
     }
 }
+
+
+

@@ -92,8 +92,8 @@
   "BARD_POWER_WEAKNESS_SHRIEK_POWER.smartDescription": "Reduce {StrengthReduction} Strength and {DexterityReduction} Dexterity this turn",
 
   "BARD_POWER_DARK_CACOPHONY_POWER.title": "Dark Cacophony",
-  "BARD_POWER_DARK_CACOPHONY_POWER.description": "At turn start, ALL enemies take {Damage} damage",
-  "BARD_POWER_DARK_CACOPHONY_POWER.smartDescription": "At turn start, ALL enemies take {Damage} damage",
+  "BARD_POWER_DARK_CACOPHONY_POWER.description": "At turn start, ALL enemies take {Amount} damage",
+  "BARD_POWER_DARK_CACOPHONY_POWER.smartDescription": "At turn start, ALL enemies take {Amount} damage",
 
   "BARD_POWER_COURAGE_SONG_CHANT.title": "Song of Courage",
   "BARD_POWER_COURAGE_SONG_CHANT.description": "Next turn, gain Strength and Vigor",
@@ -119,3 +119,4 @@
   "BARD_POWER_ARCANE_ECHO_POWER.description": "When Harmony reaches {Amount:diff()} stacks, recover a Magic card from Exhaust",
   "BARD_POWER_ARCANE_ECHO_POWER.smartDescription": "Harmony ({Amount:diff()} to trigger)"
 }
+

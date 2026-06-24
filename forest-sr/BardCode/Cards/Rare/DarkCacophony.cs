@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Rare;
 
@@ -28,12 +29,14 @@ public sealed class DarkCacophony : BardCard
     protected override async Task OnPlay(PlayerChoiceContext ctx, CardPlay cardPlay)
     {
         await PowerCmd.Apply<DarkCacophonyPower>(ctx, Owner.Creature, DynamicVars.Damage.IntValue, Owner.Creature, this);
+                SfxCmd.Play("event:/Bard/sfx/DarkCacophony");
     }
 
-    protected override void OnUpgrade()
+ protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(2);
     }
 }
+
 
 

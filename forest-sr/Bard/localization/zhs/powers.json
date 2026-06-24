@@ -32,8 +32,8 @@
   "BARD_POWER_ALLEGRO_POWER.smartDescription": "每回合开始时获得 1 点[gold]能量[/gold]",
 
   "BARD_POWER_BRISK_BEAT_POWER.title": "轻快节拍",
-  "BARD_POWER_BRISK_BEAT_POWER.description": "每回合开始时抽[blue]{Amount}[/blue]张牌",
-  "BARD_POWER_BRISK_BEAT_POWER.smartDescription": "每回合开始时抽[blue]{Amount}[/blue]张牌",
+  "BARD_POWER_BRISK_BEAT_POWER.description": "每回合开始时抽[blue]1[/blue]张牌",
+  "BARD_POWER_BRISK_BEAT_POWER.smartDescription": "每回合开始时抽[blue]1[/blue]张牌",
 
   "BARD_POWER_DANCING_YOUTH_POWER.title": "舞动青春",
   "BARD_POWER_DANCING_YOUTH_POWER.description": "回合结束时若和声大于3，下回合抽[blue]{Amount}[/blue]张牌",
@@ -92,8 +92,8 @@
   "BARD_POWER_WEAKNESS_SHRIEK_POWER.smartDescription": "本回合降低{StrengthReduction}点力量，{DexterityReduction}点敏捷",
 
   "BARD_POWER_DARK_CACOPHONY_POWER.title": "黑暗喧嚣",
-  "BARD_POWER_DARK_CACOPHONY_POWER.description": "每回合开始时对所有敌人造成{Damage}点伤害",
-  "BARD_POWER_DARK_CACOPHONY_POWER.smartDescription": "每回合开始时对所有敌人造成{Damage}点伤害",
+  "BARD_POWER_DARK_CACOPHONY_POWER.description": "每回合开始时对所有敌人造成{Amount}点伤害",
+  "BARD_POWER_DARK_CACOPHONY_POWER.smartDescription": "每回合开始时对所有敌人造成{Amount}点伤害",
 
   "BARD_POWER_COURAGE_SONG_CHANT.title": "勇气之歌",
   "BARD_POWER_COURAGE_SONG_CHANT.description": "下回合获得力量与活力",
@@ -119,6 +119,7 @@
   "BARD_POWER_ARCANE_ECHO_POWER.description": "和声达{Amount}层时回收魔法牌",
   "BARD_POWER_ARCANE_ECHO_POWER.smartDescription": "和声（{Amount}层触发）"
 }
+
 
 
 

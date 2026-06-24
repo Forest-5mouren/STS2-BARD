@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -29,11 +30,14 @@ public sealed class ClearChant : BardCard
     {
         var chant = await PowerCmd.Apply<ClearChantChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant.DrawAmount = DynamicVars.Cards.IntValue;
+                SfxCmd.Play("event:/Bard/sfx/ClearChant");
     }
 
-    protected override void OnUpgrade()
+ protected override void OnUpgrade()
     {
         DynamicVars.Cards.UpgradeValueBy(1);
     }
 }
+
+
 

@@ -9,11 +9,12 @@ using STS2RitsuLib.Keywords;
 namespace Forest_Sr.BardCode.Powers;
 
 /// <summary>
-/// 奥术回响能力：累计和声层数，达到阈值时从消耗堆回收法术，回合结束时清零
+/// 奥术回响能力：读取共享 HarmonyPower 追踪和声，达到阈值时从消耗堆回收法术
 /// </summary>
 public sealed class ArcaneEchoPower : BardPower
 {
-    private int _currentHarmony = 0;
+    // 防止本回合重复触发
+    private bool _alreadyTriggeredThisTurn;
 
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Single;
@@ -27,12 +28,15 @@ public sealed class ArcaneEchoPower : BardPower
         bool isSong = cardPlay.Card.HasModKeyword(BardKeywords.Song);
         if (!isMagic && !isSong) return;
 
-        _currentHarmony++;
+        // 使用共享的 HarmonyPower（由遗物 BardicInspiration/BetterInspiration 维护）
+        var harmonyPower = Owner!.GetPower<HarmonyPower>();
+        int harmony = (int)(harmonyPower?.Amount ?? 0);
         int threshold = (int)Amount;
 
-        // 达到阈值就触发回收，不清零（回合结束才清零）
-        if (_currentHarmony == threshold)
+        // 达到阈值且本回合未触发过
+        if (harmony >= threshold && !_alreadyTriggeredThisTurn)
         {
+            _alreadyTriggeredThisTurn = true;
             Flash();
 
             var exhaustPile = PileType.Exhaust.GetPile(Owner.Player);
@@ -49,12 +53,11 @@ public sealed class ArcaneEchoPower : BardPower
         }
     }
 
-    // 玩家回合开始时清零和声计数（替代 v1.0.7 移除的 AfterTurnEnd）
+    // 重置本回合的触发标记，HarmonyPower 由遗物负责管理
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
         if (player != Owner?.Player) return;
-        _currentHarmony = 0;
+        _alreadyTriggeredThisTurn = false;
         await Task.CompletedTask;
     }
 }
-

@@ -89,7 +89,7 @@ public sealed class FlurryThrust : BardCard
             .WithHitCount(hitCount)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithHitFx("vfx/vfx_attack_slash", null, "sword_thrust.mp3")
+            .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
 }

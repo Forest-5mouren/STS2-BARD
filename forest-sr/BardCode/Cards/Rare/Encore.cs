@@ -59,10 +59,11 @@ public sealed class Encore : BardCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .WithHitVfxNode(t => NStabVfx.Create(t, facingEnemies: true))
-            .WithHitFx("vfx/vfx_attack_slash", null, "encore_sword.mp3")
+            .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
 }
+
 
 
 

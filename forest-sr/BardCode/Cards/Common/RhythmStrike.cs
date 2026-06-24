@@ -31,7 +31,7 @@ public sealed class RhythmStrike : BardCard
             .Execute(ctx);
 
         var harmony = Owner.Creature?.GetPower<HarmonyPower>();
-        if (harmony != null && harmony.Amount > 3)
+        if (harmony != null && harmony.Amount >= 3)
         {
             await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
             await CardPileCmd.Draw(ctx, DynamicVars.Cards.IntValue, Owner);

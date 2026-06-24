@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Uncommon;
 
@@ -26,11 +27,15 @@ public sealed class BansheeWail : BardCard
         var chant = await PowerCmd.Apply<BansheeWailChant>(ctx, Owner.Creature, 1, Owner.Creature, this);
         chant!.WeakAmount = DynamicVars.Weak.IntValue;
         chant.VulnerableAmount = DynamicVars.Vulnerable.IntValue;
+                SfxCmd.Play("event:/Bard/sfx/BansheeWail");
     }
 
-    protected override void OnUpgrade()
+ protected override void OnUpgrade()
     {
         DynamicVars.Weak.UpgradeValueBy(1);
         DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 }
+
+
+

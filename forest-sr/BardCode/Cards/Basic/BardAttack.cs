@@ -27,7 +27,7 @@ public sealed class BardAttack : BardCard
 
     // 基础数值：伤害 + 易伤
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5, ValueProp.Move),
+        new DamageVar(4, ValueProp.Move),
         new PowerVar<VulnerablePower>(1)
     ];
 
@@ -58,5 +58,6 @@ public sealed class BardAttack : BardCard
         DynamicVars.Damage.UpgradeValueBy(3);
     }
 }
+
 
 

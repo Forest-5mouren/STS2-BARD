@@ -16,11 +16,11 @@ public sealed class Bard : ModCharacterTemplate<BardCardPool, BardRelicPool, Sha
     public const string CharacterId = "Bard";
 
     // 角色名称颜色
-    public override Color NameColor => new("#FFD1DC");
+    public override Color NameColor => new("#B39DDB");
     // 能量图标轮廓颜色
-    public override Color EnergyLabelOutlineColor => new("#FFD1DC");
+    public override Color EnergyLabelOutlineColor => new("#B39DDB");
     // 地图绘制颜色
-    public override Color MapDrawingColor => new("#FFD1DC");
+    public override Color MapDrawingColor => new("#B39DDB");
 
     // 人物性别
     public override CharacterGender Gender => CharacterGender.Masculine;
@@ -69,7 +69,7 @@ public sealed class Bard : ModCharacterTemplate<BardCardPool, BardRelicPool, Sha
             // 死亡音效
             // DeathSfx: "event:/bard/death",
             // 角色选择音效
-            // CharacterSelectSfx: "event:/bard/select",
+            CharacterSelectSfx: "event:/Bard/sfx/MakePeace"
             // 过渡音效
             // CharacterTransitionSfx: "event:/sfx/ui/wipe_bard"
             ),
@@ -124,3 +124,4 @@ public sealed class Bard : ModCharacterTemplate<BardCardPool, BardRelicPool, Sha
         "vfx/vfx_magic_blast"
     };
 }
+

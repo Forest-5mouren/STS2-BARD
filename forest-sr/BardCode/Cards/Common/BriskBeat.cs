@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using STS2RitsuLib.Cards.DynamicVars;
 using STS2RitsuLib.Interop.AutoRegistration;
+using STS2RitsuLib.Audio;
 
 namespace Forest_Sr.BardCode.Cards.Common;
 //轻快节拍
@@ -52,9 +53,14 @@ public sealed class BriskBeat : BardCard
                 Owner.Creature,     // 来源
                 this);              // 关联卡牌
         }
+                SfxCmd.Play("event:/Bard/sfx/BriskBeat");
     }
-    protected override void OnUpgrade()
+
+ protected override void OnUpgrade()
     {
         DynamicVars["Duration"].UpgradeValueBy(1);  // 3 → 4
     }
 }
+
+
+

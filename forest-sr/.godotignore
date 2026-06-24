@@ -1,0 +1,2 @@
+# 排除整个 Audio 目录，防止 Godot 导入处理（FMOD 需要原始文件）
+Bard/Audio/

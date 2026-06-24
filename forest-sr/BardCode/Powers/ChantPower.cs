@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.ValueProps;
 using STS2RitsuLib.Keywords;
 
 namespace Forest_Sr.BardCode.Powers;
@@ -86,7 +87,6 @@ public sealed class InspiringMelodyChant : ChantPower
 public sealed class ClearChantChant : ChantPower
 {
     public int DrawAmount { get; set; } = 2;
-    public decimal VulnerableAmount { get; set; } = 1;
 
     protected override async Task OnChantTrigger(PlayerChoiceContext ctx)
     {
@@ -105,8 +105,6 @@ public sealed class ClearChantChant : ChantPower
             await CardPileCmd.Add(spells, PileType.Hand, CardPilePosition.Random, null, false);
         }
 
-        // 给予自己易伤
-        await PowerCmd.Apply<VulnerablePower>(ctx, Owner, VulnerableAmount, Owner, null);
     }
 }
 
@@ -129,6 +127,25 @@ public sealed class SereneSongChant : ChantPower
 /// <summary>
 /// 幻影杀手返回能力：下回合开始时将幻影杀手移回手牌
 /// </summary>
+
+/// <summary>
+/// 尖锐刺耳吟唱：下回合全体敌人受到伤害+虚弱
+/// </summary>
+public sealed class EarPiercingShriekChant : ChantPower
+{
+    public int DamageAmount { get; set; } = 11;
+    public decimal WeakAmount { get; set; } = 1;
+
+    protected override async Task OnChantTrigger(PlayerChoiceContext ctx)
+    {
+        foreach (Creature enemy in Owner!.CombatState!.HittableEnemies)
+        {
+            await CreatureCmd.Damage(ctx, enemy, DamageAmount, ValueProp.Move, Owner, null);
+            await PowerCmd.Apply<WeakPower>(ctx, enemy, WeakAmount, Owner, null);
+        }
+    }
+}
+
 public sealed class PhantasmalKillerReturnPower : BardPower
 {
     public override PowerType Type => PowerType.Buff;
@@ -154,6 +171,12 @@ public sealed class PhantasmalKillerReturnPower : BardPower
         await PowerCmd.Remove(this);
     }
 }
+
+
+
+
+
+
 
 
 
