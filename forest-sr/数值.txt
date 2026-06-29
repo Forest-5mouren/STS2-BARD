@@ -1,0 +1,23 @@
+杀戮尖塔本体卡牌平均模型 
+attack
+0c: damage 6 / aoe 5
+1c: damage 11 / 5*2 /3*3 / 2*4   / aoe 8
+2c: damage 20 / aoe 15
+3c: damage 30 / aoe 22
+xc: damage 7 / aoe 5
+block
+0c: block 4 
+1c: block 9 
+2c: block 17
+3c: block 24
+xc: block 7
+card
+1.3 per cost
+energy
+0.6 per cost
+
+
+根据获取难度，数值可能相应提高：
+先前为白卡common强度
+蓝卡uncommon 可能有更高的数值或者多一个机制
+金卡rare 可能带来不一样的机制 或者更高的数值

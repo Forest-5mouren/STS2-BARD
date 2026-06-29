@@ -44,10 +44,9 @@ public sealed class ThunderclapPower : BardPower
         }
     }
 
-    // 回合结束时移除（如果需要）
+    // 回合结束时移除
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext ctx, Player player)
     {
-        if (player != Owner?.Player) return;
         await PowerCmd.Remove(this);
     }
 }

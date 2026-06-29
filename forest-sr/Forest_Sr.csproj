@@ -19,7 +19,7 @@
       <HintPath>D:\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
     </Reference>
     <Reference Include="STS2-RitsuLib">
-      <HintPath>D:\SteamLibrary\steamapps\common\Slay the Spire 2\mods\STS2-RitsuLib.0.4.28.variant-pack\lib\0.107.1\STS2-RitsuLib.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\Slay the Spire 2\mods\STS2.RitsuLib.0.4.36.github\STS2-RitsuLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
