@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Character;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using STS2RitsuLib.Interop.AutoRegistration;
 using STS2RitsuLib.Scaffolding.Content;

@@ -4,6 +4,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
+    <RitsuLibReferenceTarget>0.107.1</RitsuLibReferenceTarget>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="0.1.5" />
@@ -18,9 +19,6 @@
     <Reference Include="sts2">
       <HintPath>D:\SteamLibrary\steamapps\common\Slay the Spire 2\data_sts2_windows_x86_64\sts2.dll</HintPath>
     </Reference>
-    <Reference Include="STS2-RitsuLib">
-      <HintPath>D:\SteamLibrary\steamapps\common\Slay the Spire 2\mods\STS2.RitsuLib.0.4.36.github\STS2-RitsuLib.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bard\Images\Cards\" />
@@ -32,4 +30,5 @@
   <ItemGroup>
     <AdditionalFiles Include="Bard\localization/**/*.json" />
   </ItemGroup>
+  <Import Project="D:\SteamLibrary\steamapps\workshop\content\2868840\3747602295\RitsuLib.References.props" />
 </Project>

@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Character;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Cards.Other;
 using Forest_Sr.BardCode.Powers;

@@ -3,7 +3,7 @@ using STS2RitsuLib.Scaffolding.Characters;
 using STS2RitsuLib.Scaffolding.Content;
 using STS2RitsuLib.Utils;
 
-namespace Forest_Sr.BardCode.Cards;
+namespace Forest_Sr.BardCode.Character;
 
 public sealed class BardCardPool : TypeListCardPoolModel, IModColorfulPhilosophersCardPool
 {

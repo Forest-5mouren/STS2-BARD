@@ -1,4 +1,5 @@
 using Forest_Sr.BardCode.Cards.KeyWord;
+using Forest_Sr.BardCode.Character;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;

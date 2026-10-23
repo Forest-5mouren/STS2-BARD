@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Character;
 using Forest_Sr.BardCode.Cards.KeyWord;
 using Forest_Sr.BardCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -45,7 +46,8 @@ public sealed class BardBlock : BardCard
             DynamicVars["tempDexterity"].IntValue,
             Owner.Creature,
             this);
-                SfxCmd.Play("event:/Bard/sfx/BardBlock");
+                SfxCmd.Play("event:/Bard/sfx/BardBlock");
+
     }
 
     // 升级：格挡 5→7，临时敏捷 1→2
@@ -56,7 +58,6 @@ public sealed class BardBlock : BardCard
         DynamicVars["tempDexterity"].UpgradeValueBy(1);
     }
 }
-
 
 
 

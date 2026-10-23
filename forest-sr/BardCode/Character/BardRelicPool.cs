@@ -1,6 +1,6 @@
 using STS2RitsuLib.Scaffolding.Content;
 
-namespace Forest_Sr.BardCode.Relics;
+namespace Forest_Sr.BardCode.Character;
 
 public sealed class BardRelicPool : TypeListRelicPoolModel
 {

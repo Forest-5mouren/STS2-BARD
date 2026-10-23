@@ -1,5 +1,3 @@
-using Forest_Sr.BardCode.Cards;
-using Forest_Sr.BardCode.Relics;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Models.PotionPools;

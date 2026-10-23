@@ -1,3 +1,4 @@
+using Forest_Sr.BardCode.Character;
 using Godot;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
